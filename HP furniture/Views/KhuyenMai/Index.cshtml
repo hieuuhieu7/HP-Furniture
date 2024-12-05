@@ -1,0 +1,171 @@
+﻿@model HP_furniture.Models.GuiYeuCauHoTro
+@{
+    ViewBag.Title = "HP furniture - Khuyến mãi";
+    Layout = "~/Views/share/HPfurnitureLayout.cshtml";
+    ViewBag.Click = 2;
+    ViewBag.Nav = 6;
+}
+
+<!-- Khuyến mãi -->
+<div class="col-12" style="height: 10px;"></div>
+<div class="col-1" style="height: 5%;"></div>
+<div class="col-5" style="height: 5%;">
+    <img src="~/Assets/assets/img/khuyenmai.jpg" class="intro__img" alt="">
+</div>
+<div class="col-5" style="height: 5%;">
+    <div class="intro">
+        <div class="intro__flex">
+            <div class="intro__box">
+                <h3>ĐÓN TẾT ĐỦ ĐẦY VỚI “HAPPY TẾT”, CHỈ CÓ TẠI HP FURNITURE</h3>
+                <ul class="intro__list">
+                    <span>Cùng HP furniture chuẩn bị cho một năm mới tươm tất với <span style="font-weight: bold; color: #333;">ƯU ĐÃI ĐẾN 50% CHO TẤT CẢ SẢN PHẨM</span> trong chương trong chương trình “Happy Tết”:</span>
+                    <br>
+                    <br>
+                    <li class="intro__list--item">
+                        Diễn ra từ 22/12/2023 đến 22/01/2024
+                    </li>
+                    <li class="intro__list--item">
+                        Áp dụng tại tất cả các cửa hàng HP furniture trên toàn quốc
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-1" style="height: 5%;"></div>
+<div class="col-12" style="height: 40px;"></div>
+
+<div class="col-1" style="height: 5%;"></div>
+<div class="col-5" style="height: 5%;">
+    <div class="intro__right">
+        <h2>MUA HÀNG KHÔNG GIỚI HẠN – TRẢ GÓP 0% LÃI SUẤT </h2>
+        <p>
+            Mách bạn bí quyết mua sắm những món đồ nội thất chất lượng mà vẫn nhẹ đầu chuyện tài chính,
+            HP furniture đang có chương trình <span style="font-weight: bold;">“MUA HÀNG KHÔNG GIỚI HẠN – TRẢ GÓP 0% LÃI SUẤT”</span> áp dụng cho tất cả đơn hàng.
+            Thay vì phải thanh toán toàn bộ đơn hàng trong 1 lần, quý khách có thể trả góp 0% lãi suất <span style="font-weight: bold;">trong kỳ hạn từ 3 – 6 – 9 tháng</span> với thủ tục đơn giản.
+        </p>
+        <ul>
+            <li>
+                – Liên kết đến <span style="font-weight: bold;">30 ngân hàng</span>;
+            </li>
+            <li>
+                – Áp dụng cho thẻ tín dụng trên <span style="font-weight: bold;">mọi đơn hàng</span>;
+            </li>
+            <li>
+                – Điều kiện áp dụng: đơn hàng từ 3.000.000 với các sản phẩm <span style="font-weight: bold;">giảm từ 15%</span> trở xuống;
+            </li>
+            <li>
+                – Thời gian áp dụng: <span style="font-weight: bold;">từ ngày 28/6/2023</span>.
+            </li>
+        </ul>
+        <p>
+            Chào đón quý khách hàng đến tham quan và mua sắm tại <span style="font-weight: bold;">tất cả cửa hàng thuộc thương hiệu HP furniture</span>.
+        </p>
+        <p>Liên hệ ngay qua hotline <span style="font-weight: bold;">38781108</span> để được tư vấn miễn phí.</p>
+    </div>
+</div>
+<div class="col-5" style="height: 5%;">
+    <img src="https://nhaxinh.com/wp-content/uploads/2023/08/KV-tra-gop.jpg" class="intro__img" alt="">
+</div>
+<div class="col-1" style="height: 5%;"></div>
+<div class="col-12" style="height: 60px;"></div>
+
+<!-- Hỗ trợ -->
+<div class="col-12 bg" style="height: 5%;">
+    <div class="col-6 block__mobile" style="height: 5%;">
+        <div class="bag__sp">
+            <div class="hotline">
+                <i class="fa-solid fa-phone-volume"></i>
+                HOTLINE: 38781108
+            </div>
+            <!-- Form để nhập thông tin khách hàng -->
+            @using (Html.BeginForm("GuiYeuCauHoTro", "TrangChu", FormMethod.Post, new { id = "myForm" }))
+            {
+                @Html.ValidationSummary(true)
+                <div class="sp__text">
+                    <div class="sp__text-sp">Bạn cần hỗ trợ?</div>
+                    <div class="sp__text-back">Xin vui lòng để lại yêu cầu hỗ trợ của bạn.</div>
+                </div>
+                <div class="sp__input">
+                    <div class="sp__info">
+                        <!-- HoTen -->
+                        @Html.TextBoxFor(model => model.HoTen, new { @class = "sp__info-name sp__info-input", placeholder = "Họ tên", required = "required" })
+                        <div style="padding: 0 34px 0 34px"></div>
+
+                        <div class="kc__tablet"></div>
+
+                        <!-- SDT -->
+                        @Html.TextBoxFor(model => model.SDT, new { @class = "sp__info-call sp__info-input", placeholder = "(+84) 0123 456", required = "required" })
+                    </div>
+                    <!-- Email -->
+                    @Html.TextBoxFor(model => model.Email, new { @class = "sp__email", placeholder = "Email", required = "required" })
+
+                    <!-- Noi dung -->
+                    @Html.TextAreaFor(model => model.NoiDung, new { @class = "sp__textarea", placeholder = "Nội dung", required = "required" })
+                    <button type="button" class="sp__btn" onclick="validateForm()">GỬI YÊU CẦU</button>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="col-6 block__mobile" style="height: 5%;">
+        <div class="background">
+            <img src="~/Assets/assets/img/ghe2.jpg" alt="" class="img__bg">
+        </div>
+    </div>
+</div>
+<!-- <div class="col-12" style="height: 10px;"></div> -->
+
+<div class="col-6" style="height: 5%;">
+    <div class="col-12" style="height: 600px;">
+        <div class="address__img">
+            <div class="pos">
+                <img class="sl__img--big" src="~/Assets/assets/img/camhung4.jpg" alt="">
+                <div class="address__img--title">
+                    <h2 class="sl__h2">SOFA</h2>
+                    <a class="address__img--link" href="~/SanPhamSofa/Index">Xem thêm</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-3" style="height: 5%;">
+    <div class="col-12" style="height: 600px;">
+        <div class="address__img">
+            <div class="pos">
+                <img class="sl__img--big" src="~/Assets/assets/img/camhung3.jpg" alt="">
+                <div class="address__img--title">
+                    <h2 class="sl__h2">BÀN ĂN</h2>
+                    <a class="address__img--link" href="~/SanPhamBan/Index">Xem thêm</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-3" style="height: 5%;">
+    <div class="col-12" style="height: 300px;">
+        <div class="address__img">
+            <div class="pos">
+                <img class="sl__img--small" src="~/Assets/assets/img/camhung5.jpg" alt="">
+                <div class="address__img--title">
+                    <h2>GIƯỜNG NGỦ</h2>
+                    <a class="address__img--link" href="~/SanPhamGiuongNgu/Index">Xem thêm</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12" style="height: 300px;">
+        <div class="address__img">
+            <div class="pos">
+                <img class="sl__img--small" src="~/Assets/assets/img/camhung2.jpg" alt="">
+                <div class="address__img--title">
+                    <h2 class="sl__h2">THIẾT KẾ NỘI THẤT</h2>
+                    <a class="address__img--link" href="~/ThietKeNoiThat/Index">Xem thêm</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

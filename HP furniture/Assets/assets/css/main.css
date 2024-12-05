@@ -1,0 +1,39 @@
+.bd__flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bd__box {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 105px;
+    width: 100%;
+}
+
+.pd__flex {
+    display: flex;
+    flex-wrap: wrap; /* Cho phép các h?p xu?ng dòng n?u không ?? ch? */
+    align-items: stretch; /* ??m b?o các h?p kéo dài toàn b? chi?u cao c?a container cha */
+    justify-content: center; /* C?n gi?a các h?p n?u có kho?ng tr?ng */
+    width: 100%; /* ??m b?o container chi?m toàn b? chi?u r?ng */
+    gap: 10px; /* Kho?ng cách gi?a các h?p */
+}
+
+.pd__box {
+    display: flex;
+    flex-direction: column; /* ??t các ph?n t? bên trong theo c?t */
+    align-items: flex-start; /* C?n ch?nh các ph?n t? bên trong v? phía ??u */
+    padding: 20px; /* Kho?ng cách bên trong h?p */
+    background-color: #f0f0f0; /* Màu n?n cho h?p */
+    border: 1px solid #ccc; /* ???ng vi?n cho h?p */
+    box-sizing: border-box; /* Bao g?m padding và border vào kích th??c t?ng th? */
+    flex: 1 1 300px; /* ??m b?o h?p chi?m toàn b? chi?u r?ng c?a container cha và co giãn */
+    min-width: 200px; /* ??t chi?u r?ng t?i thi?u ?? h?p không quá nh? */
+}
+
+.title__box {
+    margin: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}

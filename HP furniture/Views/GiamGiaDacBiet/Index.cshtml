@@ -1,0 +1,223 @@
+﻿
+@{
+    ViewBag.Title = "HP furniture - Giảm giá đặc biệt";
+    Layout = "~/Views/share/HPfurnitureLayout.cshtml";
+    ViewBag.Nav = 7;
+}
+
+@* Giảm giá đặc biệt *@
+<!-- Gioi thieu -->
+<div class="col-12" style="height: 10px;"></div>
+<div class="col-12" style="height: 600px;">
+    <div class="collect__img">
+        <div class="collect__overlay">
+            <div class="collect__text">
+                <span>Giảm giá</span>
+                <div class="collect__link">
+                    <a href="#">Trang chủ</a>
+                    <slash class="collect__slash"> / </slash>
+                    <a href="#">Giảm giá</a>
+                </div>
+            </div>
+        </div>
+        <img src="~/Assets/assets/img/yt3.jpg" alt="BoSuuTap">
+    </div>
+</div>
+
+<!-- Lọc sản phẩm -->
+<div class="col-12" style="height: 5%;">
+    <div class="apply">
+        @using (Html.BeginForm("Index", "SapXepSanPham", FormMethod.Get))
+        {
+            <div class="apply__list">
+                <div class="apply__list-item">
+                    <div class="apply__bag">
+                        <span href="#" class="apply__list-item-link">
+                            Giá
+                            <i class="fa-solid fa-angle-down apply__list-item-icon"></i>
+                        </span>
+                    </div>
+                    <div class="select">
+                        <select name="gia" id="gia" class="apply__select">
+                            <option value="3" class="apply__options">Giá từ: Thấp đến cao</option>
+                            <option value="4" class="apply__options">Giá từ: Cao đến thấp</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="apply__list-item">
+                    <button type="submit" class="apply__btn">ÁP DỤNG</button>
+                </div>
+            </div>
+            <input type="hidden" name="loaiSanPham" value="7" /> <!-- Thêm loại sản phẩm vào URL -->
+        }
+    </div>
+</div>
+
+<!-- Sản phẩm Sofa -->
+<div class="col-1"></div>
+<div class="col-10" style="height: 50%;">
+    @{
+        List<HP_furniture.Models.SanPham> data = (List<HP_furniture.Models.SanPham>)ViewBag.Product;
+        for (int i = 0; i < data.Count; i++)
+        {
+            <div class="col-3 product__tablet product__mobile" style="height: 335px;">
+                <div class="product">
+                    <div class="img__container">
+                        <div class="sale">@data[i].Sale%</div>
+                        <div class="product__img">
+                            <img class="product__img-link-original" src="@data[i].HinhAnhSanPham" alt="img_1">
+                            <img class="product__img-link-hover" src="@data[i].HinhAnhSanPham2" alt="img_1_hover">
+                        </div>
+                    </div>
+                    <div class="product__title">
+                        <span class="product__title-name" style=" display: inline-block; max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                            @data[i].TenSanPham
+                        </span>
+                        <a href="/YeuThich/ThemYeuThich/@data[i].ID" class="product__icon--link">
+                            <i class="fa-regular fa-heart product__icon"></i>
+                        </a>
+                    </div>
+                    <div class="product__price">
+                        <span class="price price__old">@Html.FormatValue(@data[i].GiaSanPham, "{0: #,####}")₫</span>
+                        <span class="price__sale">@Html.FormatValue(@data[i].GiaSanPhamSale, "{0: #,####}")₫</span>
+                    </div>
+                    <div class="product__btn">
+                        <div class="product__btn-cart">
+                            <a href="/GioHang/ThemGioHang/@data[i].ID" class="product__btn-cart_link">
+                                THÊM VÀO GIỎ
+                            </a>
+                        </div>
+                        <div class="product__btn-details">
+                            <a href="@Url.Action("Index", "ChiTietSanPham", new { Id = data[i].ID })" class="product__btn-details_link">
+                                XEM THÊM
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+<div class="col-1"></div>
+
+<!-- Phân trang -->
+<!--<div class="col-12" style="height: 5%;">
+        <ul class="pagination__list">
+            <li class="pagination__list-item">
+                <a href="#" class="pagination__link">
+                    <i class="fa-solid fa-arrow-left pagination__icon"></i>
+                </a>
+            </li>
+            <li class="pagination__list-item">
+                <a href="#" class="pagination__link pagination__active">1</a>
+            </li>
+            <li class="pagination__list-item">
+                <a href="#" class="pagination__link">2</a>
+            </li>
+            <li class="pagination__list-item">
+                <a href="#" class="pagination__link">3</a>
+            </li>
+            <li class="pagination__list-item">
+                <a href="#" class="pagination__link">4</a>
+            </li>
+            <li class="pagination__list-item">
+                <a href="#" class="pagination__link">5</a>
+            </li>
+            <li class="pagination__list-item">
+                <a href="#" class="pagination__link">...</a>
+            </li>
+            <li class="pagination__list-item">
+                <a href="#" class="pagination__link">7</a>
+            </li>
+            <li class="pagination__list-item">
+                <a href="#" class="pagination__link">
+                    <i class="fa-solid fa-arrow-right pagination__icon"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+</div>-->
+<div class="col-1"></div>
+<div class="col-12" style="height: 20px;"></div>
+
+@* Mẫu thiết kế *@
+<div class="col-6 block__mobile" style="height: 5%;">
+    <div class="discount">
+        <img src="~/Assets/assets/img/ggdb_0.jpeg" alt="" class="discount__img">
+    </div>
+
+    <div class="discount__title--one__mobile">
+        <h2 class="discount__h2">Mẫu thiết kế phòng khách</h2>
+        <p class="discount__p">Phòng khách là không gian chính của ngôi nhà, là nơi sum họp gia đình</p>
+        <a href="~/SanPhamPhongKhach/Index" class="discount__flex">
+            <span class="discount__span">MẪU PHÒNG KHÁCH</span>
+            <i class="fa-solid fa-arrow-right-long discount__icon"></i>
+        </a>
+    </div>
+</div>
+<div class="col-2 hide__on--mobile" style="height: 500px;">
+    <div class="discount__box">
+        <div class="discount__title--one">
+            <h2 class="discount__h2">Mẫu thiết kế phòng khách</h2>
+            <p class="discount__p">Phòng khách là không gian chính của ngôi nhà, là nơi sum họp gia đình</p>
+            <a href="~/SanPhamPhongKhach/Index" class="discount__flex">
+                <span class="discount__span">MẪU PHÒNG KHÁCH</span>
+                <i class="fa-solid fa-arrow-right-long discount__icon"></i>
+            </a>
+        </div>
+
+        <div class="discount__title--two">
+            <h2 class="discount__h2">Đồ trang trí</h2>
+            <p class="discount__p">Mang lại những nguồn cảm hứng và nét sinh động cho không gian</p>
+            <a href="~/TatCaSanPham/Index" class="discount__flex">
+                <span class="discount__span">KHÁM PHÁ</span>
+                <i class="fa-solid fa-arrow-right-long discount__icon"></i>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="col-4 block__mobile" style="height: 5%;">
+    <img src="~/Assets/assets/img/ggdb_1.jpg" alt="" class="discount__img">
+
+    <div class="discount__title--two__mobile">
+        <h2 class="discount__h2">Đồ trang trí</h2>
+        <p class="discount__p">Mang lại những nguồn cảm hứng và nét sinh động cho không gian</p>
+        <a href="~/TatCaSanPham/Index" class="discount__flex">
+            <span class="discount__span">KHÁM PHÁ</span>
+            <i class="fa-solid fa-arrow-right-long discount__icon"></i>
+        </a>
+    </div>
+</div>
+
+<div class="col-12 hide__on--tablet__mobile" style="height: 70px;"></div>
+
+<div class="col-6 flex__discount block__tablet block__mobile" style="height: 5%;">
+    <div class="flex__discount--dis">
+        <img src="https://nhaxinh.com/wp-content/uploads/2021/10/SHOWROOM_007.jpg" alt="" class="discount__bottom--imgOne">
+        <div class="discount__title">
+            <h2 class="discount__h2">Mẫu thiết kế phòng ngủ</h2>
+            <p class="discount__p">Những mẫu phòng ngủ của Nhà Xinh mang đến cảm giác ấm cúng, gần gũi và thoải mái</p>
+            <a href="~/SanPhamPhongNgu/Index" class="discount__flex">
+                <span class="discount__span">MẪU PHÒNG NGỦ</span>
+                <i class="fa-solid fa-arrow-right-long discount__icon"></i>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="col-6 flex__discount block__tablet block__mobile" style="height: 5%;">
+    <div class="discount__padding">
+        <img src="https://nhaxinh.com/wp-content/uploads/2021/10/Rectangle4.jpeg" alt="" class="discount__bottom--imgTwo">
+        <div class="discount__title">
+            <h2 class="discount__h2">Mẫu thiết kế phòng ăn</h2>
+            <p class="discount__p">Một bữa ăn ngon luôn là mong ước của mỗi gia đình. Không gian phòng ăn đóng vai trò rất quan trọng trong văn hóa Việt</p>
+            <a href="~/SanPhamPhongAn/Index" class="discount__flex">
+                <span class="discount__span">MẪU PHÒNG ĂN</span>
+                <i class="fa-solid fa-arrow-right-long discount__icon"></i>
+            </a>
+        </div>
+    </div>
+</div>
+<!-- end add -->
+<div class="col-12" style="height: 20px;"></div>
+

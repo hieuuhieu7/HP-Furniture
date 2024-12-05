@@ -1,0 +1,266 @@
+﻿@model HP_furniture.Models.GuiYeuCauHoTro
+@{
+    ViewBag.Title = "HP furniture";
+    Layout = "~/Views/share/HPfurnitureLayout.cshtml";
+}
+
+<!-- Img big hover -->
+<div class="col-12" style="height: 700px;">
+    <div class="warpper">
+        <div class="img__big-hover">
+            <div class="img__big-hover-item">
+                <a href="#" class="img__big-hover-link">
+                    <img class="img__big-hover-image" src="~/Assets/assets/img/slider1.jpg" alt="">
+                    <div class="img__big-hover-text">HP furniture</div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-12" style="height: 10px;"></div>
+
+<!-- Img fit hover -->
+<div class="col-6" style="height: 580px;">
+    <div class="warpper__one">
+        <div class="img__fit-hover">
+            <div class="img__fit-hover-item">
+                <a href="#" class="img__fit-hover-link">
+                    <img class="img__fit-hover-image" src="~/Assets/assets/img/sofa1.jpg" alt="">
+                    <div class="img__fit-hover-text">SOFA</div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Img small hover -->
+<div class="col-6" style="height: 580px;">
+    <div class="col-6" style="height: 285px;">
+        <div class="warpper__two">
+            <div class="img__small-hover">
+                <div class="img__small-hover-item">
+                    <a href="#" class="img__small-hover-link">
+                        <img class="img__small-hover-image" src="~/Assets/assets/img/phongan.jpg" alt="">
+                        <div class="img__small-hover-text">BÀN ĂN</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6" style="height: 285px;">
+        <div class="warpper__two">
+            <div class="img__small-hover">
+                <div class="img__small-hover-item">
+                    <a href="#" class="img__small-hover-link">
+                        <img class="img__small-hover-image" src="~/Assets/assets/img/giuong1.jpg" alt="">
+                        <div class="img__small-hover-text">GIƯỜNG</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6" style="height: 285px;">
+        <div class="warpper__two">
+            <div class="img__small-hover">
+                <div class="img__small-hover-item">
+                    <a href="#" class="img__small-hover-link">
+                        <img class="img__small-hover-image" src="~/Assets/assets/img/armchair1.jpg" alt="">
+                        <div class="img__small-hover-text">ARMCHAIR</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6" style="height: 285px;">
+        <div class="warpper__two">
+            <div class="img__small-hover">
+                <div class="img__small-hover-item">
+                    <a href="#" class="img__small-hover-link">
+                        <img class="img__small-hover-image" src="~/Assets/assets/img/ghean.jpg" alt="">
+                        <div class="img__small-hover-text">BÀN ĂN</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-12" style="height: 20px;"></div>
+
+<!-- Search add -->
+<div class="col-12" style="height: 50px;">
+    <div class="search__add">
+        <form action="@Url.Action("Index", "TimKiem")" method="get">
+            <!-- Điều chỉnh action và method -->
+            <input type="text" name="key" class="search__add--input" placeholder="Nhập...">
+            <input type="submit" value="Tìm kiếm" class="search__add--btn">
+        </form>
+    </div>
+</div>
+
+<!-- Sản phẩm mới -->
+<div class="col-1" style="height: 80px;"></div>
+<div class="col-10" style="height: 80px;">
+    <div class="product__box">
+        <span class="product__title-new prd">Sản phẩm mới</span>
+        <span class="product__titel-all prd">
+            <a href="~/TatCaSanPham/Index" class="link__all">
+                Xem tất cả
+                <i class="fa-solid fa-angle-right"></i>
+            </a>
+        </span>
+    </div>
+</div>
+<div class="col-1" style="height: 80px;"></div>
+
+<!-- Sản phẩm mới -->
+<div class="col-1"></div>
+<div class="col-10" style="height: 50%;">
+    @{
+        List<HP_furniture.Models.SanPham> data = (List<HP_furniture.Models.SanPham>)ViewBag.Product;
+        for (int i = 0; i < data.Count; i++)
+        {
+            <div class="col-3" style="height: 335px;">
+                <div class="product">
+                    <div class="img__container">
+                        @*<div class="sale">-10%</div>*@
+                        <div class="product__img">
+                            <img class="product__img-link-original" src="@data[i].HinhAnhSanPham" alt="img_1">
+                            <img class="product__img-link-hover" src="@data[i].HinhAnhSanPham2" alt="img_1_hover">
+                        </div>
+                    </div>
+                    <div class="product__title">
+                        <span class="product__title-name" style=" display: inline-block; max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                            @data[i].TenSanPham
+                        </span>
+                        <a href="/YeuThich/ThemYeuThich/@data[i].ID" class="product__icon--link">
+                            <i class="fa-regular fa-heart product__icon"></i>
+                        </a>
+                    </div>
+                    <div class="product__price">
+                        <span class="price__sale">@Html.FormatValue(@data[i].GiaSanPham, "{0: #,####}")₫</span>
+                    </div>
+                    <div class="product__btn">
+                        <div class="product__btn-cart">
+                            <a href="/GioHang/ThemGioHang/@data[i].ID" class="product__btn-cart_link">
+                                THÊM VÀO GIỎ
+                            </a>
+                        </div>
+                        <div class="product__btn-details">
+                            <a href="@Url.Action("Index", "ChiTietSanPham", new { Id = data[i].ID })" class="product__btn-details_link">
+                                XEM THÊM
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+<div class="col-1"></div>
+<div class="col-12" style="height: 20px"></div>
+
+@* Mẫu thiết kế *@
+<div class="col-6" style="height: 500px;">
+    <div class="discount">
+        <img src="~/Assets/assets/img/ggdb_0.jpeg" alt="" class="discount__img">
+    </div>
+</div>
+<div class="col-2" style="height: 500px;">
+    <div class="discount__box">
+        <div class="discount__title--one">
+            <h2 class="discount__h2">Mẫu thiết kế phòng khách</h2>
+            <p class="discount__p">Phòng khách là không gian chính của ngôi nhà, là nơi sum họp gia đình</p>
+            <a href="#" class="discount__flex">
+                <span class="discount__span">MẪU PHÒNG KHÁCH</span>
+                <i class="fa-solid fa-arrow-right-long discount__icon"></i>
+            </a>
+        </div>
+
+        <div class="discount__title--two">
+            <h2 class="discount__h2">Đồ trang trí</h2>
+            <p class="discount__p">Mang lại những nguồn cảm hứng và nét sinh động cho không gian</p>
+            <a href="#" class="discount__flex">
+                <span class="discount__span">KHÁM PHÁ</span>
+                <i class="fa-solid fa-arrow-right-long discount__icon"></i>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="col-4" style="height: 500px;">
+    <img src="~/Assets/assets/img/ggdb_1.jpg" alt="" class="discount__img">
+</div>
+
+<div class="col-12" style="height: 70px;"></div>
+
+<div class="col-6 flex__discount" style="height:500px;">
+    <div class="flex__discount--dis">
+        <img src="https://nhaxinh.com/wp-content/uploads/2021/10/SHOWROOM_007.jpg" alt="" class="discount__bottom--imgOne">
+        <div class="discount__title">
+            <h2 class="discount__h2">Mẫu thiết kế phòng ngủ</h2>
+            <p class="discount__p">Những mẫu phòng ngủ của Nhà Xinh mang đến cảm giác ấm cúng, gần gũi và thoải mái</p>
+            <a href="#" class="discount__flex">
+                <span class="discount__span">MẪU PHÒNG NGỦ</span>
+                <i class="fa-solid fa-arrow-right-long discount__icon"></i>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="col-6 flex__discount" style="height:500px;">
+    <div class="discount__padding">
+        <img src="https://nhaxinh.com/wp-content/uploads/2021/10/Rectangle4.jpeg" alt="" class="discount__bottom--imgTwo">
+        <div class="discount__title">
+            <h2 class="discount__h2">Mẫu thiết kế phòng ăn</h2>
+            <p class="discount__p">Một bữa ăn ngon luôn là mong ước của mỗi gia đình. Không gian phòng ăn đóng vai trò rất quan trọng trong văn hóa Việt</p>
+            <a href="#" class="discount__flex">
+                <span class="discount__span">MẪU PHÒNG ĂN</span>
+                <i class="fa-solid fa-arrow-right-long discount__icon"></i>
+            </a>
+        </div>
+    </div>
+</div>
+<!-- end add -->
+<div class="col-12" style="height: 20px;"></div>
+<!-- Hỗ trợ -->
+<div class="col-12 bg" style="height: 600px;">
+    <div class="col-6" style="height: 570px;">
+        <div class="bag__sp">
+            <div class="hotline">
+                <i class="fa-solid fa-phone-volume"></i>
+                HOTLINE: 38781108
+            </div>
+            <!-- Form để nhập thông tin khách hàng -->
+            @using (Html.BeginForm("GuiYeuCauHoTro", "TrangChu", FormMethod.Post))
+            {
+                @Html.ValidationSummary(true)
+                <div class="sp__text">
+                    <div class="sp__text-sp">Bạn cần hỗ trợ?</div>
+                    <div class="sp__text-back">Xin vui lòng để lại yêu cầu hỗ trợ của bạn.</div>
+                </div>
+                <div class="sp__input">
+                    <div class="sp__info">
+                        <!-- HoTen -->
+                        @Html.TextBoxFor(model => model.HoTen, new { @class = "sp__info-name sp__info-input", placeholder = "Họ tên" })
+                        <div style="padding: 0 34px 0 34px"></div>
+                        <!-- SDT -->
+                        @Html.TextBoxFor(model => model.SDT, new { @class = "sp__info-call sp__info-input", placeholder = "(+84) 0123 456" })
+                    </div>
+                    <!-- Email -->
+                    @Html.TextBoxFor(model => model.Email, new { @class = "sp__email", placeholder = "Email" })
+
+                    <!-- Noi dung -->
+                    @Html.TextAreaFor(model => model.NoiDung, new { @class = "sp__textarea", placeholder = "Nội dung" })
+                    <button type="submit" class="sp__btn">GỬI YÊU CẦU</button>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="col-6" style="height: 570px;">
+        <div class="background">
+            <img src="~/Assets/assets/img/ghe2.jpg" alt="" class="img__bg">
+        </div>
+    </div>
+</div>
+

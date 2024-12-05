@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="90f23f54ef4b469eb991fdd8d6f4a5a7" Name="Diagram1" ZoomLevel="92">
+        <EntityTypeShape EntityType="DB_QuanLyCuaHangDoNoiThatModel.ChiTietDonHang" Width="2.25" PointX="5.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_QuanLyCuaHangDoNoiThatModel.ChucNang" Width="1.5" PointX="5.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_QuanLyCuaHangDoNoiThatModel.DonHang" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_QuanLyCuaHangDoNoiThatModel.GioHang" Width="1.5" PointX="8.25" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_QuanLyCuaHangDoNoiThatModel.KhachHang" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_QuanLyCuaHangDoNoiThatModel.LoaiSanPham" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_QuanLyCuaHangDoNoiThatModel.NhanVien" Width="1.5" PointX="5.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_QuanLyCuaHangDoNoiThatModel.PhanQuyen" Width="1.5" PointX="8" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_QuanLyCuaHangDoNoiThatModel.SanPham" Width="1.75" PointX="2.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_QuanLyCuaHangDoNoiThatModel.sysdiagrams" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_QuanLyCuaHangDoNoiThatModel.TaiKhoanAdmin" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="DB_QuanLyCuaHangDoNoiThatModel.FK_ChiTietDonHang_DonHang" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_QuanLyCuaHangDoNoiThatModel.FK_ChiTietDonHang_SanPham" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_QuanLyCuaHangDoNoiThatModel.FK_PhanQuyen_ChucNang" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_QuanLyCuaHangDoNoiThatModel.FK_DonHang_KhachHang" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_QuanLyCuaHangDoNoiThatModel.FK_GioHang_KhachHang" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_QuanLyCuaHangDoNoiThatModel.FK_GioHang_SanPham" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_QuanLyCuaHangDoNoiThatModel.FK_SanPham_LoaiSanPham" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_QuanLyCuaHangDoNoiThatModel.FK_PhanQuyen_NhanVien" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DB_QuanLyCuaHangDoNoiThatModel.BoSuuTap" Width="1.5" PointX="10.375" PointY="6.75" />
+        <EntityTypeShape EntityType="DB_QuanLyCuaHangDoNoiThatModel.ThietKeNoiThat" Width="1.5" PointX="10.375" PointY="9.75" />
+        <EntityTypeShape EntityType="DB_QuanLyCuaHangDoNoiThatModel.Phong" Width="2.125" PointX="12.375" PointY="6.625" />
+        <EntityTypeShape EntityType="DB_QuanLyCuaHangDoNoiThatModel.LoaiPhong" Width="1.75" PointX="13.125" PointY="10.375" />
+        <AssociationConnector Association="DB_QuanLyCuaHangDoNoiThatModel.FK_Phong_LoaiPhong" />
+        <EntityTypeShape EntityType="DB_QuanLyCuaHangDoNoiThatModel.CuaHang360" Width="1.75" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="DB_QuanLyCuaHangDoNoiThatModel.GocCamHung" Width="2.125" PointX="2.75" PointY="11.75" />
+        <EntityTypeShape EntityType="DB_QuanLyCuaHangDoNoiThatModel.GuiYeuCauHoTro" Width="1.75" PointX="8.125" PointY="11.375" />
+        <EntityTypeShape EntityType="DB_QuanLyCuaHangDoNoiThatModel.TrangThai" Width="1.5" PointX="10.375" PointY="12.875" />
+        <AssociationConnector Association="DB_QuanLyCuaHangDoNoiThatModel.FK_DonHang_TrangThai" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,60 @@
+﻿@model HP_furniture.Models.DonHang
+
+@{
+    ViewBag.Title = "Xóa";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout1.cshtml";
+}
+
+<h4>XÓA HÓA ĐƠN</h4>
+
+<h5>Bạn có chắc chắn muốn xóa không?</h5>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.NgayDatHang)*@
+            Ngày đặt hàng
+        </dt>
+
+        <dd>
+            @*@Html.DisplayFor(model => model.NgayDatHang)*@
+            @string.Format("{0:dd-MM-yyyy}", Model.NgayDatHang)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.TongTien)*@
+            Tổng tiền
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TongTien)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.KhachHang.TenKhachHang)*@
+            Tên khách hàng
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KhachHang.TenKhachHang)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger" /> |
+            @Html.ActionLink("Trở về danh sách", "Index")
+        </div>
+    }
+</div>

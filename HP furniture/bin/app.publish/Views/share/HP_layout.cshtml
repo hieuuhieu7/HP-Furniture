@@ -1,0 +1,350 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link href="~/HP_Assets/assets/css/main.css" rel="stylesheet" />
+    <link href="~/HP_Assets/assets/css/base.css" rel="stylesheet" />
+    <link href="~/HP_Assets/assets/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> -->
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="col-12" style="height: 55px;">
+            <div class="header">
+                <div class="header-nav__one">
+                    <div class="nav-VNEN">
+                        <span>
+                            <img src="https://nhaxinh.com/wp-content/plugins/sitepress-multilingual-cms/res/flags/vi.png" alt="Tiếng Việt">
+                            <span style="color: grey;">VN</span> EN
+                        </span>
+                    </div>
+                    <div class="nav">
+                        <ul class="nav-list">
+                            <li class="nav-list__item">
+                                <a href="#" class="item-link item-link__call">
+                                    <i class="fa-solid fa-phone item-link__call--icon"></i>
+                                    1800 7200
+                                </a>
+                            </li>
+                            <li class="nav-list__item">
+                                <a href="#" class="item-link">
+
+                                    Giới thiệu
+                                </a>
+                            </li>
+                            <li class="nav-list__item">
+                                <a href="#" class="item-link">
+
+                                    Khuyến mãi
+                                </a>
+                            </li>
+                            <li class="nav-list__item">
+                                <span href="#" class="item-link item-link__sale">
+
+                                    Giảm giá đặc biệt
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <ul class="header__navbar-list">
+                    <li class="header__navbar-item">
+                        <i class="fa-solid fa-location-arrow header__navbar-item-icon"></i>
+                    </li>
+                    <li class="header__navbar-item">
+                        <i class="fa-solid fa-heart header__navbar-item-icon"></i>
+                    </li>
+                    <li class="header__navbar-item">
+                        <a href="~/HP_GioHang/Index"><i class="fa-solid fa-cart-shopping header__navbar-item-icon"></i></a>
+                    </li>
+                    <li class="header__navbar-item">
+                        <a href="~/HP_DangNhap/Index" class="header__navbar-item-link">Đăng nhập</a>
+                    </li>
+                    <li class="header__navbar-item">
+                        <a href="~/HP_DangKy/Index" class="header__navbar-item-link">Đăng ký</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-2" style="height: 70px;">
+            <div class="bag">
+                <!-- Navbar -->
+                <label for="nav__input-checkbox" class="nav__bars-btn">
+                    <i class="fa-solid fa-bars bag-category"></i>
+                </label>
+
+                <input type="checkbox" hidden name="" class="nav__input" id="nav__input-checkbox">
+
+                <label for="nav__input-checkbox" class="nav__overlay"></label>
+
+                <nav class="nav__bag">
+                    <label for="nav__input-checkbox" class="nav__close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </label>
+                    <ul class="nav__list">
+                        <li class="nav__list-item">
+                            <a href="#" class="nav__link">SOFA</a>
+                        </li>
+                        <li class="nav__list-item">
+                            <a href="#" class="nav__link">BÀN</a>
+                        </li>
+                        <li class="nav__list-item">
+                            <a href="#" class="nav__link">GHẾ</a>
+                        </li>
+                        <li class="nav__list-item">
+                            <a href="#" class="nav__link">GIƯỜNG NGỦ</a>
+                        </li>
+                        <li class="nav__list-item">
+                            <a href="#" class="nav__link">TỦ VÀ KỆ</a>
+                        </li>
+                        <li class="nav__list-item">
+                            <a href="#" class="nav__link">BẾP</a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- LOGO -->
+                <a href="~/HP_TrangChu/Index" class="logo">
+                    <img src="~/HP_Assets/assets/img/logo.jpg" alt="Nội thất HP" class="logo__img">
+                </a>
+            </div>
+        </div>
+
+        <!-- Dropdown -->
+        <div class="col-7" style="height: 70px;">
+            <div class="header-navbar">
+                <ul class="navbar-list">
+                    <li class="navbar-list__item">
+                        <a href="" class="navbar-list__link">
+                            <div class="dropdown">
+                                <div class="dropdown__select">
+                                    <span class="dropdown__selected">Sản phẩm</span>
+                                    <i class="fa-solid fa-angle-down"></i>
+                                </div>
+                                <ul class="dropdown__list">
+                                    @if (ViewBag.dropActive == 1)
+                                    {
+                                        <li class="dropdown__item">
+                                            <a href="~/HP_SP_Sofa/Index" class="dropdown__text dropdown__active">
+                                                Sofa
+                                            </a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="dropdown__item">
+                                            <a href="~/HP_SP_Sofa/Index" class="dropdown__text">
+                                                Sofa
+                                            </a>
+                                        </li>
+                                    }
+                                    <li class="dropdown__item">
+                                        <a href="#" class="dropdown__text">
+                                            Bàn
+                                        </a>
+                                    </li>
+                                    <li class="dropdown__item">
+                                        <a href="#" class="dropdown__text">
+                                            Ghế
+                                        </a>
+                                    </li>
+                                    <li class="dropdown__item">
+                                        <a href="#" class="dropdown__text">
+                                            Giường ngủ
+                                        </a>
+                                    </li>
+                                    <li class="dropdown__item">
+                                        <a href="#" class="dropdown__text">
+                                            Tủ và kệ
+                                        </a>
+                                    </li>
+                                    <li class="dropdown__item">
+                                        <a href="#" class="dropdown__text">
+                                            Bếp
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="navbar-list__item">
+                        <a href="" class="navbar-list__link">
+                            <div class="dropdown">
+                                <div class="dropdown__select">
+                                    <span class="dropdown__selected">Phòng</span>
+                                    <i class="fa-solid fa-angle-down"></i>
+                                </div>
+                                <ul class="dropdown__list">
+                                    @if (ViewBag.dropActive == 7)
+                                    {
+                                        <li class="dropdown__item">
+                                            <a href="~/HP_P_PhongKhach" class="dropdown__text dropdown__active">
+                                                Phòng khách
+                                            </a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="dropdown__item">
+                                            <a href="~/HP_P_PhongKhach" class="dropdown__text">
+                                                Phòng khách
+                                            </a>
+                                        </li>
+                                    }
+                                    <li class="dropdown__item">
+                                        <a href="#" class="dropdown__text">
+                                            Phòng ăn
+                                        </a>
+                                    </li>
+                                    <li class="dropdown__item">
+                                        <a href="#" class="dropdown__text">
+                                            Phòng ngủ
+                                        </a>
+                                    </li>
+                                    <li class="dropdown__item">
+                                        <a href="#" class="dropdown__text">
+                                            Phòng làm việc
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </a>
+                    </li>
+                    @if (ViewBag.Active == 3)
+                    {
+                        <li class="navbar-list__item active__navbar">
+                            <a href="~/HP_BoSuuTap/Index" class="navbar-list__link">
+                                Bộ sưu tập
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="navbar-list__item">
+                            <a href="~/HP_BoSuuTap/Index" class="navbar-list__link">
+                                Bộ sưu tập
+                            </a>
+                        </li>
+                    }
+                    @if (ViewBag.Active == 4)
+                    {
+                        <li class="navbar-list__item active__navbar">
+                            <a href="~/HP_ThietKeNoiThat/Index" class="navbar-list__link">
+                                Thiết kế nội thất
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="navbar-list__item">
+                            <a href="~/HP_ThietKeNoiThat/Index" class="navbar-list__link">
+                                Thiết kế nội thất
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="col-3" style="height: 70px;">
+            <div class="header-search">
+                <input type="text" class="header-search__input" placeholder="Tìm kiếm">
+                <i class="fa-solid fa-magnifying-glass header-search__icon"></i>
+            </div>
+        </div>
+    </header>
+    <div class="col-12" style="height: 117px;"></div>
+    <!-- End Header -->
+
+    @RenderBody()
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer__bag">
+            <div class="col-3 footer__bg" style="height: 200px;">
+                <h4 class="footer__title">KẾT NỐI VỚI HP FURNITURE</h4>
+                <ul class="footer__list">
+                    <li class="footer__list-item">
+                        HP FURNITURE
+                    </li>
+                    <li class="footer__list-item">
+                        FOLLOW US
+                    </li>
+                    <li class="footer__list-item">
+                        <a href="">Instagram - Youtube - Facebook</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-3 footer__bg" style="height: 200px;">
+                <h4 class="footer__title">HP FURNITURE</h4>
+                <ul class="footer__list">
+                    <li class="footer__list-item">
+                        Giới thiệu
+                    </li>
+                    <li class="footer__list-item">
+                        Tổng công ty
+                    </li>
+                    <li class="footer__list-item">
+                        Tuyển dụng
+                    </li>
+                    <li class="footer__list-item">
+                        Thẻ hội viên
+                    </li>
+                    <li class="footer__list-item">
+                        Đổi trả hàng
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-3 footer__bg" style="height: 200px;">
+                <h4 class="footer__title">CẢM HỨNG #HP FURNITURE</h4>
+                <ul class="footer__list">
+                    <li class="footer__list-item">
+                        Sản phẩm
+                    </li>
+                    <li class="footer__list-item">
+                        Ý tưởng và cảm hứng
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-3 footer__bg" style="height: 200px;">
+                <h4 class="footer__title">NEWSLETTER</h4>
+                <ul class="footer__list">
+                    <li class="footer__list-item">
+                        Hãy để lại email của bạn để nhận được những ý tưởng trang trí mới và những thông tin, ưu đãi từ Nhà Xinh
+                    </li>
+                    <li class="footer__list-item">
+                        Email: tunhienbikick.com.vn
+                    </li>
+                    <li class="footer__list-item">
+                        Hotline: 18007200
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-1 footer__bg" style="height: 150px;"></div>
+        <div class="col-10 footer__bg" style="height: 150px;">
+            <div class="footer__balo">
+                <div>
+                    © 2021 - Bản quyền của tunhienbikick - thương hiệu thuộc HP Furniture <br>
+                    Từ năm 1999 - thương hiệu đăng ký số 284074 Cục sở hữu trí tuệ
+                </div>
+                <div><img src="https://nhaxinh.com/wp-content/uploads/2021/09/image-15.png" alt=""></div>
+            </div>
+        </div>
+        <div class="col-1 footer__bg" style="height: 150px;"></div>
+    </footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="~/HP_Assets/validator.js"></script>
+</body>
+</html>
+

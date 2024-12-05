@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewBag.Title = "HP furniture - Tủ và kệ";
+    Layout = "~/Views/share/HPfurnitureLayout.cshtml";
+    ViewBag.dropActive = 5;
+    ViewBag.optionActive = 5;
+}
+
+<!-- Imgae Bàn -->
+<div class="col-12" style="height: 486px;">
+    <div class="image__sofa">
+        <div class="img__overlay">
+            <h2 class="img__overley-text">TỦ VÀ KỆ</h2>
+        </div>
+        <img src="~/Assets/assets/img/tuvake.jpg" alt="" class="image__sofa-link">
+    </div>
+</div>
+
+<!-- Lọc sản phẩm -->
+<div class="col-12" style="height: 5%;">
+    <div class="apply">
+        @using (Html.BeginForm("Index", "SapXepSanPham", FormMethod.Get))
+        {
+            <div class="apply__list">
+                <div class="apply__list-item">
+                    <div class="apply__bag">
+                        <span href="#" class="apply__list-item-link">
+                            Giá
+                            <i class="fa-solid fa-angle-down apply__list-item-icon"></i>
+                        </span>
+                    </div>
+                    <div class="select">
+                        <select name="gia" id="gia" class="apply__select">
+                            <option value="3" class="apply__options">Giá từ: Thấp đến cao</option>
+                            <option value="4" class="apply__options">Giá từ: Cao đến thấp</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="apply__list-item">
+                    <button type="submit" class="apply__btn">ÁP DỤNG</button>
+                </div>
+            </div>
+            <input type="hidden" name="loaiSanPham" value="13" /> <!-- Thêm loại sản phẩm vào URL -->
+        }
+    </div>
+</div>
+
+<!-- Sản phẩm Sofa -->
+<div class="col-1"></div>
+<div class="col-10" style="height: 50%;">
+    @{
+        List<HP_furniture.Models.SanPham> data = (List<HP_furniture.Models.SanPham>)ViewBag.Product;
+        for (int i = 0; i < data.Count; i++)
+        {
+            <div class="col-3 product__tablet product__mobile" style="height: 335px;">
+                <div class="product">
+                    <div class="img__container">
+                        <div class="sale">@data[i].Sale%</div>
+                        <div class="product__img">
+                            <img class="product__img-link-original" src="@data[i].HinhAnhSanPham" alt="img_1">
+                            <img class="product__img-link-hover" src="@data[i].HinhAnhSanPham2" alt="img_1_hover">
+                        </div>
+                    </div>
+                    <div class="product__title">
+                        <span class="product__title-name" style=" display: inline-block; max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">@data[i].TenSanPham</span>
+                        <a href="/YeuThich/ThemYeuThich/@data[i].ID" class="product__icon--link">
+                            <i class="fa-regular fa-heart product__icon"></i>
+                        </a>
+                    </div>
+                    <div class="product__price">
+                        <span class="price price__old">@Html.FormatValue(@data[i].GiaSanPham, "{0: #,####}")₫</span>
+                        <span class="price__sale">@Html.FormatValue(@data[i].GiaSanPhamSale, "{0: #,####}")₫</span>
+                    </div>
+                    <div class="product__btn">
+                        <div class="product__btn-cart">
+                            <a href="/GioHang/ThemGioHang/@data[i].ID" class="product__btn-cart_link">
+                                THÊM VÀO GIỎ
+                            </a>
+                        </div>
+                        <div class="product__btn-details">
+                            <a href="@Url.Action("Index", "ChiTietSanPham", new { Id = data[i].ID })" class="product__btn-details_link">
+                                XEM THÊM
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+<div class="col-1"></div>
+
+<!-- Phân trang -->
+<div class="col-12" style="height: 80px;">
+    <ul class="pagination__list">
+        <li class="pagination__list-item">
+            <a href="#" class="pagination__link">
+                <i class="fa-solid fa-arrow-left pagination__icon"></i>
+            </a>
+        </li>
+        <li class="pagination__list-item">
+            <a href="#" class="pagination__link pagination__active">1</a>
+        </li>
+        <li class="pagination__list-item">
+            <a href="#" class="pagination__link">2</a>
+        </li>
+        <li class="pagination__list-item">
+            <a href="#" class="pagination__link">3</a>
+        </li>
+        <li class="pagination__list-item">
+            <a href="#" class="pagination__link">4</a>
+        </li>
+        <li class="pagination__list-item">
+            <a href="#" class="pagination__link">5</a>
+        </li>
+        <li class="pagination__list-item">
+            <a href="#" class="pagination__link">...</a>
+        </li>
+        <li class="pagination__list-item">
+            <a href="#" class="pagination__link">7</a>
+        </li>
+        <li class="pagination__list-item">
+            <a href="#" class="pagination__link">
+                <i class="fa-solid fa-arrow-right pagination__icon"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+

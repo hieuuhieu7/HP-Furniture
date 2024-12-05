@@ -1,0 +1,149 @@
+﻿@model HP_furniture.Models.KhachHang
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HP furniture - Đăng ký</title>
+    <link rel="stylesheet" href="~/Assets/assets/css/main.css">
+    <link rel="stylesheet" href="~/Assets/assets/css/base.css">
+    <link rel="stylesheet" href="~/Assets/assets/css/style.css">
+    <link href="~/Assets/assets/css/responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        .form-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .form__control {
+            height: 35px;
+        }
+
+            .btn__register:hover {
+                background-color: black;
+                color: whitesmoke;
+            }
+
+        .back__link {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 3%;
+            cursor: pointer;
+            transition: 0.5s;
+            color: black;
+            font-style: italic;
+        }
+
+            .back__link:hover {
+                color: whitesmoke;
+            }
+
+        .form__flex{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form__control--validate{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg__form">
+        <div class="balo__form">
+            <h2 class="title__form">ĐĂNG KÝ</h2>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.TenKhachHang, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <label class="min"><span style="font-weight: bold; font-size: 18px">Họ và tên</span>*</label>
+                <div class="col-md-10 form__flex">
+                    @Html.EditorFor(model => model.TenKhachHang, new { htmlAttributes = new { @class = "form__control" } })
+                    @Html.ValidationMessageFor(model => model.TenKhachHang, "", new { @class = "text-danger form__control--validate" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.SDT_KH, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <label class="min"><span style="font-weight: bold; font-size: 18px">Số điện thoại</span>*</label>
+                <div class="col-md-10 form__flex">
+                    @Html.EditorFor(model => model.SDT_KH, new { htmlAttributes = new { @class = "form__control" } })
+                    @Html.ValidationMessageFor(model => model.SDT_KH, "", new { @class = "text-danger form__control--validate" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.DiaChi_KH, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <label class="min">Địa chỉ</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DiaChi_KH, new { htmlAttributes = new { @class = "form__control" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <label class="min"><span style="font-weight: bold; font-size: 18px">Email</span>*</label>
+                <div class="col-md-10 form__flex">
+                    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form__control" } })
+                    @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger form__control--validate" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <label class="min"><span style="font-weight: bold; font-size: 18px">Mật khẩu</span>*</label>
+                <div class="col-md-10 form__flex">
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form__control", Type = "password", id = "Password" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger form__control--validate" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <label class="min"><span style="font-weight: bold; font-size: 18px">Nhập lại mật khẩu</span>*</label>
+                <div class="col-md-10 form__flex">
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form__control", Type = "password", id = "ConfirmPassword" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger form__control--validate" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10 block__mobile">
+                    <input type="submit" value="ĐĂNG KÝ" class="btn btn-default btn__register" onclick="return validatePassword();" />
+                </div>
+            </div>
+
+            <div>
+                <a href="~/DangNhap/Index" class="back__link">Trở về trang đăng nhập</a>
+            </div>
+        </div>
+            }
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    function validatePassword() {
+        var password = document.getElementById("Password").value;
+        var confirmPassword = document.getElementById("ConfirmPassword").value;
+        if (password != confirmPassword) {
+            alert("Mật khẩu không khớp.");
+            return false;
+        }
+        return true;
+    }
+</script>

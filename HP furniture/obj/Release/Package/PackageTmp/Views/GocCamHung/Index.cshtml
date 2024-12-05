@@ -1,0 +1,153 @@
+﻿
+@{
+    ViewBag.Title = "HP furniture - Góc cảm hứng";
+    Layout = "~/Views/share/HPfurnitureLayout.cshtml";
+    ViewBag.Active = 6;
+    ViewBag.Nav = 4;
+}
+
+<!-- Góc cảm hứng -->
+<!-- Phần 1 -->
+<div class="col-12" style="height: 30px;"></div>
+<div class="col-1" style="height: 560px;"></div>
+<div class="col-10" style="height: 560px;">
+    <div class="col-8" style="height: 550px;">
+        <div class="image__one">
+            <div class="image__fit-hover">
+                <div class="image__fit-hover-item">
+                    <a href="#" class="image__fit-hover-link">
+                        <img class="image__fit-hover-image" src="~/Assets/assets/img/yt1.jpg" alt="">
+                        <div class="image__fit-hover-text">GÓC CẢM HỨNG</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-4" style="height: 275px;">
+        <div class="image__two">
+            <div class="image__small-hover">
+                <div class="image__small-hover-item">
+                    <a href="#" class="image__small-hover-link">
+                        <img class="image__small-hover-image" src="~/Assets/assets/img/yt2.jpg" alt="">
+                        <div class="image__small-hover-text">Ý TƯỞNG</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-4" style="height: 275px;">
+        <div class="image__two">
+            <div class="image__small-hover">
+                <div class="image__small-hover-item">
+                    <a href="#" class="image__small-hover-link">
+                        <img class="image__small-hover-image" src="~/Assets/assets/img/yt3.jpg" alt="">
+                        <div class="image__small-hover-text">KHÔNG GIAN SỐNG</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-1" style="height: 560px;"></div>
+<div class="col-12" style="height: 50px;"></div>
+
+<!-- Phần 2 -->
+<div class="col-1" style="height: 5%;"></div>
+<div class="col-10" style="height: 5%;">
+    @{
+        List<HP_furniture.Models.GocCamHung> data = (List<HP_furniture.Models.GocCamHung>)ViewBag.Product;
+        for (int i = 0; i < data.Count; i++)
+        {
+            <div class="col-6 product__mobile" style="height: 5%;">
+                <a href="@Url.Action("Index", "ChiTietGocCamHung", new { Id = data[i].ID })" class="prd__ins">
+                    <div class="prd__ins--img">
+                        <img src="@data[i].HinhAnhCamHung1" alt="">
+                    </div>
+                    <div class="prd__ins--name">
+                        <h3 style="max-width: 480px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                            @data[i].TenCamHung1
+                        </h3>
+                        <div class="prd__ins--border"></div>
+                    </div>
+                </a>
+            </div>
+        }
+    }
+</div>
+<div class="col-1" style="height: 5%;"></div>
+<div class="col-12" style="height: 10px;">
+    <div style="border-bottom: 1px solid var(--rgb-primarry)"></div>
+</div>
+
+<div class="col-1" style="height: 5%;"></div>
+<div class="col-10" style="height: 5%;">
+    <div class="col-6" style="height: 580px;">
+        <div class="address__img">
+            <div class="pos">
+                <img class="address__img--small" src="~/Assets/assets/img/camhung3.jpg" alt="">
+                <div class="address__img--title">
+                    <h2>PHÒNG ĂN</h2>
+                    <a class="address__img--link" href="~/SanPhamPhongAn/Index">Xem thêm</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6" style="height: 580px;">
+        <div class="address__img">
+            <div class="pos">
+                <img class="address__img--small" src="~/Assets/assets/img/camhung4.jpg" alt="">
+                <div class="address__img--title">
+                    <h2>PHÒNG KHÁCH</h2>
+                    <a class="address__img--link" href="~/SanPhamPhongKhach/Index">Xem thêm</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12" style="height: 20px;"></div>
+    <div class="col-12" style="height:650px;">
+        <div class="address__img">
+            <div class="pos">
+                <img class="address__img--big" src="~/Assets/assets/img/camhung5.jpg" alt="">
+                <div class="address__img--title">
+                    <h2>PHÒNG NGỦ</h2>
+                    <a class="address__img--link" href="~/SanPhamPhongNgu/Index">Xem thêm</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-1" style="height: 5%;"></div>
+
+<!-- Phần 3: Slide -->
+<div class="col-12 fl" style="height: 300px;">
+    <div id="slider-container">
+        <div class="slide">
+            <img src="~/Assets/assets/img/ch1.jpg" alt="Image 1">
+        </div>
+        <div class="slide">
+            <img src="~/Assets/assets/img/ch2.jpg" alt="Image 2">
+        </div>
+        <div class="slide">
+            <img src="~/Assets/assets/img/ch3.jpg" alt="Image 3">
+        </div>
+        <div class="slide">
+            <img src="~/Assets/assets/img/ch4.jpg" alt="Image 4">
+        </div>
+        <div class="slide">
+            <img src="~/Assets/assets/img/ch5.jpg" alt="Image 5">
+        </div>
+        <div class="slide">
+            <img src="~/Assets/assets/img/ch6.jpg" alt="Image 6">
+        </div>
+        <div class="slide">
+            <img src="~/Assets/assets/img/ch7.jpg" alt="Image 7">
+        </div>
+        <div class="slide">
+            <img src="~/Assets/assets/img/ch8.jpg" alt="Image 8">
+        </div>
+    </div>
+</div>
+<div class="col-12" style="height: 5px;"></div>
+

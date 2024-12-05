@@ -1,0 +1,193 @@
+﻿
+@{
+    ViewBag.Title = "HP furniture - Chi tiết góc cảm hứng";
+    Layout = "~/Views/share/HPfurnitureLayout.cshtml";
+}
+@model HP_furniture.Models.GocCamHung
+
+<!-- Chi tiết góc cảm hứng -->
+<div class="GCH">
+    <div class="col-12" style="height: 20px;"></div>
+
+    <div class="col-1" style="height: 580px;"></div>
+    <div class="col-5" style="height: 580px;">
+        <div style="padding: 0px 10px 0px 10px;">
+            <div class="GCH__title">
+                <h1>@Model.TenCamHung1</h1>
+            </div>
+            <div class="GCH__mt">
+                <span>
+                    @{
+                        string moTaWithoutHtml = null;
+                        if (!string.IsNullOrEmpty(Model.MoTaCamHung1))
+                        {
+                            // Sử dụng Regex để loại bỏ thẻ HTML
+                            moTaWithoutHtml = System.Text.RegularExpressions.Regex.Replace(Model.MoTaCamHung1, "<.*?>", string.Empty);
+                            // Giải mã HTML entities
+                            moTaWithoutHtml = HttpUtility.HtmlDecode(moTaWithoutHtml);
+                            // Thêm thẻ <br> sau mỗi dòng
+                            moTaWithoutHtml = moTaWithoutHtml.Replace("\n", "<br>");
+                        }
+                        else
+                        {
+                            moTaWithoutHtml = "Chưa có mô tả";
+                        }
+                    }
+                    <span>@Html.Raw(moTaWithoutHtml)</span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-5" style="height: 580px;">
+        <div class="GCH__img--sm1">
+            <img src="@Model.HinhAnhCamHung1" alt="">
+        </div>
+    </div>
+    <div class="col-1" style="height: 580px;"></div>
+
+    <div class="col-12" style="height: 20px;"></div>
+
+    <div class="col-1" style="height: 700px;"></div>
+    <div class="col-5" style="height: 700px;">
+        <div class="GCH__img--sm2">
+            <img src="@Model.HinhAnhCamHung2" alt="">
+        </div>
+    </div>
+    <div class="col-5" style="height: 700px;">
+        <div style="padding: 0px 10px 0px 10px;">
+            <div class="GCH__title">
+                <h2>@Model.TenCamHung2 </h2>
+            </div>
+            <div class="GCH__mt--sp">
+                <span>
+                    @{
+                        string moTaWithoutHtml2 = null;
+                        if (!string.IsNullOrEmpty(Model.MoTaCamHung2))
+                        {
+                            // Sử dụng Regex để loại bỏ thẻ HTML
+                            moTaWithoutHtml2 = System.Text.RegularExpressions.Regex.Replace(Model.MoTaCamHung2, "<.*?>", string.Empty);
+                            // Giải mã HTML entities
+                            moTaWithoutHtml2 = HttpUtility.HtmlDecode(moTaWithoutHtml2);
+                            // Thêm thẻ <br> sau mỗi dòng
+                            moTaWithoutHtml2 = moTaWithoutHtml2.Replace("\n", "<br>");
+                        }
+                        else
+                        {
+                            moTaWithoutHtml2 = "Chưa có mô tả";
+                        }
+                    }
+                    <span>@Html.Raw(moTaWithoutHtml2)</span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-1" style="height: 700px;"></div>
+
+    <div class="col-12" style="height: 20px;"></div>
+
+    <div class="col-1" style="height: 700px;"></div>
+    <div class="col-5" style="height: 700px;">
+        <div style="padding: 0px 10px 0px 10px;">
+            <div class="GCH__title">
+                <h2>@Model.TenCamHung3</h2>
+            </div>
+            <div class="GCH__mt--sp">
+                <span>
+                    @{
+                        string moTaWithoutHtml3 = null;
+                        if (!string.IsNullOrEmpty(Model.MoTaCamHung3))
+                        {
+                            // Sử dụng Regex để loại bỏ thẻ HTML
+                            moTaWithoutHtml3 = System.Text.RegularExpressions.Regex.Replace(Model.MoTaCamHung3, "<.*?>", string.Empty);
+                            // Giải mã HTML entities
+                            moTaWithoutHtml3 = HttpUtility.HtmlDecode(moTaWithoutHtml3);
+                            // Thêm thẻ <br> sau mỗi dòng
+                            moTaWithoutHtml3 = moTaWithoutHtml3.Replace("\n", "<br>");
+                        }
+                        else
+                        {
+                            moTaWithoutHtml3 = "Chưa có mô tả";
+                        }
+                    }
+                    <span>@Html.Raw(moTaWithoutHtml3)</span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-5" style="height: 700px;">
+        <div class="GCH__img--sm2">
+            <img src="@Model.HinhAnhCamHung3" alt="">
+        </div>
+    </div>
+    <div class="col-1" style="height: 700px;"></div>
+
+    <div class="col-12" style="height: 10px;"></div>
+
+    <div class="col-12" style="height: 600px;">
+        <div class="GCH__img--big">
+            <img src="@Model.HinhAnhEnd" alt="">
+        </div>
+    </div>
+
+    <div class="col-12" style="height: 50px;"></div>
+
+    <div class="col-12" style="height: 50px; display: flex; align-items: center; justify-content: center;">
+        <div>
+            <h2>THÊM LỰA CHỌN</h2>
+        </div>
+    </div>
+
+    <div class="col-1" style="height: 315px;"></div>
+    <div class="col-10" style="height: 315px; border: 1.5px solid var(--rgb-primarry); padding: 10px;">
+        <div class="GCH__add">
+                        <ul class="GCH__list">
+                            @{
+                                List<HP_furniture.Models.GocCamHung> data = (List<HP_furniture.Models.GocCamHung>)ViewBag.Product;
+                                for (int i = 0; i < data.Count; i++)
+                                {
+                                    <li class="GCH__list--item">
+                                        <a href="@Url.Action("Index", "ChiTietGocCamHung", new { Id = data[i].ID })" class="GCH__list--item--link">
+                                            <img src="@data[i].HinhAnhCamHung1" alt="">
+
+                                            <div class="GCH__list--item--name">
+                                                <h2 style=" display: inline-block; max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                                    @data[i].TenCamHung1
+                                                </h2>
+                                                <div class="GCH__bottom"></div>
+                                            </div>
+
+                                            <div class="GCH__list--item--title">
+                                                <span>
+                                                    @{
+                                                        string moTaWithoutHtml4 = null;
+                                                        if (!string.IsNullOrEmpty(data[i].MoTaCamHung1))
+                                                        {
+                                                            // Sử dụng Regex để loại bỏ thẻ HTML
+                                                            moTaWithoutHtml4 = System.Text.RegularExpressions.Regex.Replace(data[i].MoTaCamHung1, "<.*?>", string.Empty);
+                                                            // Giải mã HTML entities
+                                                            moTaWithoutHtml4 = HttpUtility.HtmlDecode(moTaWithoutHtml4);
+                                                            // Thêm thẻ <br> sau mỗi dòng
+                                                            moTaWithoutHtml4 = moTaWithoutHtml4.Replace("\n", "<br>");
+                                                        }
+                                                        else
+                                                        {
+                                                            moTaWithoutHtml4 = "Chưa có mô tả";
+                                                        }
+                                                    }
+                                                    <span>@Html.Raw(moTaWithoutHtml4)</span>
+                                                </span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                }
+                            }
+                        </ul>
+        </div>
+    </div>
+    <div class="col-1" style="height: 315px;"></div>
+
+    <div class="col-12" style="height: 40px;"></div>
+
+</div>
+
+<!-- End chi tiết góc cảm hứng -->

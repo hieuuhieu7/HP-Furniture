@@ -1,0 +1,895 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>@ViewBag.Title</title>
+    <link rel="website icon" type="jpg" href="~/Assets/assets/img/logo1.png" />
+
+    <link href="~/Assets/assets/css/main.css" rel="stylesheet" />
+    <link href="~/Assets/assets/css/base.css" rel="stylesheet" />
+    <link href="~/Assets/assets/css/style.css" rel="stylesheet" />
+    <link href="~/Assets/assets/css/responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> -->
+    @RenderSection("Styles", required: false)
+
+    <!--Chat box AI-->
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <df-messenger
+    intent="WELCOME"
+    chat-title="ChatBox_AI"
+    agent-id="faec0b7e-61af-4e2b-8caf-f930734779d6"
+    language-code="vi"
+    ></df-messenger>
+
+</head>
+
+<body>
+    <style>
+        .item-link__sale {
+            transition: 0.3s;
+        }
+
+            .item-link__sale:hover {
+                color: orangered;
+            }
+
+        .click {
+            font-weight: bold;
+            color: var(--be-primary);
+        }
+    </style>
+
+    <!-- Header -->
+    <header class="width__mobile">
+        <div class="col-12 hide__on--tablet__mobile" style="height: 55px;">
+            <div class="header">
+                <div class="header-nav__one">
+                    <div class="nav-VNEN">
+                        <span>
+                            <img src="https://nhaxinh.com/wp-content/plugins/sitepress-multilingual-cms/res/flags/vi.png" alt="Tiếng Việt">
+                            <span style="color: grey;">VN</span> EN
+                        </span>
+                    </div>
+                    <div class="nav">
+                        <ul class="nav-list">
+                            <li class="nav-list__item">
+                                <a href="#" class="item-link item-link__call">
+                                    <i class="fa-solid fa-phone item-link__call--icon"></i>
+                                    3878 1108
+                                </a>
+                            </li>
+                            @if (ViewBag.Click == 1)
+                            {
+                                <li class="nav-list__item">
+                                    <a href="~/GioiThieu/Index" class="item-link click">
+                                        Giới thiệu
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-list__item">
+                                    <a href="~/GioiThieu/Index" class="item-link">
+                                        Giới thiệu
+                                    </a>
+                                </li>
+                            }
+                            @if (ViewBag.Click == 2)
+                            {
+                                <li class="nav-list__item">
+                                    <a href="~/KhuyenMai/Index" class="item-link click">
+                                        Khuyến mãi
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-list__item">
+                                    <a href="~/KhuyenMai/Index" class="item-link">
+                                        Khuyến mãi
+                                    </a>
+                                </li>
+                            }
+                            <li class="nav-list__item">
+                                <a href="~/GiamGiaDacBiet/Index" class="item-link item-link__sale">
+                                    Giảm giá đặc biệt
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <marquee behavior="" direction="" class="" style="color: var(--grey-primary); font-size: 17px; margin-right: 50px">
+                        <span>HP FURNITURE - TẠO NÊN KHÔNG GIAN SỐNG ĐẲNG CẤP</span>
+                        <i class="fa-solid fa-check"></i>
+                    </marquee>
+                </div>
+                <ul class="header__navbar-list">
+                    @if (ViewBag.act == 1)
+                    {
+                        <li class="header__navbar-item">
+                            <a href="~/ViTri/Index">
+                                <i class="fa-solid fa-location-arrow header__navbar-item-icon active__act"></i>
+                            </a>
+                        </li>
+
+                    }
+                    else
+                    {
+                        <li class="header__navbar-item">
+                            <a href="~/ViTri/Index">
+                                <i class="fa-solid fa-location-arrow header__navbar-item-icon"></i>
+                            </a>
+                        </li>
+                    }
+                    @if (ViewBag.act == 2)
+                    {
+                        <li class="header__navbar-item">
+                            <a href="~/YeuThich/Index"><i class="fa-solid fa-heart header__navbar-item-icon active__act"></i></a>
+                            @if (Session["HeartQuantity"] != null && (int)Session["HeartQuantity"] > 0)
+                            {
+                                <!-- Hiển thị số lượng sản phẩm trong giỏ hàng khi có sản phẩm -->
+                                <div class="header__navbar-item--sl">@Session["HeartQuantity"]</div>
+                            }
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="header__navbar-item">
+                            <a href="~/YeuThich/Index"><i class="fa-solid fa-heart header__navbar-item-icon"></i></a>
+                            @if (Session["HeartQuantity"] != null && (int)Session["HeartQuantity"] > 0)
+                            {
+                                <!-- Hiển thị số lượng sản phẩm trong giỏ hàng khi có sản phẩm -->
+                                <div class="header__navbar-item--sl">@Session["HeartQuantity"]</div>
+                            }
+                        </li>
+                    }
+                    @if (ViewBag.act == 3)
+                    {
+                        <li class="header__navbar-item">
+                            <a href="~/GioHang/Index"><i class="fa-solid fa-cart-shopping header__navbar-item-icon active__act"></i></a>
+                            @if (Session["CartQuantity"] != null && (int)Session["CartQuantity"] > 0)
+                            {
+                                <!-- Hiển thị số lượng sản phẩm trong giỏ hàng khi có sản phẩm -->
+                                <div class="header__navbar-item--sl">@Session["CartQuantity"]</div>
+                            }
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="header__navbar-item">
+                            <a href="~/GioHang/Index"><i class="fa-solid fa-cart-shopping header__navbar-item-icon"></i></a>
+                            @if (Session["CartQuantity"] != null && (int)Session["CartQuantity"] > 0)
+                            {
+                                <!-- Hiển thị số lượng sản phẩm trong giỏ hàng khi có sản phẩm -->
+                                <div class="header__navbar-item--sl">@Session["CartQuantity"]</div>
+                            }
+                        </li>
+                    }
+
+                    @if (Session["khach"] != null)
+                    {
+                        var name = (HP_furniture.Models.KhachHang)HttpContext.Current.Session["khach"];
+                        <!-- Hiển thị tên người đăng nhập và nút "Đăng xuất" nếu đã đăng nhập -->
+                        <li class="header__navbar-item">
+                            <div style="display: flex; align-items: center">
+                                <img src="@name.Avt" alt="avt" style="width: 25px; height: 25px; border-radius: 50%;margin: 0; margin-right: 3px">
+                                <span class="header__navbar-item-link">@name.TenKhachHang</span>
+                            </div>
+                            <ul class="drop__user_list">
+                                <li class="drop__user_list_item">
+                                    <a href="~/HoSo/Index">Hồ sơ</a>
+                                    <i class="fa-solid fa-user icon__item"></i>
+                                </li>
+                                <li class="drop__user_list_item">
+                                    <a href="~/DangNhap/DangXuat">Đăng xuất</a>
+                                    <i class="fa-solid fa-arrow-right-from-bracket icon__item"></i>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <!-- Hiển thị nút "Đăng nhập" và "Đăng ký" nếu chưa đăng nhập -->
+                        <li class="header__navbar-item">
+                            <a href="~/DangNhap/Index" class="header__navbar-item-link">Đăng nhập</a>
+                        </li>
+                        <li class="header__navbar-item">
+                            <a href="~/DangKy/Index" class="header__navbar-item-link"> | </a>
+                        </li>
+                        <li class="header__navbar-item">
+                            <a href="~/DangKy/Create" class="header__navbar-item-link">Đăng ký</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-2 flex__on--mobile" style="height: 70px;">
+            <div class="bag">
+                <!-- Navbar -->
+                <label for="nav__input-checkbox" class="nav__bars-btn">
+                    <i class="fa-solid fa-bars bag-category"></i>
+                </label>
+
+                <input type="checkbox" hidden name="" class="nav__input" id="nav__input-checkbox">
+
+                <label for="nav__input-checkbox" class="nav__overlay"></label>
+
+                <!-- Menu -->
+                <nav class="nav__bag">
+                    <div style="padding: 5px;">
+                        <a href="#" class="select__call--link">
+                            <i class="fa-solid fa-phone select__call--link__icon"></i>
+                            3878 1108
+                        </a>
+                    </div>
+                    <div class="select-menu">
+                        <div class="select-btn">
+                            <span class="sBtn-text">SẢN PHẨM</span>
+                            <i class="fa-solid fa-chevron-down bx bx-chevron-down"></i>
+                        </div>
+                        <ul class="options">
+                            @if (ViewBag.optionActive == 1)
+                            {
+                                <li class="option">
+                                    <a href="~/SanPhamSofa/Index" class="option-text option__active">Sofa</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="option">
+                                    <a href="~/SanPhamSofa/Index" class="option-text">Sofa</a>
+                                </li>
+                            }
+                            @if (ViewBag.optionActive == 2)
+                            {
+                                <li class="option">
+                                    <a href="~/SanPhamBan/Index" class="option-text option__active">Bàn</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="option">
+                                    <a href="~/SanPhamBan/Index" class="option-text">Bàn</a>
+                                </li>
+                            }
+                            @if (ViewBag.optionActive == 3)
+                            {
+                                <li class="option">
+                                    <a href="~/SanPhamGhe/Index" class="option-text option__active">Ghế</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="option">
+                                    <a href="~/SanPhamGhe/Index" class="option-text">Ghế</a>
+                                </li>
+                            }
+                            @if (ViewBag.optionActive == 4)
+                            {
+                                <li class="option">
+                                    <a href="~/SanPhamGiuongNgu/Index" class="option-text option__active">Giường ngủ</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="option">
+                                    <a href="~/SanPhamGiuongNgu/Index" class="option-text">Giường ngủ</a>
+                                </li>
+                            }
+                            @if (ViewBag.optionActive == 5)
+                            {
+                                <li class="option">
+                                    <a href="~/SanPhamTuVaKe/Index" class="option-text option__active">Tủ và kệ</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="option">
+                                    <a href="~/SanPhamTuVaKe/Index" class="option-text">Tủ và kệ</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <!-- Menu2 -->
+                    <div style="padding: 2px;"></div>
+                    <div class="select-menu">
+                        <div class="select-btn">
+                            <span class="sBtn-text">PHÒNG</span>
+                            <i class="fa-solid fa-chevron-down bx bx-chevron-down"></i>
+                        </div>
+                        <ul class="options">
+                            @if (ViewBag.optionActive == 6)
+                            {
+                                <li class="option">
+                                    <a href="~/SanPhamPhongKhach/Index" class="option-text option__active">Phòng khách</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="option">
+                                    <a href="~/SanPhamPhongKhach/Index" class="option-text">Phòng khách</a>
+                                </li>
+                            }
+                            @if (ViewBag.optionActive == 7)
+                            {
+                                <li class="option">
+                                    <a href="~/SanPhamPhongAn/Index" class="option-text option__active">Phòng ăn</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="option">
+                                    <a href="~/SanPhamPhongAn/Index" class="option-text">Phòng ăn</a>
+                                </li>
+                            }
+                            @if (ViewBag.optionActive == 8)
+                            {
+                                <li class="option">
+                                    <a href="~/SanPhamPhongNgu/Index" class="option-text option__active">Phòng ngủ</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="option">
+                                    <a href="~/SanPhamPhongNgu/Index" class="option-text">Phòng ngủ</a>
+                                </li>
+                            }
+                            @if (ViewBag.optionActive == 9)
+                            {
+                                <li class="option">
+                                    <a href="~/SanPhamPhongLamViec/Index" class="option-text option__active">Phòng làm việc</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="option">
+                                    <a href="~/SanPhamPhongLamViec/Index" class="option-text">Phòng làm việc</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+
+                    <ul class="nav__list">
+                        @if (ViewBag.Nav == 1)
+                        {
+                            <li class="nav__list-item">
+                                <a href="~/BoSuuTap/Index" class="nav__link nav__active">BỘ SƯU TẬP</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav__list-item">
+                                <a href="~/BoSuuTap/Index" class="nav__link">BỘ SƯU TẬP</a>
+                            </li>
+                        }
+                        @if (ViewBag.Nav == 2)
+                        {
+                            <li class="nav__list-item">
+                                <a href="~/ThietKeNoiThat/Index" class="nav__link nav__active">THIẾT KẾ NỘI THẤT</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav__list-item">
+                                <a href="~/ThietKeNoiThat/Index" class="nav__link">THIẾT KẾ NỘI THẤT</a>
+                            </li>
+                        }
+                        @if (ViewBag.Nav == 3)
+                        {
+                            <li class="nav__list-item">
+                                <a href="~/CuaHang360/Index" class="nav__link nav__active">CỬA HÀNG 360 ĐỘ</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav__list-item">
+                                <a href="~/CuaHang360/Index" class="nav__link">CỬA HÀNG 360 ĐỘ</a>
+                            </li>
+                        }
+                        @if (ViewBag.Nav == 4)
+                        {
+                            <li class="nav__list-item">
+                                <a href="~/GocCamHung/Index" class="nav__link nav__active">GÓC CẢM HỨNG</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav__list-item">
+                                <a href="~/GocCamHung/Index" class="nav__link">GÓC CẢM HỨNG</a>
+                            </li>
+                        }
+                        @if (ViewBag.Nav == 5)
+                        {
+                            <li class="nav__list-item">
+                                <a href="~/GioiThieu/Index" style="color: black" class="nav__link nav__active">GIỚI THIỆU</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav__list-item">
+                                <a href="~/GioiThieu/Index" style="color: black" class="nav__link">GIỚI THIỆU</a>
+                            </li>
+                        }
+                        @if (ViewBag.Nav == 6)
+                        {
+                            <li class="nav__list-item">
+                                <a href="~/KhuyenMai/Index" style="color: black" class="nav__link nav__active">KHUYẾN MÃI</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav__list-item">
+                                <a href="~/KhuyenMai/Index" style="color: black" class="nav__link">KHUYẾN MÃI</a>
+                            </li>
+                        }
+                        @if (ViewBag.Nav == 7)
+                        {
+                            <li class="nav__list-item">
+                                <a href="~/GiamGiaDacBiet/Index" style="color: red" class="nav__link nav__active">GIẢM GIÁ ĐẶC BIỆT</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav__list-item">
+                                <a href="~/GiamGiaDacBiet/Index" style="color: red" class="nav__link">GIẢM GIÁ ĐẶC BIỆT</a>
+                            </li>
+                        }
+                    </ul>
+
+                    @if (Session["khach"] != null)
+                    {
+                        var name = (HP_furniture.Models.KhachHang)HttpContext.Current.Session["khach"];
+                        <div class="nav__login">
+                            @* Khi đã đăng nhập *@
+                            <div class="nav__login--tbmb">
+                                <a href="~/HoSo/Index" class="nav__login--link">
+                                    <img class="nav__login--img" src="@name.Avt" />
+                                    <span class="nav__login--span">@name.TenKhachHang</span>
+                                </a>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="nav__login">
+                            <a class="nav__login--lg" href="~/DangNhap/Index">ĐĂNG NHẬP</a>
+                        </div>
+                    }
+                </nav>
+                <!-- End Menu -->
+                <!-- LOGO -->
+                <a href="~/TrangChu/Index" class="logo hide__on--mobile">
+                    <img src="~/Assets/assets/img/logo1.png" alt="Nội thất HP" class="logo__img">
+                </a>
+            </div>
+        </div>
+
+        <!-- Dropdown -->
+        <div class="col-7" style="height: 70px;">
+            <div class="header-navbar hide__on--tablet__mobile">
+                <ul class="navbar-list">
+                    <li class="navbar-list__item">
+                        <div class="navbar-list__link">
+                            <div class="dropdown">
+                                <div class="dropdown__select">
+                                    <span class="dropdown__selected">Sản phẩm</span>
+                                    <i class="fa-solid fa-angle-down"></i>
+                                </div>
+                                <ul class="dropdown__list">
+                                    @if (ViewBag.dropActive == 1)
+                                    {
+                                        <li class="dropdown__item">
+                                            <a href="~/SanPhamSofa/Index" class="dropdown__text dropdown__active">
+                                                Sofa
+                                            </a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="dropdown__item">
+                                            <a href="~/SanPhamSofa/Index" class="dropdown__text">
+                                                Sofa
+                                            </a>
+                                        </li>
+                                    }
+                                    @if (ViewBag.dropActive == 2)
+                                    {
+                                        <li class="dropdown__item">
+                                            <a href="~/SanPhamBan/Index" class="dropdown__text dropdown__active">
+                                                Bàn
+                                            </a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="dropdown__item">
+                                            <a href="~/SanPhamBan/Index" class="dropdown__text">
+                                                Bàn
+                                            </a>
+                                        </li>
+                                    }
+                                    @if (ViewBag.dropActive == 3)
+                                    {
+                                        <li class="dropdown__item">
+                                            <a href="~/SanPhamGhe/Index" class="dropdown__text dropdown__active">
+                                                Ghế
+                                            </a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="dropdown__item">
+                                            <a href="~/SanPhamGhe/Index" class="dropdown__text">
+                                                Ghế
+                                            </a>
+                                        </li>
+                                    }
+                                    @if (ViewBag.dropActive == 4)
+                                    {
+                                        <li class="dropdown__item">
+                                            <a href="~/SanPhamGiuongNgu/Index" class="dropdown__text dropdown__active">
+                                                Giường ngủ
+                                            </a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="dropdown__item">
+                                            <a href="~/SanPhamGiuongNgu/Index" class="dropdown__text">
+                                                Giường ngủ
+                                            </a>
+                                        </li>
+                                    }
+                                    @if (ViewBag.dropActive == 5)
+                                    {
+                                        <li class="dropdown__item">
+                                            <a href="~/SanPhamTuVaKe/Index" class="dropdown__text dropdown__active">
+                                                Tủ và kệ
+                                            </a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="dropdown__item">
+                                            <a href="~/SanPhamTuVaKe/Index" class="dropdown__text">
+                                                Tủ và kệ
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="navbar-list__item">
+                        <div class="navbar-list__link">
+                            <div class="dropdown">
+                                <div class="dropdown__select">
+                                    <span class="dropdown__selected">Phòng</span>
+                                    <i class="fa-solid fa-angle-down"></i>
+                                </div>
+                                <ul class="dropdown__list">
+                                    @if (ViewBag.dropActive == 7)
+                                    {
+                                        <li class="dropdown__item">
+                                            <a href="~/SanPhamPhongKhach/Index" class="dropdown__text dropdown__active">
+                                                Phòng khách
+                                            </a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="dropdown__item">
+                                            <a href="~/SanPhamPhongKhach/Index" class="dropdown__text">
+                                                Phòng khách
+                                            </a>
+                                        </li>
+                                    }
+                                    @if (ViewBag.dropActive == 8)
+                                    {
+                                        <li class="dropdown__item">
+                                            <a href="~/SanPhamPhongAn/Index" class="dropdown__text dropdown__active">
+                                                Phòng ăn
+                                            </a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="dropdown__item">
+                                            <a href="~/SanPhamPhongAn/Index" class="dropdown__text">
+                                                Phòng ăn
+                                            </a>
+                                        </li>
+                                    }
+                                    @if (ViewBag.dropActive == 9)
+                                    {
+                                        <li class="dropdown__item">
+                                            <a href="~/SanPhamPhongNgu/Index" class="dropdown__text dropdown__active">
+                                                Phòng ngủ
+                                            </a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="dropdown__item">
+                                            <a href="~/SanPhamPhongNgu/Index" class="dropdown__text">
+                                                Phòng ngủ
+                                            </a>
+                                        </li>
+                                    }
+                                    @if (ViewBag.dropActive == 10)
+                                    {
+                                        <li class="dropdown__item">
+                                            <a href="~/SanPhamPhongLamViec/Index" class="dropdown__text dropdown__active">
+                                                Phòng làm việc
+                                            </a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="dropdown__item">
+                                            <a href="~/SanPhamPhongLamViec/Index" class="dropdown__text">
+                                                Phòng làm việc
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    @if (ViewBag.Active == 3)
+                    {
+                        <li class="navbar-list__item active__navbar">
+                            <a href="~/BoSuuTap/Index" class="navbar-list__link">
+                                Bộ sưu tập
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="navbar-list__item">
+                            <a href="~/BoSuuTap/Index" class="navbar-list__link">
+                                Bộ sưu tập
+                            </a>
+                        </li>
+                    }
+                    @if (ViewBag.Active == 4)
+                    {
+                        <li class="navbar-list__item active__navbar">
+                            <a href="~/ThietKeNoiThat/Index" class="navbar-list__link">
+                                Thiết kế nội thất
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="navbar-list__item">
+                            <a href="~/ThietKeNoiThat/Index" class="navbar-list__link">
+                                Thiết kế nội thất
+                            </a>
+                        </li>
+                    }
+                    @if (ViewBag.Active == 5)
+                    {
+                        <li class="navbar-list__item active__navbar">
+                            <a href="~/CuaHang360/Index" class="navbar-list__link">
+                                Cửa hàng 360 độ
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="navbar-list__item">
+                            <a href="~/CuaHang360/Index" class="navbar-list__link">
+                                Cửa hàng 360 độ
+                            </a>
+                        </li>
+                    }
+                    @if (ViewBag.Active == 6)
+                    {
+                        <li class="navbar-list__item active__navbar">
+                            <a href="~/GocCamHung/Index" class="navbar-list__link">
+                                Góc cảm hứng
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="navbar-list__item">
+                            <a href="~/GocCamHung/Index" class="navbar-list__link">
+                                Góc cảm hứng
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <!-- Tìm kiếm Tablet -->
+            <div class="header__search--tablet hide__on--mobile">
+                <form action="@Url.Action("Index", "TimKiem")" method="get" style="display: flex; width: 100%; align-items: center; justify-content: center">
+                    <!-- Điều chỉnh action và method -->
+                    <input type="text" name="key" class="header__search--tablet__input" placeholder="Nhập...">
+                    <input type="submit" value="TÌM" class="header__search--tablet__submit">
+                </form>
+            </div>
+
+            @* Logo Mobile *@
+            <a href="~/TrangChu/Index" class="logo__mobile flex__on--mobile">
+                <img src="~/Assets/assets/img/logo1.png" alt="Nội thất HP" class="logo__mobile--img">
+            </a>
+        </div>
+
+        <div class="col-3 flex__on--tablet" style="height: 70px;">
+            <div class="header-search hide__on--tablet hide__on--mobile">
+                <form action="@Url.Action("Index", "TimKiem")" method="get">
+                    <!-- Điều chỉnh action và method -->
+                    <input type="text" name="key" class="header-search__input" placeholder="Nhập...">
+                    <input type="submit" value="TÌM KIẾM" class="header-search__submit">
+                </form>
+            </div>
+
+            @* Giỏ hàng và Yêu thích tablet *@
+            <!-- Yêu thích - Giỏ hàng -->
+            <div class="header__tablet--bag">
+                <a href="~/YeuThich/Index" class="header__tablet--bag__love">
+                    <i class="fa-solid fa-heart"></i>
+                    @if (Session["HeartQuantity"] != null && (int)Session["HeartQuantity"] > 0)
+                    {
+                        <!-- Hiển thị số lượng sản phẩm trong yêu thích khi có sản phẩm -->
+                        <div class="header__tablet--bag__sl__love">@Session["HeartQuantity"]</div>
+                    }
+                </a>
+                <a href="~/GioHang/Index" class="header__tablet--bag__cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    @if (Session["CartQuantity"] != null && (int)Session["CartQuantity"] > 0)
+                    {
+                        <!-- Hiển thị số lượng sản phẩm trong giỏ hàng khi có sản phẩm -->
+                        <div class="header__tablet--bag__sl__cart">@Session["CartQuantity"]</div>
+                    }
+                </a>
+            </div>
+
+            @* Giỏ hàng và Yêu thích Mobile *@
+            <div class="header__mobile--bag flex__on--mobile">
+                <a href="~/YeuThich/Index" class="header__mobile--bag__love">
+                    <i class="fa-solid fa-heart"></i>
+                    @if (Session["HeartQuantity"] != null && (int)Session["HeartQuantity"] > 0)
+                    {
+                        <!-- Hiển thị số lượng sản phẩm trong yêu thích khi có sản phẩm -->
+                        <div class="header__mobile--bag__sl__love">@Session["HeartQuantity"]</div>
+                    }
+                </a>
+                <a href="~/GioHang/Index" class="header__mobile--bag__cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    @if (Session["CartQuantity"] != null && (int)Session["CartQuantity"] > 0)
+                    {
+                        <!-- Hiển thị số lượng sản phẩm trong giỏ hàng khi có sản phẩm -->
+                        <div class="header__mobile--bag__sl__cart">@Session["CartQuantity"]</div>
+                    }
+                </a>
+            </div>
+
+        </div>
+        <div class="col-12 none__mobile" style="height: 58px;">
+            <div class="header__search--mobile">
+                <form action="@Url.Action("Index", "TimKiem")" method="get" style="display: flex; width: 100%; align-items: center; justify-content: center">
+                    <!-- Điều chỉnh action và method -->
+                    <input type="text" name="key" class="header__search--mobile__input" placeholder="Nhập...">
+                    <input type="submit" value="TÌM" class="header__search--mobile__submit">
+                </form>
+            </div>
+        </div>
+
+    </header>
+    <div class="col-12 hide__on--tablet" style="height: 120px;">
+
+    </div>
+    <div class="padding__on--tablet"></div>
+    <!-- End Header -->
+
+    @RenderBody()
+
+    <!-- Footer -->
+    <div class="col-1" style="height: 40px; background-color: #303036;"></div>
+    <div class="col-10" style="height: 40px; background-color: #303036;">
+        <div>
+            <marquee behavior="" direction="" class="GHC__kh">
+                HP FURNITURE - TẠO NÊN KHÔNG GIAN SỐNG ĐẲNG CẤP
+                <i class="fa-solid fa-check" style="color: whitesmoke;"></i>
+            </marquee>
+        </div>
+    </div>
+    <div class="col-1" style="height: 40px; background-color: #303036;"></div>
+    <footer class="footer">
+        <div class="footer__bag">
+            <div class="col-3 footer__bg block__mobile" style="height: 200px;">
+                <h4 class="footer__title">KẾT NỐI VỚI HP FURNITURE</h4>
+                <ul class="footer__list">
+                    <li class="footer__list-item">
+                        HP FURNITURE
+                    </li>
+                    <li class="footer__list-item">
+                        FOLLOW US
+                    </li>
+                    <li class="footer__list-item">
+                        <a href="">Instagram - Youtube - Facebook</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-3 footer__bg block__mobile" style="height: 200px;">
+                <h4 class="footer__title">HP FURNITURE</h4>
+                <ul class="footer__list">
+                    <li class="footer__list-item">
+                        Giới thiệu
+                    </li>
+                    <li class="footer__list-item">
+                        Tổng công ty
+                    </li>
+                    <li class="footer__list-item">
+                        Tuyển dụng
+                    </li>
+                    <li class="footer__list-item">
+                        Thẻ hội viên
+                    </li>
+                    <li class="footer__list-item">
+                        Đổi trả hàng
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-3 footer__bg block__mobile" style="height: 200px;">
+                <h4 class="footer__title">CẢM HỨNG #HP FURNITURE</h4>
+                <ul class="footer__list">
+                    <li class="footer__list-item">
+                        Sản phẩm
+                    </li>
+                    <li class="footer__list-item">
+                        Ý tưởng và cảm hứng
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-3 footer__bg block__mobile" style="height: 200px;">
+                <h4 class="footer__title">NEWSLETTER</h4>
+                <ul class="footer__list">
+                    <li class="footer__list-item">
+                        Hãy để lại email của bạn để nhận được những ý tưởng trang trí mới và những thông tin, ưu đãi từ <br /> HP furniture
+                    </li>
+                    <li class="footer__list-item">
+                        Email: tunhienbikick.com.vn
+                    </li>
+                    <li class="footer__list-item">
+                        Hotline: 18007200
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-1 footer__bg" style="height: 150px;"></div>
+        <div class="col-10 footer__bg" style="height: 150px;">
+            <div class="footer__balo">
+                <div>
+                    © 2021 - Bản quyền của tunhienbikick - thương hiệu thuộc HP Furniture <br>
+                    Từ năm 1999 - thương hiệu đăng ký số 284074 Cục sở hữu trí tuệ
+                </div>
+                <div><img src="https://nhaxinh.com/wp-content/uploads/2021/09/image-15.png" alt=""></div>
+            </div>
+        </div>
+        <div class="col-1 footer__bg" style="height: 150px;"></div>
+    </footer>
+
+    <div id="backtop">
+        <i class="fa-solid fa-angle-up backtop__icon"></i>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="~/Assets/validator.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
+

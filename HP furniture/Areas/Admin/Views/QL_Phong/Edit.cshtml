@@ -1,0 +1,145 @@
+﻿@model HP_furniture.Models.Phong
+
+@{
+    ViewBag.Title = "Sửa";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout1.cshtml";
+    HP_furniture.Models.DB_QuanLyCuaHangDoNoiThatEntities db = new HP_furniture.Models.DB_QuanLyCuaHangDoNoiThatEntities();
+}
+
+<h4>SỬA PHÒNG</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ID)
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Loại phòng</label>
+        <div class="col-md-10">
+            <select name="ID_LoaiPhong" style=" border: none; width: 100%; height: 35px;">
+                @foreach (var slect in db.LoaiPhong.ToList())
+                {
+                    <option value="@slect.ID" @Html.Raw(slect.ID == Model.ID_LoaiPhong ? "selected" : "")>
+                        @slect.TenLoaiPhong
+                    </option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.TenPhongKhach, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <label class="control-label col-md-2">Tên phòng khách</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TenPhongKhach, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TenPhongKhach, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">
+            Hình ảnh phòng khách
+        </label>
+        <div class="col-md-10">
+            @Html.HiddenFor(model => model.HinhAnhPhongKhach) <!-- Thêm trường ẩn cho đường dẫn ảnh 2 -->
+            <input type="text" name="HinhAnhPhongKhach" class="form-control" value="@Model.HinhAnhPhongKhach" />
+            @Html.ValidationMessageFor(model => model.HinhAnhPhongKhach, "", new { @class = "text-danger" })
+            <div style="margin-left: 90%; margin-top: 1%">
+                <button type="button" onclick="OpenCkfinder('HinhAnhPhongKhach')" class="btn btn-bitbucket">Chọn ảnh</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">
+            Hình ảnh thêm 1
+        </label>
+        <div class="col-md-10">
+            @Html.HiddenFor(model => model.HinhAnh1) <!-- Thêm trường ẩn cho đường dẫn ảnh 2 -->
+            <input type="text" name="HinhAnh1" class="form-control" value="@Model.HinhAnh1" />
+            @Html.ValidationMessageFor(model => model.HinhAnh1, "", new { @class = "text-danger" })
+            <div style="margin-left: 90%; margin-top: 1%">
+                <button type="button" onclick="OpenCkfinder('HinhAnh1')" class="btn btn-bitbucket">Chọn ảnh</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">
+            Hình ảnh thêm 2
+        </label>
+        <div class="col-md-10">
+            @Html.HiddenFor(model => model.HinhAnh2) <!-- Thêm trường ẩn cho đường dẫn ảnh 2 -->
+            <input type="text" name="HinhAnh2" class="form-control" value="@Model.HinhAnh2" />
+            @Html.ValidationMessageFor(model => model.HinhAnh2, "", new { @class = "text-danger" })
+            <div style="margin-left: 90%; margin-top: 1%">
+                <button type="button" onclick="OpenCkfinder('HinhAnh2')" class="btn btn-bitbucket">Chọn ảnh</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">
+            Hình ảnh thêm 3
+        </label>
+        <div class="col-md-10">
+            @Html.HiddenFor(model => model.HinhAnh3) <!-- Thêm trường ẩn cho đường dẫn ảnh 2 -->
+            <input type="text" name="HinhAnh3" class="form-control" value="@Model.HinhAnh3" />
+            @Html.ValidationMessageFor(model => model.HinhAnh3, "", new { @class = "text-danger" })
+            <div style="margin-left: 90%; margin-top: 1%">
+                <button type="button" onclick="OpenCkfinder('HinhAnh3')" class="btn btn-bitbucket">Chọn ảnh</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Mô tả ngắn</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Mt1, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Mt1, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Mô tả dài</label>
+        <div class="col-md-10">
+            <textarea class="form-control" name="MoTaDai" id="inputMoTa">
+                @Model.MoTaDai
+            </textarea>
+            @Html.ValidationMessageFor(model => model.MoTaDai, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Lưu" class="btn btn-success" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Trở về danh sách", "Index")
+</div>
+
+@section HieuJS{
+    <script>
+        CKEDITOR.replace('inputMoTa')
+
+        function OpenCkfinder(inputName) {
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (fileUrl) {
+                SetUrlHinhAnh(fileUrl, inputName);
+            };
+            finder.popup();
+        }
+        function SetUrlHinhAnh(fileUrl, inputName) {
+            $('input[name=' + inputName + ']').val(fileUrl);
+        }
+    </script>
+}

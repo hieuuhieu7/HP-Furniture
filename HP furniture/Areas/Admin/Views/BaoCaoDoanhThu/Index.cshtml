@@ -1,0 +1,253 @@
+﻿@{
+    ViewBag.Title = "Trang chủ - Báo cáo doanh thu";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout1.cshtml";
+}
+
+<style>
+    .bg-cl {
+        background-color: #5d5d5d;
+        color: white;
+    }
+
+    .bg-cl__r {
+        background-color: #686868;
+        color: white;
+    }
+</style>
+
+<div style="display: flex; align-items: center; justify-content: center; margin-top: 10px">
+    <h1>BÁO CÁO DOANH THU</h1>
+</div>
+
+<!-- Info boxes -->
+<div class="row" style="margin-top: 30px;">
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-cl__r">
+            <div class="inner">
+                <h3>@ViewBag.TotalOrdersFromBeginning</h3>
+                <p>Tổng số lượng đơn hàng</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-ios-box-outline"></i>
+            </div>
+            <a href="~/Admin/QL_ChiTietHoaDon/Index" class="small-box-footer">Thêm thông tin <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div><!-- ./col -->
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-cl__r">
+            <div class="inner">
+                <h3>@ViewBag.PendingOrdersCount</h3>
+                <p>Đơn hàng đang chờ xử lý</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-load-a"></i>
+            </div>
+            <a href="~/Admin/QL_HoaDon/Index" class="small-box-footer">Thêm thông tin <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div><!-- ./col -->
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-cl__r">
+            <div class="inner">
+                <h3>@ViewBag.DeliveringOrdersCount</h3>
+                <p>Đơn hàng đang giao</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-flash"></i>
+            </div>
+            <a href="~/Admin/QL_HoaDon/Index" class="small-box-footer">Thêm thông tin <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div><!-- ./col -->
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-cl__r">
+            <div class="inner">
+                <h3>@ViewBag.CompletedOrdersCount</h3>
+                <p>Đơn hàng đã hoàn thành</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-android-done"></i>
+            </div>
+            <a href="~/Admin/QL_HoaDon/Index" class="small-box-footer">Thêm thông tin <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div><!-- ./col -->
+</div>
+
+<div style="">
+    <div class="small-box bg-cl" style="display: flex; align-items: center; justify-content: flex-start; height: 105px">
+        <div class="inner">
+            <p style="margin: 0px; font-size: 25px;">
+                Tổng doanh thu: <span style="font-weight: bold; font-size: 27px">@ViewBag.TotalRevenueFromBeginning.ToString("N0") VNĐ</span>
+            </p>
+        </div>
+        <div class="icon">
+            <i class="ion ion-cash"></i>
+        </div>
+    </div>
+</div>
+
+<!-- Thẻ canvas để vẽ biểu đồ -->
+<div class="bd__flex">
+    @* Biểu đồ cột *@
+    <div class="warp__tablet__mobile">
+        <div class="small-box bg-cl bd__box">
+            <div class="inner">
+                <p style="margin: 0px; font-size: 25px;">
+                    Biểu đồ cột doanh thu: <span style="font-weight: bold; font-size: 27px">Từng tháng (từ tháng 1 - 12)</span>
+                </p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+            </div>
+        </div>
+        <canvas id="revenueChart" width="400" height="200"></canvas>
+    </div>
+
+    <div style="padding: 2px"></div>
+
+    @* Biểu đồ đường *@
+    <div class="warp__tablet__mobile">
+        <div class="small-box bg-cl bd__box">
+            <div class="inner">
+                <p style="margin: 0px; font-size: 25px;">
+                    Biểu đồ đường doanh thu: <span style="font-weight: bold; font-size: 27px">Từng tháng (từ tháng 1 - 12)</span>
+                </p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+            </div>
+        </div>
+        <canvas id="lineChart" width="400" height="200"></canvas>
+    </div>
+</div>
+
+<div style="margin-top: 30px">
+    <div class="small-box bg-cl" style="display: flex; align-items: center; justify-content: flex-start; height: 105px">
+        <div class="inner">
+            @if (!string.IsNullOrEmpty(ViewBag.MostBoughtProduct))
+            {
+                <p style="margin: 0px; font-size: 25px;">
+                    Tổng số lượng người đã đăng ký tài khoản: <span style="font-weight: bold; font-size: 27px">@ViewBag.CustomerCount</span>
+                </p>
+            }
+            else
+            {
+                <p style="margin: 0px; font-size: 25px; font-weight: bold;">Không có người đăng ký.</p>
+            }
+        </div>
+        <div class="icon">
+            <i class="ion ion-person"></i>
+        </div>
+    </div>
+
+    <div class="pd__flex">
+        <div class="small-box bg-cl pd__box">
+            <div class="inner title__box">
+                @if (!string.IsNullOrEmpty(ViewBag.MostBoughtProduct))
+                {
+                    <p style="margin: 0px; font-size: 25px;">
+                        Sản phẩm được mua nhiều nhất: <span style="font-weight: bold; font-size: 27px">@ViewBag.MostBoughtProduct</span>
+                    </p>
+                }
+                else
+                {
+                    <p style="margin: 0px; font-size: 25px; font-weight: bold;">Không có sản phẩm được mua nhiều nhất.</p>
+                }
+            </div>
+            <div class="icon">
+                <i class="ion ion-bag"></i>
+            </div>
+        </div>
+
+        <div style="padding: 10px;"></div>
+
+        <div class="small-box bg-cl pd__box">
+            <div class="inner title__box">
+                <p style="margin: 0px; font-size: 25px;">
+                    Tổng số lượng mỗi sản phẩm đã bán ra:
+                </p>
+                <ul style="list-style: circle; margin-top: 0; margin-bottom: 10px; font-size: 20px; margin-top: 10px;">
+                    @foreach (var item in ViewBag.TotalQuantitySoldFromBeginning)
+                    {
+                        <li>
+                            @item.Key:
+                            <span style="font-weight: bold; font-size: 22px">@item.Value</span>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="icon">
+                <i class="ion ion-ios-box"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <!-- Đường dẫn đến Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Biểu đồ cột
+        var monthlyRevenues = @Html.Raw(Json.Encode(ViewBag.MonthlyRevenues)); // Lấy danh sách doanh thu từ ViewBag
+
+        // Tạo mảng chứa nhãn cho tất cả các tháng
+        var labels = [];
+        for (var i = 0; i < 12; i++) {
+            labels.push('T ' + (i + 1));
+        }
+
+        var ctx = document.getElementById('revenueChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'bar', // Loại biểu đồ cột
+            data: {
+                labels: labels, // Sử dụng mảng nhãn cho tất cả các tháng
+                datasets: [{
+                    label: 'Doanh thu', // Nhãn của dữ liệu
+                    backgroundColor: 'rgba(192, 192, 192, 1)',
+                    borderColor: 'rgba(64, 64, 64, 1)',
+                    borderWidth: 1,
+                    data: monthlyRevenues // Dữ liệu doanh thu
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+
+    <script>
+        // Biểu đồ đường
+        var lineCtx = document.getElementById('lineChart').getContext('2d');
+        var lineChart = new Chart(lineCtx, {
+            type: 'line',
+            data: {
+                labels: labels, // Sử dụng các nhãn tương tự như biểu đồ cột
+                datasets: [{
+                    label: 'Doanh thu', // Nhãn của dữ liệu
+                    backgroundColor: 'rgba(192, 192, 192, 1)',
+                    borderColor: 'rgba(64, 64, 64, 1)',
+                    borderWidth: 1,
+                    data: monthlyRevenues // Dữ liệu doanh thu
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+}
+

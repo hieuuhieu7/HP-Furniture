@@ -1,0 +1,102 @@
+﻿@model HP_furniture.Models.Phong
+
+@{
+    ViewBag.Title = "Xóa";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout1.cshtml";
+}
+
+<h4>XÓA PHÒNG</h4>
+
+<h5>Bạn có chắc chắn muốn xóa không?</h5>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID)
+        </dd>
+
+        <dt>
+            Loại phòng
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoaiPhong.TenLoaiPhong)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.TenPhongKhach)*@
+            Tên phòng khách
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenPhongKhach)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.HinhAnhPhongKhach)*@
+            Hình ảnh phòng khách
+        </dt>
+
+        <dd>
+            <img src="@Model.HinhAnhPhongKhach" width="200" />
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.HinhAnhPhongKhach)*@
+            Hình ảnh thêm 1
+        </dt>
+
+        <dd>
+            <img src="@Model.HinhAnh1" width="200" />
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.HinhAnhPhongKhach)*@
+            Hình ảnh thêm 2
+        </dt>
+
+        <dd>
+            <img src="@Model.HinhAnh2" width="200" />
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.HinhAnhPhongKhach)*@
+            Hình ảnh thêm 3
+        </dt>
+
+        <dd>
+            <img src="@Model.HinhAnh3" width="200" />
+        </dd>
+
+        <dt>
+            Mô tả ngắn
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mt1)
+        </dd>
+
+        <dt>
+            Mô tả dài
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.MoTaDai)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger" /> |
+            @Html.ActionLink("Trở về danh sách", "Index")
+        </div>
+    }
+</div>

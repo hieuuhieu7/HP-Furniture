@@ -1,0 +1,137 @@
+﻿@model IEnumerable<HP_furniture.Models.SanPhamMoi>
+
+@{
+    ViewBag.Title = "Danh sách";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout1.cshtml";
+}
+
+@section Style {
+    <!-- DataTables -->
+    <link href="~/Areas/Admin/Assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+}
+
+<h4>DANH SÁCH SẢN PHẨM (mới)</h4>
+
+<p>
+    @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-success" })
+</p>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box ">
+            <div class="box-header">
+                @*<a href="" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Thêm mới</a>*@
+            </div><!-- /.box-header -->
+            <div class="box-body">
+                <table id="example" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.ID)*@
+                                ID
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.TenSanPhamMoi)*@
+                                Tên SP mới
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.GiaSanPhamMoi)*@
+                                Giá
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.SoLuongTonKho)*@
+                                SL tồn
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.HinhAnh1)*@
+                                H/a 1
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.HinhAnh2)*@
+                                H/a 2
+                            </th>
+                            <!--<th>-->
+                                @*@Html.DisplayNameFor(model => model.MoTaSanPhamMoi)*@
+                                <!--Mô tả sản phẩm mới
+                            </th>-->
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TenSanPhamMoi)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.GiaSanPhamMoi)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SoLuongTonKho)
+                                </td>
+                                <td>
+                                    <img src="@item.HinhAnh1" width="200" />
+                                </td>
+                                <td>
+                                    <img src="@item.HinhAnh2" width="200" />
+                                </td>
+                                @*<td>
+                                    @Html.Raw(item.MoTaSanPhamMoi)
+                                </td>*@
+                                <td>
+                                    @Html.ActionLink("Sửa", "Edit", new { id = item.ID }, new { @class = "btn btn-warning btn-sm" }) |
+                                    @Html.ActionLink("Chi tiết", "Details", new { id = item.ID }, new { @class = "btn btn-info btn-sm" }) |
+                                    @Html.ActionLink("Xóa", "Delete", new { id = item.ID }, new { @class = "btn btn-danger btn-sm" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.ID)*@
+                                ID
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.TenSanPhamMoi)*@
+                                Tên SP mới
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.GiaSanPhamMoi)*@
+                                Giá
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.SoLuongTonKho)*@
+                                SL tồn
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.HinhAnh1)*@
+                                H/a 1
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.HinhAnh2)*@
+                                H/a 2
+                            </th>
+                            <!--<th>-->
+                                @*@Html.DisplayNameFor(model => model.MoTaSanPhamMoi)*@
+                                <!--Mô tả sản phẩm mới
+                            </th>-->
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+    </div><!-- /.col -->
+</div>
+
+@section Scripts{
+    <!-- DataTables -->
+    <script src="~/Areas/Admin/Assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Areas/Admin/Assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <script src="~/Areas/Admin/Assets/plugins/datatables/dataTables.alphabetSearch.js"></script>
+}

@@ -1,0 +1,105 @@
+﻿@model HP_furniture.Models.ChiTietDonHang
+
+@{
+    ViewBag.Title = "Xóa";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout1.cshtml";
+}
+
+<h4>XÓA CHI TIẾT HÓA ĐƠN</h4>
+
+<h5>Bạn có chắc chắn muốn xóa không?</h5>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @*@Html.DisplayNameFor(model => model.DonHang.ID)*@
+            ID đơn hàng
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DonHang.ID)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.SanPham.TenSanPham)*@
+            Tên KH
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoTen)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.SanPham.TenSanPham)*@
+            SDT
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SDT)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.SanPham.TenSanPham)*@
+            Email
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.SanPham.TenSanPham)*@
+            D/c
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaChi)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.SanPham.TenSanPham)*@
+            Note
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GhiChu)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.SanPham.TenSanPham)*@
+            Tên sản phẩm
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SanPham.TenSanPham)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.SoLuong)*@
+            Số lượng
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuong)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.TongTien)*@
+            Tổng tiền
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TongTien)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger" /> |
+            @Html.ActionLink("Trở về danh sách", "Index")
+        </div>
+    }
+</div>

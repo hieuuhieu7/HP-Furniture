@@ -1,0 +1,100 @@
+﻿@model HP_furniture.Models.KhachHang
+
+@{
+    ViewBag.Title = "Thêm mới";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout1.cshtml";
+}
+
+<h4>THÊM MỚI THÔNG TIN KHÁCH HÀNG</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.TenKhachHang, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <label class="control-label col-md-2">Họ và tên</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TenKhachHang, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TenKhachHang, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.SDT_KH, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <label class="control-label col-md-2">Số điện thoại</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SDT_KH, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.SDT_KH, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.DiaChi_KH, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <label class="control-label col-md-2">Địa chỉ</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.DiaChi_KH, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DiaChi_KH, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">
+            Hình ảnh
+        </label>
+        <div class="col-md-10">
+            <input type="text" name="Avt" class="form-control" />
+            @Html.ValidationMessageFor(model => model.Avt, "", new { @class = "text-danger" })
+            <div style="margin-left: 90%; margin-top: 1%">
+                <button type="button" onclick="OpenCkfinder()" class="btn btn-info">Chọn ảnh</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+            @*@Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label class="control-label col-md-2">Tên người dùng</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <label class="control-label col-md-2">Mật khẩu</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Thêm" class="btn btn-success" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Trở về danh sách", "Index")
+</div>
+
+@section HieuJS{
+    <script>
+        CKEDITOR.replace('inputMoTa')
+
+        function OpenCkfinder() {
+            var finder = new CKFinder();
+            finder.selectActionFunction = SetUrlHinhAnh;
+            finder.popup();
+        }
+        function SetUrlHinhAnh(fileUrl) {
+            $('input[name=Avt]').val(fileUrl);
+        }
+    </script>
+}

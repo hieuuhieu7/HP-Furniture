@@ -1,0 +1,195 @@
+﻿@model IEnumerable<HP_furniture.Models.NhanVien>
+
+@{
+    ViewBag.Title = "Danh sách";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout1.cshtml";
+}
+
+@section Style {
+    <!-- DataTables -->
+    <link href="~/Areas/Admin/Assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+}
+
+<style>
+    .btn-all {
+        align-items: center;
+        appearance: none;
+        background-color: #FCFCFD;
+        border-radius: 1px;
+        border-width: 0;
+        box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+        box-sizing: border-box;
+        color: #36395A;
+        cursor: pointer;
+        display: inline-flex;
+        height: 30px;
+        justify-content: center;
+        line-height: 1;
+        list-style: none;
+        overflow: hidden;
+        position: relative;
+        text-align: left;
+        text-decoration: none;
+        transition: box-shadow .15s, transform .15s;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        white-space: nowrap;
+        will-change: box-shadow, transform;
+        font-size: 13px;
+        width: 65px;
+        text-align: center;
+        margin-bottom: 3px;
+    }
+
+    .btn-all:focus {
+        box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+    }
+
+    .btn-all:hover {
+        box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+        transform: translateY(-2px);
+    }
+
+    .btn-all:active {
+        box-shadow: #D6D6E7 0 3px 7px inset;
+        transform: translateY(2px);
+    }
+</style>
+
+<h4>DANH SÁCH NHÂN VIÊN</h4>
+
+<p>
+    @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-all" })
+</p>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box ">
+            <div class="box-header">
+                @*<a href="" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Thêm mới</a>*@
+            </div><!-- /.box-header -->
+            <div class="box-body">
+                <table id="example" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ID)
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.TenNhanVien)*@
+                                Họ và tên
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.NgaySinh)*@
+                                Ngày sinh
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.DiaChi)*@
+                                Địa chỉ
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.SDT)*@
+                                Số điện thoại
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.ChucVu)*@
+                                Chức vụ
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.Username)*@
+                                Tên người dùng
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.Password)*@
+                                Mật khẩu
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TenNhanVien)
+                                </td>
+                                <td>
+                                    @*@Html.DisplayFor(modelItem => item.NgaySinh)*@
+                                    @string.Format("{0:dd-MM-yyyy}", item.NgaySinh)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DiaChi)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SDT)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ChucVu)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Username)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Password)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Sửa", "Edit", new { id = item.ID }, new { @class = "btn btn-all" }) 
+                                    <br />
+                                    @Html.ActionLink("Chi tiết", "Details", new { id = item.ID }, new { @class = "btn btn-all" }) 
+                                    <br />
+                                    @Html.ActionLink("Xóa", "Delete", new { id = item.ID }, new { @class = "btn btn-all" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ID)
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.TenNhanVien)*@
+                                Tên nhân viên
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.NgaySinh)*@
+                                Ngày sinh
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.DiaChi)*@
+                                Địa chỉ
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.SDT)*@
+                                Số điện thoại
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.ChucVu)*@
+                                Chức vụ
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.Username)*@
+                                Tên người dùng
+                            </th>
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.Password)*@
+                                Mật khẩu
+                            </th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+    </div><!-- /.col -->
+</div>
+
+@section Scripts{
+    <!-- DataTables -->
+    <script src="~/Areas/Admin/Assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Areas/Admin/Assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <script src="~/Areas/Admin/Assets/plugins/datatables/dataTables.alphabetSearch.js"></script>
+}

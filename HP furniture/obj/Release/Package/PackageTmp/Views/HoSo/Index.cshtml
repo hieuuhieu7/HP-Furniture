@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "HP furniture - Hồ sơ người dùng";
+    Layout = "~/Views/share/HPfurnitureLayout.cshtml";
+}
+
+<!-- Hồ sơ người dùng -->
+<div class="col-12" style="height: 100px; display: flex; align-items: center;">
+    <div class="col-1"></div>
+    <div class="col-10">
+        <div class="back__flex">
+            <a href="~/TrangChu/Index" class="back__info">
+                <i class="fa-solid fa-caret-left"></i>
+                Trang chủ
+            </a>
+            <a href="#" style="margin-left: 0.5%; margin-right: 0.5%; font-size: 20px; color: var(--rgb-primarry);"> / </a>
+            <a href="#" class="back__info" style="color: var(--be-primary)">
+                <i class="fa-regular fa-user"></i>
+                Hồ sơ
+            </a>
+        </div>
+    </div>
+    <div class="col-1"></div>
+</div>
+<div class="col-1" style="height: 50%;"></div>
+<div class="col-10 infomation">
+            <div class="info">
+                <div class="flex__text">
+                    <h2 class="info__text">Hồ sơ người dùng</h2>
+                    <i class="fa-regular fa-user info__icon"></i>
+                </div>
+                @{ 
+                    var name = (HP_furniture.Models.KhachHang)HttpContext.Current.Session["khach"];
+                }
+                <div class="info__flex">
+                    <label for="" class="info__label">Họ và tên</label>
+                    <input type="text" name="" id="" class="info__inp" value="@name.TenKhachHang">
+                </div>
+                <div class="info__flex">
+                    <label for="" class="info__label">Số điện thoại</label>
+                    <input type="text" name="" id="" class="info__inp" value="@name.SDT_KH">
+                </div>
+                <div class="info__flex">
+                    <label for="" class="info__label">Địa chỉ</label>
+                    <input type="text" name="" id="" class="info__inp" value="@name.DiaChi_KH">
+                </div>
+                <div class="info__flex">
+                    <label for="" class="info__label">Tên người dùng</label>
+                    <input type="text" name="" id="" class="info__inp" value="@name.Username">
+                </div>
+                <div class="info__flex">
+                    <label for="" class="info__label">Mật khẩu</label>
+                    <input type="password" name="" id="" class="info__inp" value="@name.Password">
+                </div>
+                <a href="#" class="info__save">LƯU</a>
+            </div>
+
+            <div class="avt">
+                <img src="@name.Avt" alt="avt" class="info__avt">
+                <a href="#" class="avt__btn">CHỌN ẢNH</a>
+            </div>
+
+            <div class="logouat__tablet">
+                <a href="~/DangNhap/DangXuat" class="logout__tablet--link">
+                    <i class="fa-solid fa-power-off logout__tablet--icon"></i>
+                </a>
+            </div>
+</div>
+<div class="col-1" style="height: 50%;"></div>
+
+<div class="col-12" style="height: 100px; display: flex; align-items: center; justify-content: center">
+    @if (name.Username.ToLower() == "hieu")
+    {
+        <a href="~/Admin/HomeAdmin/DangNhap" class="btn__admin">ADMIN</a>
+    }
+</div>
+

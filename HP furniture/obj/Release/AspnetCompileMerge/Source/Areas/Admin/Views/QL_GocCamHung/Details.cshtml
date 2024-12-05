@@ -1,0 +1,117 @@
+﻿@model HP_furniture.Models.GocCamHung
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout1.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>GocCamHung</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.TenCamHung1)*@
+            Tên cảm hứng 1
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenCamHung1)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.HinhAnhCamHung1)*@
+            Hình ảnh 1
+        </dt>
+
+        <dd>
+            <img src="@Model.HinhAnhCamHung1" width="200" />
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.MoTaCamHung1)*@
+            Mô tả 1
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.MoTaCamHung1)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.TenCamHung2)*@
+            Tên cảm hứng 2
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenCamHung2)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.HinhAnhCamHung2)*@
+            Hình ảnh 2
+        </dt>
+
+        <dd>
+            <img src="@Model.HinhAnhCamHung2" width="200" />
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.MoTaCamHung2)*@
+            Mô tả 2
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.MoTaCamHung2)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.TenCamHung3)*@
+            Tên cảm hứng 3
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenCamHung3)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.HinhAnhCamHung3)*@
+            Hình ảnh 3
+        </dt>
+
+        <dd>
+            <img src="@Model.HinhAnhCamHung3" width="200" />
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.MoTaCamHung3)*@
+            Mô tả 3
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.MoTaCamHung3)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.HinhAnhEnd)*@
+            Hình ảnh 4
+        </dt>
+
+        <dd>
+            <img src="@Model.HinhAnhEnd" width="200" />
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.ID }, new { @class = "btn btn-warning" }) |
+    @Html.ActionLink("Trở về danh sách", "Index")
+</p>

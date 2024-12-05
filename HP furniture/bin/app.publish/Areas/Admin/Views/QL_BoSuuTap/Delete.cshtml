@@ -1,0 +1,94 @@
+﻿@model HP_furniture.Models.BoSuuTap
+
+@{
+    ViewBag.Title = "Xóa";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout1.cshtml";
+}
+
+<h4>XÓA BỘ SƯU TẬP</h4>
+
+<h5>Bạn có chắc chắn muốn xóa không?</h5>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @*@Html.DisplayNameFor(model => model.ID)*@
+            ID
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.TenBST)*@
+            Tên bộ sưu tập
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenBST)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.HinhAnhBST)*@
+            Hình ảnh bộ sưu tập
+        </dt>
+
+        <dd>
+            <img src="@Model.HinhAnhBST" width="200" />
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.HinhAnhBST)*@
+            Hình ảnh thêm 1
+        </dt>
+
+        <dd>
+            <img src="@Model.HinhAnh1" width="200" />
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.HinhAnhBST)*@
+            Hình ảnh thêm 2
+        </dt>
+
+        <dd>
+            <img src="@Model.HinhAnh2" width="200" />
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.HinhAnhBST)*@
+            Hình ảnh thêm 3
+        </dt>
+
+        <dd>
+            <img src="@Model.HinhAnh3" width="200" />
+        </dd>
+
+        <dt>
+            Mô tả ngắn
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MoTaBST)
+        </dd>
+
+        <dt>
+            Mô tả dài
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.MoTaDai)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger" /> |
+            @Html.ActionLink("Trở về danh sách", "Index")
+        </div>
+    }
+</div>

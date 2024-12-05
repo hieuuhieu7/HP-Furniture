@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "HP furniture - Hồ sơ người dùng";
+    Layout = "~/Views/share/HPfurnitureLayout.cshtml";
+}
+
+<!-- Hồ sơ người dùng -->
+<div class="col-12" style="height: 100px; display: flex; align-items: center;">
+    <div class="col-1"></div>
+    <div class="col-10">
+        <div class="back__flex">
+            <a href="~/TrangChu/Index" class="back__info">
+                <i class="fa-solid fa-caret-left"></i>
+                Trang chủ
+            </a>
+            <a href="#" style="margin-left: 0.5%; margin-right: 0.5%; font-size: 20px; color: var(--rgb-primarry);"> / </a>
+            <a href="#" class="back__info" style="color: var(--be-primary)">
+                <i class="fa-regular fa-user"></i>
+                Hồ sơ
+            </a>
+        </div>
+    </div>
+    <div class="col-1"></div>
+</div>
+<div class="col-1" style="height: 50%;"></div>
+<div class="col-10 infomation">
+    @{
+        var name = (HP_furniture.Models.KhachHang)HttpContext.Current.Session["khach"];
+    }
+    <form action="~/HoSo/UploadImage" method="post" enctype="multipart/form-data" class="info_flex">
+        <div class="info warp__tablet__mobile">
+            <div class="flex__text">
+                <h2 class="info__text">Hồ sơ người dùng</h2>
+                <i class="fa-regular fa-user info__icon"></i>
+            </div>
+            <div class="info__flex">
+                <label for="TenKhachHang" class="info__label">Họ và tên</label>
+                <input type="text" name="TenKhachHang" id="TenKhachHang" class="info__inp" value="@name.TenKhachHang">
+            </div>
+            <div class="info__flex">
+                <label for="SDT_KH" class="info__label">Số điện thoại</label>
+                <input type="text" name="SDT_KH" id="SDT_KH" class="info__inp" value="@name.SDT_KH">
+            </div>
+            <div class="info__flex">
+                <label for="DiaChi_KH" class="info__label">Địa chỉ</label>
+                <input type="text" name="DiaChi_KH" id="DiaChi_KH" class="info__inp" value="@name.DiaChi_KH">
+            </div>
+            <div class="info__flex">
+                <label for="Username" class="info__label">Email</label>
+                <input type="text" name="Username" id="Username" class="info__inp" value="@name.Username">
+            </div>
+            <div class="info__flex">
+                <label for="Password" class="info__label">Mật khẩu</label>
+                <input type="password" name="Password" id="Password" class="info__inp" value="@name.Password">
+            </div>
+            <input type="submit" value="LƯU" class="info__save" />
+        </div>
+
+        <div style="padding: 100px"></div>
+
+        <div class="avt warp__tablet__mobile">
+            <img src="@name.Avt" alt="avt" class="info__avt" id="avatarPreview">
+            <input type="file" name="avt" style="display:none;" id="fileInput" onchange="previewImage(event)">
+            <a href="#" class="avt__btn" onclick="document.getElementById('fileInput').click(); return false;">CHỌN ẢNH</a>
+        </div>
+    </form>
+
+    <div class="logouat__tablet">
+        <a href="~/DangNhap/DangXuat" class="logout__tablet--link">
+            <i class="fa-solid fa-power-off logout__tablet--icon"></i>
+        </a>
+    </div>
+</div>
+<div class="col-1" style="height: 50%;"></div>
+
+<div class="col-12" style="height: 100px; display: flex; align-items: center; justify-content: center">
+    @if (name.Username.ToLower() == "tunhienbikick@gmail.com")
+    {
+        <a href="~/Admin/HomeAdmin/DangNhap" class="btn__admin" target="_blank">ADMIN</a>
+    }
+</div>
+
+<script>
+    function previewImage(event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var output = document.getElementById('avatarPreview');
+            output.src = reader.result;
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
+

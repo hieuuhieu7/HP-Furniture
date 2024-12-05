@@ -1,0 +1,155 @@
+﻿@using HP_furniture.Controllers
+@using HP_furniture.Models
+
+@{
+    ViewBag.Title = "HP furniture - Tìm kiếm";
+    Layout = "~/Views/share/HPfurnitureLayout.cshtml";
+
+    string key = Request.QueryString["key"];
+    List<SanPham> result = new List<SanPham>();
+}
+
+<!-- Chuyển sang trang tìm kiếm -->
+<div class="col-12" style="height: 20px;"></div>
+<div class="col-1" style="height: 50px;"></div>
+<div class="col-10" style="height: 50px; display: flex; align-items: center;">
+    <h2>Sản phẩm tìm kiếm</h2>
+    <i class="fa-solid fa-magnifying-glass" style=" margin-left: 7px; font-size: 21px;"></i>
+</div>
+<div class="col-1" style="height: 50px;"></div>
+
+<!-- Sản phẩm tìm kiếm sẽ ở đây -->
+<div class="col-1" style="height: 5%;"></div>
+<div class="col-10" style="height: 5%;">
+    @*<div style="height: 20px; display: flex; align-items: center; justify-content: center;">
+            <div class="line__bottom"></div>
+        </div>*@
+    @{
+        if (string.IsNullOrEmpty(key) || key.Length < 2)
+        {
+            // Nếu từ khóa trống, hiển thị thông báo
+        <div style="display: flex; align-items: center">
+            <h3 style="color: black">Không tìm thấy</h3>
+            <i class="fa-solid fa-ban" style="margin-left: 5px; color: red"></i>
+        </div>
+        }
+        else
+        {
+            // Nếu có từ khóa, thực hiện tìm kiếm và hiển thị kết quả
+            var timKiemController = new HP_furniture.Controllers.TimKiemController();
+            result = timKiemController.SearchByKey(key);
+            {
+                // Nếu có kết quả, hiển thị danh sách sản phẩm
+                foreach (var item in result)
+                {
+                    <div class="cart__box">
+                        <a href="@Url.Action("Index", "ChiTietSanPham", new { Id = item.ID })">
+                            <div class="cart__img">
+                                @if (!string.IsNullOrEmpty(item.HinhAnhSanPham))
+                                {
+                                    <img class="cart__img--search" src="@item.HinhAnhSanPham" alt="sp">
+                                }
+                                else
+                                {
+                                    <img src="placeholder.jpg" alt="sp">
+                                }
+                            </div>
+                        </a>
+                        <div class="cart__title">
+                            <div class="cart__title-flex">
+                                <h3>@item.TenSanPham</h3>
+                            </div>
+                            @if (!string.IsNullOrEmpty(item.MoTaSanPham))
+                            {
+                                string moTa = System.Text.RegularExpressions.Regex.Replace(item.MoTaSanPham, @"<[^>]+>|&nbsp;", "").Trim();
+                                <p>Mô tả: @Html.Raw(moTa)</p>
+                            }
+                            <br />
+                            @if (item.GiaSanPhamSale != null)
+                            {
+                                <span class="cart__price" style="color: grey; font-weight: normal"><del>@string.Format("{0: #,####}₫", item.GiaSanPham)</del></span>
+                                <span style="padding: 0 2px 0 2px"></span>
+                                <span class="cart__price">@string.Format("{0: #,####}₫", item.GiaSanPhamSale)</span>
+                            }
+                            else
+                            { 
+                                <span class="cart__price">@Html.FormatValue(item.GiaSanPham, "{0: #,####}")₫</span>
+                            }
+                            <div class="cart__bag">
+                                <div class="cart__heart">
+                                    <a href="#">
+                                        <i class="fa-regular fa-heart"></i>
+                                        Thêm vào Wishlist
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="height: 20px; display: flex; align-items: center; justify-content: center;">
+                        <div class="line__bottom"></div>
+                    </div>
+                }
+            }
+        }
+    }
+</div>
+<div class="col-1" style="height: 5%;"></div>
+@*<div class="col-12" style="height: 20px; display: flex; align-items: center; justify-content: center;">
+    <div class="line__bottom"></div>
+</div>*@
+
+
+<div class="col-6" style="height: 5%;">
+    <div class="col-12" style="height: 600px;">
+        <div class="address__img">
+            <div class="pos">
+                <img class="sl__img--big" src="~/Assets/assets/img/camhung4.jpg" alt="">
+                <div class="address__img--title">
+                    <h2 class="sl__h2">SOFA</h2>
+                    <a class="address__img--link" href="#">Xem thêm</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-3" style="height: 5%;">
+    <div class="col-12" style="height: 600px;">
+        <div class="address__img">
+            <div class="pos">
+                <img class="sl__img--big" src="~/Assets/assets/img/camhung3.jpg" alt="">
+                <div class="address__img--title">
+                    <h2 class="sl__h2">BÀN ĂN</h2>
+                    <a class="address__img--link" href="#">Xem thêm</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-3" style="height: 5%;">
+    <div class="col-12" style="height: 300px;">
+        <div class="address__img">
+            <div class="pos">
+                <img class="sl__img--small" src="~/Assets/assets/img/camhung5.jpg" alt="">
+                <div class="address__img--title">
+                    <h2>GIƯỜNG NGỦ</h2>
+                    <a class="address__img--link" href="#">Xem thêm</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12" style="height: 300px;">
+        <div class="address__img">
+            <div class="pos">
+                <img class="sl__img--small" src="~/Assets/assets/img/camhung2.jpg" alt="">
+                <div class="address__img--title">
+                    <h2 class="sl__h2">THIẾT KẾ NỘI THẤT</h2>
+                    <a class="address__img--link" href="#">Xem thêm</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-12" style="height: 20px;"></div>
+

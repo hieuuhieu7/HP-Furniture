@@ -1,0 +1,394 @@
+﻿
+@{
+    ViewBag.Title = "HP furniture - Đặt mua";
+    Layout = "~/Views/share/HPfurnitureLayout.cshtml";
+}
+
+<div class="col-12" style="height: 20px;"></div>
+    <div class="col-7 block__mobile" style="height: 5%;">
+        <div class="col-12" style="height: 50px; display: flex; align-items: center">
+            <h2 style="margin: 0; font-size: 21px;">Địa chỉ giao hàng</h2>
+        </div>
+        <div class="col-12" style="height: 650px;">
+            <!-- Một form duy nhất bao bọc toàn bộ các trường dữ liệu -->
+            <form id="orderForm" action="@Url.Action("DatHang", "DatMua")" method="post" onsubmit="return validateForm()">
+                <div class="order__group">
+                    <label class="order__label" for="hoTen">Họ và tên <span style="color: red;">*</span></label>
+                    <br>
+                    <input class="order__input" type="text" autofocus name="hoTen" id="hoTen">
+                    <div style="padding: 2px 0 2px 0"></div>
+                    <span class="error-message" id="hoTenError" style="color: red; margin-top: 2px"></span>
+                </div>
+
+                <div class="order__group">
+                    <div class="order__group--flex">
+                        <div class="order__group--bag">
+                            <label class="order__label" for="soDienThoai">Số điện thoại <span style="color: red;">*</span></label>
+                            <br>
+                            <input class="order__input" type="text" autofocus name="soDienThoai" id="soDienThoai">
+                            <div style="padding: 2px 0 2px 0"></div>
+                            <span class="error-message" id="soDienThoaiError" style="color: red; margin-top: 2px"></span>
+                        </div>
+                        <div style="padding: 0 20px 0 20px;"></div>
+                        <div class="order__group--bag">
+                            <label class="order__label" for="email">Email <span style="color: red;">*</span></label>
+                            <br>
+                            <input class="order__input" type="email" name="email" id="email">
+                            <div style="padding: 2px 0 2px 0"></div>
+                            <span class="error-message" id="emailError" style="color: red; margin-top: 2px"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order__group">
+                    <label class="order__label" for="diaChi">Địa chỉ <span style="color: red;">*</span></label>
+                    <br>
+                    <input class="order__input" type="text" autofocus name="diaChi" id="diaChi">
+                    <div style="padding: 2px 0 2px 0"></div>
+                    <span class="error-message" id="diaChiError" style="color: red; margin-top: 2px"></span>
+                </div>
+
+                <div class="order__group">
+                    <h2 style="margin: 0; font-size: 21px;">Thông tin thêm</h2>
+                    <h4 style="margin: 0; line-height: 2;">Lưu ý cho đơn hàng (tùy chọn)</h4>
+                    <textarea class="order__textarea" name="note" id="note" cols="30" rows="10" placeholder="Viết các lưu ý cho đơn hàng của bạn, ví dụ: lưu ý đặc biệt khi vận chuyển"></textarea>
+                </div>
+
+                <!-- Nút "Đặt Mua" -->
+                <div class="order__buy">
+                    <button type="submit" class="order__buy--link">ĐẶT MUA</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-12" style="height: 50px; display: flex; align-items: center">
+            <h2 style="margin: 0; font-size: 21px;">Phương thức thanh toán</h2>
+        </div>
+        <div class="col-12" style="height: 150px;">
+            <div class="order__box--flex">
+                <a href="javascript:void(0)" class="order__box">
+                    <i class="fa-solid fa-box-open order__icon"></i>
+                    <br>
+                    <span class="order__span">Chuyển khoản ngân hàng</span>
+                </a>
+                <div style="padding: 0 10px 0 10px;"></div>
+                <a href="javascript:void(0)" class="order__box">
+                    <i class="fa-regular fa-credit-card order__icon"></i>
+                    <br>
+                    <span class="order__span">Thanh toán khi nhận hàng</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-12" style="height: 50px; display: flex; align-items: center">
+            <h2 style="margin: 0; font-size: 21px;" class="MB">Ngân hàng MB-BANK</h2>
+        </div>
+        <div class="col-12" style="height: 100px; ">
+            <div style="line-height: 1.5; color: var(--grey-primary);">
+                <span>Số tài khoản: 0914481203</span>
+                <br>
+                <span>Tên chủ tài khoản:</span>
+                <br>
+                <span>CT CP NOI THAT HP FURNITURE MBBANK - CHI NHÁNH HÀ NỘI.</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-5 block__mobile" style="height: 5%;">
+        <div class="build">
+            <h2>Tóm tắt đơn hàng</h2>
+
+            <div class="build__price">
+                <span>Thành tiền</span>
+                <span class="build__price-money">@ViewBag.TotalAmount₫</span>
+            </div>
+
+            <div class="build__price">
+                <span>Vận chuyển</span>
+                <span style="color: var(--grey-primary);">Liên hệ phí vận chuyển sau</span>
+            </div>
+
+            <!-- Hiển thị các sản phẩm trong giỏ hàng -->
+            @foreach (var product in ViewBag.Products)
+            {
+                <div class="build__prd">
+                    <div class="build__pos">
+                        <span class="build__prd--span" style="color: var(--grey-primary); font-size: 17px;">Sản phẩm</span>
+                        <div class="build__prd--sl">@product.Quantity</div>
+                    </div>
+                    <div class="order__product--flex">
+                        <img src="@product.ProductDetail.HinhAnhSanPham" alt="" style="width: 100px; height: 80px;">
+                        <span style="color: var(--grey-primary);">@product.ProductDetail.TenSanPham</span>
+                    </div>
+                </div>
+            }
+
+            <!-- Hiển thị tổng cộng -->
+            <div class="build__all-price">
+                <span style="font-size: 20px; font-weight: bold;">Tổng cộng</span>
+                <span class="build__all-price-money" style="font-size: 18px;">@ViewBag.TotalAmount₫</span>
+            </div>
+
+            <div class="build__ship"></div>
+
+            <div class="build__scroll">
+                <h3>Chính sách bán hàng</h3>
+                <p>
+                    <span style="font-weight: bold;">1. THANH TOÁN</span>
+                    <br>
+                    HP furniture chỉ áp dụng duy nhất một hình thức thanh toán online qua thẻ tín dụng, chuyển khoản, cụ thể:
+                    <br>
+                    Bước 1: Khách hàng tìm hiểu thông tin về sản phẩm.
+                    <br>
+                    Bước 2: Khách hàng xác thực đơn hàng (điện thoại, tin nhắn, email).
+                    <br>
+                    Bước 3: Khách hàng đồng ý các điều khoản mua hàng, chi phí giao hàng và lắp đặt.
+                    <br>
+                    Bước 4: Khách hàng thanh toán qua các thẻ ATM/VISA/CREDIT CARD.
+                    <br>
+                    Bước 5: Hệ thống HP furnirue xác nhận thông tin khách hàng và giao hàng.
+                    <br>
+                    Bước 6: Khách hàng nhận hàng, kiểm tra và xác nhận với nhân viên.
+                    <br>
+                    <span style="font-weight: bold;">2. CHÍNH SÁCH LƯU KHO (Bên mua gửi/ lưu giữ hàng hóa tại kho của bên bán).</span>
+                    <br>
+                    Thỏa thuận lưu kho, phí lưu kho và điều kiện lưu kho sẽ được ký kết nếu khách hàng có nhu cầu kí gửi hàng hóa.
+                    <br>
+                    <span style="font-weight: bold;">3. ĐƠN HÀNG CÓ HIỆU LỰC.</span>
+                    <br>
+
+                    Đơn hàng có hiệu lực là đơn hàng sau khi Quý khách đã thanh toán và nhận được xác nhận của nhân viên bán hàng HP furniture.
+
+                    Quý khách không được hủy đơn hàng sau khi đã thanh toán và nhận được xác nhận của nhân viên bán hàng HP furniture.
+                    <br>
+
+                    <span style="font-weight: bold;">4. QUY ĐỊNH ĐỔI TRẢ HÀNG HÓA.</span>
+                    <br>
+
+                    4.1. Các trường hợp hợp được đổi hàng:
+                    <br>
+                    HP furniture sẽ thực hiện việc đổi, trả hàng hóa theo các điều kiện sau:
+
+                    Hàng không đủ số lượng, đủ bộ, hoặc không đúng chủng loại theo như trong đơn đặt hàng của Quý khách.
+                    Hàng bị lỗi, không đạt chất lượng.
+                    <br>
+                    4.2. Các trường hợp KHÔNG được đổi trả hàng hóa:
+                    <br>
+                    – Sản phẩm đã sử dụng, dơ bẩn, hoặc hư hại.
+                    <br>
+                    – Sản phẩm không có đầy đủ chứng từ, hóa đơn.
+                    <br>
+                    – Sản phẩm mua theo các diện thanh lý, khuyến mại, bán hiện trạng.
+                    <br>
+                    – Sản phẩm đã được Quý khách ký vào biên bản nhận hàng.
+                    <br>
+                    <br>
+                    <span style="font-weight: bold;">CHÍNH SÁCH GIAO HÀNG</span>
+                    <br>
+
+                    1. PHẠM VI ÁP DỤNG
+                    <br>
+                    Tất cả các đơn hàng có nhu cầu giao hàng và lắp đặt tại nhà được đặt mua theo hình thức mua online (qua website HP furnirue.com, điện thoại, fanpage…).
+                    <br>
+
+                    2. THỜI GIAN GIAO HÀNG.
+                    <br>
+                    – Chính sách giao hàng được áp dụng trong giờ hành chính từ thứ 2 đến hết thứ 7 (trừ chủ nhật, ngày lễ, tết).
+                    <br>
+                    – Đối với các đơn hàng có sản phẩm cần lắp đặt, nhân viên giao hàng và kỹ thuật sẽ đến tận nhà lắp đặt cho Quý khách.
+                    <br>
+                    – Đơn hàng giao tại nội thành Hà Nội, Hồ Chí Minh:
+                    <br>
+                    • Đối với các sản phẩm có sẵn tại kho và showroom: khách hàng đặt hàng từ 09h-17h sẽ được giao vào ngày hôm sau.
+                    <br>
+                    • Đối với đơn hàng phát sinh sau 17h: sẽ được giao trong 02 ngày làm việc.
+                    <br>
+                    • Đối với các sản phẩm đặt hàng: thời gian giao hàng sẽ được thỏa thuận giữa hai bên.
+                    <br>
+                    – Đơn hàng đi tỉnh hoặc khu vực ngoại thành Hà Nội, Hồ Chí Minh sẽ được hoàn tất trong 02 – 04 ngày làm việc (trừ trường hợp chờ hàng).
+                    <br>
+                    – Lịch giao hàng trong thời gian diễn ra chương trình khuyến mại sẽ được nhân viên chúng tôi thông báo cụ thể tới quý khách.
+                    <br>
+                    3. BIỂU PHÍ GIAO HÀNG – LẮP ĐẶT.
+                    <br>
+                    – Biểu phí giao hàng bao gồm chi phí vận chuyển và chi phí nhân công giao hàng – lắp đặt (nếu có và đã bao gồm VAT).
+                    <br>
+                    – Áp dụng lắp đặt cho các nhóm hàng nội thất. Không bao gồm nhóm đèn điện và các nhóm hàng khác.
+                    <br>
+                    – Biểu phí giao hàng:
+                    <br>
+                    • Đơn hàng dưới 10 triệu đồng: 350.000đ/ 1 chuyến trong nội thành Hà Nội và Hồ Chí Minh.
+                    <br>
+                    • Đơn hàng từ 10 triệu đồng trở lên: miễn phí vận chuyển và lắp đặt trong nội thành Hà Nội và Hồ Chí Minh.
+                    <br>
+                    • Đơn hàng đi tỉnh hoặc khu vực ngoại thành Hà Nội, Hồ Chí Minh sẽ được thông báo mức phí cụ thể tới Quý khách sau khi HP furnirue tiếp nhận thông tin đơn hàng.
+                    <br>
+                    – Lưu ý: Các loại phụ phí khác như lưu kho, phí khoan tường, phí tháo dỡ, phí giao tới địa điểm không thuận lợi như trên tầng/ lầu cao không có hoặc không sử dụng được thang máy; hoặc khu vực lắp đặt phải thuê xe cẩu đưa hàng hóa lên cao; hoặc mặt bằng khu vực lắp đặt không đảm bảo điều kiện có phát sinh chi phí vận chuyển; hoặc các trường hợp khác,… Chúng tôi sẽ thông báo mức phí cụ thể tới quý khách.
+                    <br>
+                    4. CÁC ĐIỀU KIỆN KHÁC.
+                    <br>
+                    – Quý khách vui lòng kiểm tra hàng hóa trước khi ký nhận hàng hóa. Quý khách có thể từ chối nhận hàng nếu hàng hóa đã bị vỡ hỏng do quá trình vận chuyển hoặc Quý khách liên hệ trực tiếp với nhân viên bán hàng để được tư vấn cụ thể.
+                    <br>
+                    – Trường hợp công ty đã vận chuyển đến địa điểm giao nhận như thỏa thuận, nhưng vì một lý do khách hàng thay đổi địa điểm nhận hàng; khách hàng phải chịu chi phí vận chuyển cho việc đổi địa điểm giao hàng theo biểu phí của công ty. Mức phí này sẽ được nhân viên HP furnirue thông báo đến Quý khách.
+                    <br>
+                    – Trong trường hợp khách hàng có thay đổi về thời gian nhận hàng so với thỏa thuận khi mua hàng, cần báo trước cho chúng tôi ít nhất trước 24h với khách hàng nội thành và ít nhất 48h đối với khách hàng có khoảng cách trên 30km từ showroom mua hàng.
+                    <br>
+                    – Trường hợp công ty đã vận chuyển đến địa điểm giao nhận nhưng không liên lạc được với quý khách, chúng tôi sẽ để lại tin nhắn thông báo. Chúng tôi sẽ tính phí giao hàng nếu giao hàng không thành công.
+                    <br>
+                    – Trong một số trường hợp khách quan chúng tôi có thể giao hàng chậm do điều kiện bất khả kháng: thời tiết xấu, thiên tai, điều kiện giao thông, giờ cấm đường hoặc vào thời điểm lễ tết, sự kiện đặc biệt dẫn tới thay đổi thời gian giao hàng, công ty sẽ liên lạc thông báo và điều chỉnh thời gian giao hàng cụ thể cho khách hàng.
+                    <br>
+                    – Nhân viên của chúng tôi chỉ lắp đặt sản phẩm trong điều kiện mặt bằng sử dụng đã sẵn sàng. Nhân viên không được phép thực hiện bất kỳ công việc nào khác ngoài việc lắp đặt sản phẩm.
+                    <br>
+                    – Nhân viên giao hàng – lắp đặt không được phép thu thêm bất cứ khoản chi phí nào ngoài các chi phí được thông báo từ bộ phận bán hàng.
+                    <br>
+                    – Với tất cả các điều kiện trên, quý khách hàng có yêu cầu khác, vui lòng hệ với nhân viên chăm sóc khách hàng hoặc cửa hàng để được tư vấn, hỗ trợ đầy đủ nhất.
+                    <br>
+                    – Các chính sách và điều khoản có thể được chúng tôi thay đổi cho phù hợp nhất mà không cần báo trước.
+                    <br>
+                    <span style="font-weight: bold;">CHÍNH SÁCH BẢO HÀNH</span>
+                    <br>
+                    1. ĐIỀU KHOẢN CHUNG VỀ THỜI HẠN BẢO HÀNH.
+                    <br>
+                    – Thời gian bảo hành các sản phẩm: 01 năm, kể từ khi nhận hàng. Nếu có trường hợp đặc biệt, nhân viên HP furnirue sẽ thông báo đến Quý khách.
+                    <br>
+                    – Các sản phẩm hàng trang trí không áp dụng bảo hành nhưng áp dụng theo chính sách đổi trả hàng hoá.
+                    <br>
+                    – Chính sách bảo hành có hiệu lực từ thời điểm bên mua nhận sản phẩm (Căn cứ theo Phiếu xuất kho kiêm biên bản bàn giao & phiếu bảo hành).
+                    <br>
+                    2. ĐIỀU KIỆN BẢO HÀNH.
+                    <br>
+                    – Các sản phẩm vẫn nằm trong thời gian bảo hành của bên bán.
+                    <br>
+                    – Khách hàng cung cấp đầy đủ Phiếu xuất kho kiêm biên bản bàn giao & phiếu bảo hành.
+                    <br>
+                    – Bên bán chỉ bảo hành cho các lỗi phát sinh trong quá trình sản xuất sản phẩm.
+                    <br>
+                    3. QUY TRÌNH BẢO HÀNH.
+                    <br>
+                    – Cửa hàng phụ trách kiểm tra sản phẩm, xác định các trường hợp thuộc phạm vi bảo hành.
+                    <br>
+                    – Với sản phẩm thuộc phạm vi bảo hành, cửa hàng sẽ quyết định việc sửa chữa hoặc thay thế hoặc hoàn đổi lại sản phẩm.
+                    <br>
+                    – Đối với các sản phẩm không còn tiếp tục kinh doanh, nếu nằm trong phạm vi bảo hành, không thể sửa chữa thì bên bán sẽ thay thế bằng sản phẩm có giá trị tương đồng.
+                    <br>
+                    – Bên bán kiểm tra sản phẩm trong vòng 48h, hoàn tất bảo hành trong vòng 48h tiếp theo. Với trường hợp đặc biệt bên mua và bên bán thống nhất thời gian bảo hành.
+                    <br>
+                    4. PHẠM VI BẢO HÀNH.
+                    <br>
+                    HP furnirue bảo hành cho các sản phẩm đáp ứng đủ hai điều kiện sau:
+                    <br>
+                    • Sản phẩm hư hỏng do lỗi kỹ thuật của nhà sản xuất và;
+                    <br>
+                    • Sản phẩm còn trong thời hạn bảo hành.
+                    <br>
+                    HP furnirue không bảo hành trong các trường hợp sau:
+                    <br>
+                    • Khách hàng tự ý sửa chữa khi sản phẩm gặp trục trặc.
+                    <br>
+                    • Sản phẩm trầy xước, hư hỏng do khách hàng không sử dụng theo đúng hướng dẫn.
+                    <br>
+                    • Sản phẩm được xử lý chống mọt từ bên trong, mọi tác động do môi trường bên ngoài như: ẩm ướt, mối, chuột,… sẽ không được bảo hành.
+                    <br>
+                    • Sản phẩm bị ngập nước, gây nở, cong, vênh.
+                    <br>
+                    • Sản phẩm bị tác động của hơi nước, lửa,… do việc lắp đặt của các thiết bị điện nước của khách hàng không đảm bảo an toàn.
+                    <br>
+                    • Sản phẩm không có phiếu bảo hành của công ty.
+                    <br>
+                    • Sản phẩm bị hao mòn tự nhiên theo tính chất của từng loại vật liệu.
+                    <br>
+                    • Sản phẩm không được bảo dưỡng đúng cách.
+                    <br>
+                    Để biết thêm thông tin, vui lòng liên hệ với cửa hàng hoặc liên hệ trực tiếp bộ phận chăm sóc khách hàng:
+                    <br>
+                    • Hotline: 38781108
+                    <br>
+                    • Email: tunhienbikick.com.vn
+                    <br>
+                    • Website: www.hpfurniture.com
+                    <br>
+                    CHÍNH SÁCH BẢO MẬT THANH TOÁN
+                    <br>
+                    1. CAM KẾT BẢO MẬT.
+                    <br>
+                    Hệ thống thanh toán thẻ được cung cấp bởi các đối tác cổng thanh toán (“Đối Tác Cổng Thanh Toán”) đã được cấp phép hoạt động hợp pháp tại Việt Nam. Theo đó, các tiêu chuẩn bảo mật thanh toán thẻ tại HP furnirue đảm bảo tuân thủ theo các tiêu chuẩn bảo mật ngành.
+                    <br>
+                    2. QUY ĐỊNH BẢO MẬT.
+                    <br>
+                    – Chính sách giao dịch thanh toán bằng thẻ quốc tế và thẻ nội địa (internet banking) đảm bảo tuân thủ các tiêu chuẩn bảo mật của các Đối Tác Cổng Thanh Toán gồm:
+                    <br>
+                    Thông tin tài chính của Khách hàng sẽ được bảo vệ trong suốt quá trình giao dịch bằng giao thức SSL (Secure Sockets Layer).
+                    Chứng nhận tiêu chuẩn bảo mật dữ liệu thông tin thanh toán (PCI DSS) do Trustwave cung cấp.
+                    Mật khẩu sử dụng một lần (OTP) được gửi qua SMS để đảm bảo việc truy cập tài khoản được xác thực.
+                    Tiêu chuẩn mã hóa MD5 128 bit.
+                    Các nguyên tắc và quy định bảo mật thông tin trong ngành tài chính ngân hàng theo quy định của Ngân hàng nhà nước Việt Nam.
+                    – Chính sách bảo mật giao dịch trong thanh toán của HP furnirue áp dụng với Khách hàng:
+                    <br>
+                    HP furnirue cung cấp tiện ích lưu giữ token – chỉ lưu chuỗi đã được mã hóa bởi Đối Tác Cổng Thanh Toán cung cấp. HP furnirue không trực tiếp lưu trữ thông tin thẻ khách hàng. Việc bảo mật thông tin thẻ thanh toán Khách hàng được thực hiện bởi Đối Tác Cổng Thanh Toán đã được cấp phép.
+                    Đối với thẻ quốc tế: thông tin thẻ thanh toán của Khách hàng mà có khả năng sử dụng để xác lập giao dịch không được lưu trên hệ thống của www.hpfurnirue.com . Đối Tác Cổng Thanh Toán sẽ lưu trữ và bảo mật.
+                    Đối với thẻ nội địa (internet banking), HP furnirue chỉ lưu trữ mã đơn hàng, mã giao dịch và tên ngân hàng.
+                    HP furnirue cam kết đảm bảo thực hiện nghiêm túc các biện pháp bảo mật cần thiết cho mọi hoạt động thanh toán thực hiện trên website www.hpfurnirue.com.
+                    <br>
+                    Tôi đã đọc và đồng ý điều kiện đổi trả hàng, giao hàng, chính sách bảo mật, điều khoản dịch vụ mua hàng online.
+                </p>
+            </div>
+
+            <div class="col-12" style="height: 5px;"></div>
+
+            <div>
+                <input style="cursor: pointer;" type="checkbox">
+                <label for="" style="font-weight: bold; font-size: 17px;">Tôi đã đọc và đồng ý điều kiện đổi trả hàng, giao hàng, chính sách bảo mật, điều khoản dịch vụ mua hàng online *</label>
+            </div>
+
+            <div class="col-12" style="height: 5px;"></div>
+
+            <!-- Sử dụng button thay vì a tag -->
+            @*<div class="order__buy">
+                    <form id="orderForm" action="@Url.Action("DatHang", "DatMua")" method="post">
+                        <button type="submit" class="order__buy--link">Đặt Mua</button>
+                    </form>
+                </div>*@
+
+        </div>
+    </div>
+<div class="col-12" style="height: 20px"></div>
+
+<script>
+    function validateForm() {
+        var hoTen = document.getElementById("hoTen").value;
+        var soDienThoai = document.getElementById("soDienThoai").value;
+        var email = document.getElementById("email").value;
+        var diaChi = document.getElementById("diaChi").value;
+
+        var hoTenError = document.getElementById("hoTenError");
+        var soDienThoaiError = document.getElementById("soDienThoaiError");
+        var emailError = document.getElementById("emailError");
+        var diaChiError = document.getElementById("diaChiError");
+
+        hoTenError.innerHTML = "";
+        soDienThoaiError.innerHTML = "";
+        emailError.innerHTML = "";
+        diaChiError.innerHTML = "";
+
+        if (hoTen == "") {
+            hoTenError.innerHTML = "Vui lòng nhập họ và tên.";
+            return false;
+        }
+
+        if (soDienThoai == "") {
+            soDienThoaiError.innerHTML = "Vui lòng nhập số điện thoại.";
+            return false;
+        }
+
+        if (email == "") {
+            emailError.innerHTML = "Vui lòng nhập địa chỉ email.";
+            return false;
+        }
+
+        if (diaChi == "") {
+            diaChiError.innerHTML = "Vui lòng nhập địa chỉ.";
+            return false;
+        }
+
+        return true;
+    }
+</script>
+

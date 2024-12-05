@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewBag.Title = "HP furniture - Phòng làm việc";
+    Layout = "~/Views/share/HPfurnitureLayout.cshtml";
+    ViewBag.dropActive = 10;
+    ViewBag.optionActive = 9;
+}
+
+<div class="col-12" style="height: 600px;">
+    <div class="collect__img">
+        <div class="collect__overlay">
+            <div class="collect__text">
+                <span>Phòng làm việc</span>
+                <div class="collect__link">
+                    <a href="~/TrangChu/Index">Trang chủ</a>
+                    <slash class="collect__slash"> / </slash>
+                    <a href="#">Phòng làm việc</a>
+                </div>
+            </div>
+        </div>
+        <img src="~/Assets/assets/img/phonglamviec1.jpg" alt="BoSuuTap">
+    </div>
+</div>
+<div class="col-12" style="height: 30px;"></div>
+<div class="col-3  product__mobile" style="height: 50%;">
+    <div class="collect__cl">
+        <ul class="collect__list">
+            <li class="collect__list-item">
+                <a href="#" class="collect__list-item-link collect__active">Nội thất phòng làm việc</a>
+            </li>
+            <li class="collect__list-item">
+                <a href="#" class="collect__list-item-link" style="font-weight: bold">Mẫu phòng làm việc</a>
+            </li>
+            <li class="collect__list-item">
+                <a href="~/SanPhamSofa/Index" class="collect__list-item-link">Sofa</a>
+            </li>
+            <li class="collect__list-item">
+                <a href="~/SanPhamBan/Index" class="collect__list-item-link">Bàn</a>
+            </li>
+            <li class="collect__list-item">
+                <a href="~/SanPhamGhe/Index" class="collect__list-item-link">Ghế</a>
+            </li>
+            <li class="collect__list-item">
+                <a href="~/SanPhamTuVaKe/Index" class="collect__list-item-link">Tủ và kệ</a>
+            </li>
+            <li class="collect__list-item">
+                <a href="~/SanPhamGiuongNgu/Index" class="collect__list-item-link">Giường ngủ</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="col-8 product__mobile" style="height: 50%;">
+    @{
+        List<HP_furniture.Models.Phong> data = (List<HP_furniture.Models.Phong>)ViewBag.Product;
+        foreach (var item in Model)
+        {
+            <div class="col-6 product__mobile" style="height: 370px;">
+                <div class="collect__product">
+                    <div class="collect__product-img">
+                        <img src="@item.HinhAnhPhongKhach" alt="">
+                    </div>
+                    <div class="collect__product-title">
+                        <h4  style=" max-width: 480px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                            @item.TenPhongKhach
+                        </h4>
+                    </div>
+                    <a href="@Url.Action("Index", "ChiTietPhong", new { Id = item.ID})" class="btn__details-room">XEM CHI TIẾT</a>
+                </div>
+            </div>
+        }
+    }
+</div>
+<div class="col-1" style="height: 50%;"></div>
+<div class="col-12" style="height: 30px;"></div>
+
+@* Phân trang *@
+@model PagedList.IPagedList<HP_furniture.Models.Phong>
+@using PagedList.Mvc;
+<div class="col-12" style="height: 80px; display: flex; align-items: center; justify-content:center">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions
+    {
+        UlElementClasses = new[] { "pagination", "page-next" }, // Thêm các class CSS của bạn vào đây
+        LiElementClasses = new[] { "page-item" }, // Lớp CSS cho mỗi phần tử li
+        LinkToPreviousPageFormat = "<li class='page-item'><a class='page-link' href='?page={0}'><</a></li>", // Định dạng cho nút prev
+        LinkToNextPageFormat = "<li class='page-item'><a class='page-link' href='?page={0}'>></a></li>" // Định dạng cho nút next
+    })
+</div>
+

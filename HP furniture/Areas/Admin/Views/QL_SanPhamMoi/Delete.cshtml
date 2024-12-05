@@ -1,0 +1,87 @@
+﻿@model HP_furniture.Models.SanPhamMoi
+
+@{
+    ViewBag.Title = "Xóa";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout1.cshtml";
+}
+
+<h4>XÓA SẢN PHẨM (mới)</h4>
+
+<h5>Bạn có chắc chắn muốn xóa không?</h5>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @*@Html.DisplayNameFor(model => model.ID)*@
+            ID
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.TenSanPhamMoi)*@
+            Tên sản phẩm mới
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenSanPhamMoi)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.SoLuongTonKho)*@
+            Số lượng tồn kho
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuongTonKho)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.GiaSanPhamMoi)*@
+            Giá sản phẩm mới
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiaSanPhamMoi)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.HinhAnh1)*@
+            Hình ảnh 1
+        </dt>
+
+        <dd>
+            <img src="@Model.HinhAnh1" width="200" />
+        </dd>
+
+        <dt style="margin-top: 1%">
+            @*@Html.DisplayNameFor(model => model.HinhAnh2)*@
+            Hình ảnh 2
+        </dt>
+
+        <dd style="margin-top: 1%">
+            <img src="@Model.HinhAnh2" width="200" />
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.MoTaSanPhamMoi)*@
+            Mô tả sản phẩm mới
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.MoTaSanPhamMoi)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger" /> |
+            @Html.ActionLink("Trở về danh sách", "Index")
+        </div>
+    }
+</div>

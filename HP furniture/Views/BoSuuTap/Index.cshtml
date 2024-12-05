@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "HP furniture - Bộ sưu tập";
+    Layout = "~/Views/share/HPfurnitureLayout.cshtml";
+    ViewBag.Active = 3;
+    ViewBag.Nav = 1;
+}
+
+<!-- Bộ sưu tập -->
+<div class="col-12" style="height: 600px;">
+    <div class="collect__img">
+        <div class="collect__overlay">
+            <div class="collect__text">
+                <span>Bộ sưu tập</span>
+                <div class="collect__link">
+                    <a href="~/TrangChu/Index">Trang chủ</a>
+                    <slash class="collect__slash"> / </slash>
+                    <a href="#">Bộ sưu tập</a>
+                </div>
+            </div>
+        </div>
+        <img src="~/Assets/assets/img/bosuutap2.jpg" alt="BoSuuTap">
+    </div>
+</div>
+<div class="col-12" style="height: 30px;"></div>
+<div class="col-3 product__mobile" style="height: 50%;">
+    <div class="collect__cl">
+        <ul class="collect__list">
+            <li class="collect__list-item">
+                <a href="#" class="collect__list-item-link collect__active">Bộ sưu tập HP furniture</a>
+            </li>
+            @{
+                List<HP_furniture.Models.BoSuuTap> dt = (List<HP_furniture.Models.BoSuuTap>)ViewBag.Product;
+                for (int i = 0; i < dt.Count; i++)
+                {
+                    <li class="collect__list-item">
+                        <a href="@Url.Action("Index", "ChiTietBST", new { Id = dt[i].ID })" class="collect__list-item-link">@dt[i].TenBST</a>
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+</div>
+<div class="col-8 product__mobile" style="height: 50%;">
+    @{
+        List<HP_furniture.Models.BoSuuTap> data = (List<HP_furniture.Models.BoSuuTap>)ViewBag.Product;
+        for (int i = 0; i < data.Count; i++)
+        {
+            <div class="col-6 product__mobile" style="height: 5%;">
+                <a href="@Url.Action("Index", "ChiTietBST", new { Id = data[i].ID })" class="collect__product--BST">
+                    <div class="collect__product-img">
+                        <img src="@data[i].HinhAnhBST" alt="">
+                    </div>
+                    <div class="collect__product-title">
+                        <h4 style="max-width: 480px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                            @data[i].TenBST
+                        </h4>
+                    </div>
+                    <div class="collect__product-text">
+                        <span style="display: block ;max-width: 480px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                            @data[i].MoTaBST
+                        </span>
+                    </div>
+                </a>
+            </div>
+        }
+    }
+</div>
+<div class="col-1 product__mobile" style="height: 50%;"></div>
+<div class="col-12" style="height: 30px;"></div>
+
+

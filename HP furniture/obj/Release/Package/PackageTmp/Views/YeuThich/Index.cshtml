@@ -1,0 +1,140 @@
+﻿
+@{
+    ViewBag.Title = "HP furniture - Yêu thích";
+    Layout = "~/Views/share/HPfurnitureLayout.cshtml";
+    ViewBag.act = 2;
+}
+
+<style>
+    .home__link, .cart__link {
+        color: var(--grey-primary);
+        font-size: 15px;
+        transition: 0.3s;
+    }
+
+        .home__link:hover, .cart__link:hover {
+            color: black;
+        }
+</style>
+
+<!-- Yêu thích -->
+<div class="col-12" style="height: 20px;">
+</div>
+<div class="col-1" style="height: 60px;"></div>
+<div class="col-10" style="height: 60px; display: flex; align-items: center; border-bottom: 1px solid var(--rgb-primarry)">
+    <div class="box">
+        <a class="home__link" href="~/TrangChu/Index">
+            <i class="fa-solid fa-house home__link_icon" style="color: var(--grey-primary)"></i>
+            Trang chủ
+        </a>
+        <span style="color: var(--rgb-primarry)"> / </span>
+        <a class="cart__link" href="~/YeuThich/Index" style="color: var(--be-primary)">
+            <i class="fa-solid fa-heart cart__link_icon"></i>
+            Yêu thích
+        </a>
+    </div>
+</div>
+<div class="col-1" style="height: 60px;"></div>
+
+<div class="col-1" style="height: 5%;"></div>
+<div class="col-10" style="height: 5%;">
+    @{
+        if (Session["Heart"] != null)
+        {
+            List<HP_furniture.Models.HeartModel> lstHeart = (List<HP_furniture.Models.HeartModel>)Session["Heart"];
+            for (int i = 0; i < lstHeart.Count; i++)
+            {
+                <div class="col-4 product__tablet product__mobile" style="height: 5%;">
+                    <div class="product">
+                        <div class="img__container--list">
+                            <div class="product__img">
+                                <img class="product__img-link-original--list" src="@lstHeart[i].YeuThichDetail.HinhAnhSanPham" alt="img_1">
+                                <img class="product__img-link-hover--list" src="@lstHeart[i].YeuThichDetail.HinhAnhSanPham2" alt="img_1_hover">
+                            </div>
+                        </div>
+                        <div class="product__title">
+                            <span class="product__title-name" style=" display: inline-block; max-width: 350px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">
+                                @lstHeart[i].YeuThichDetail.TenSanPham
+                            </span>
+                            <a href="@Url.Action("RemoveFromHeart", "YeuThich", new { heartId = lstHeart[i].YeuThichDetail.ID })">
+                                <i class="fa-solid fa-xmark delete--list"></i>
+                            </a>
+                        </div>
+                        <div class="product__price">
+                            @if (lstHeart[i].YeuThichDetail.GiaSanPhamSale != null)
+                            {
+                                <del style="color: black; font-size: 14px">@Html.FormatValue(lstHeart[i].YeuThichDetail.GiaSanPham, "{0:#,###}")₫</del>
+                                <span style="color: #BC5B64; font-weight: bold">@Html.FormatValue(lstHeart[i].YeuThichDetail.GiaSanPhamSale, "{0:#,###}")₫</span>
+                            }
+                            else
+                            {
+                                <span style="color: #BC5B64; font-weight: bold">@Html.FormatValue(lstHeart[i].YeuThichDetail.GiaSanPham, "{0:#,###}")₫</span>
+                            }
+                        </div>
+                        <div class="product__btn">
+                            <div class="product__btn-cart">
+                                <a href="/GioHang/ThemGioHang/@lstHeart[i].YeuThichId" class="product__btn-cart_link">
+                                    THÊM VÀO GIỎ
+                                </a>
+                            </div>
+                            <div class="product__btn-details">
+                                <a href="@Url.Action("Index", "ChiTietSanPham", new { Id = lstHeart[i].YeuThichId })" class="product__btn-details_link">
+                                    XEM THÊM
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    }
+</div>
+<div class="col-1" style="height: 5%;"></div>
+<div class="col-12" style="height: 50px;"></div>
+
+<div class="col-12" style="height: 50px; display: flex; align-items: center; justify-content: center;">
+    <div>
+        <h2>SẢN PHẨM MỚI</h2>
+    </div>
+</div>
+<div class="col-1" style="height: 315px;"></div>
+<div class="col-10" style="height: 315px; border: 1.5px solid var(--rgb-primarry); padding: 10px;">
+    <div class="GCH__add">
+        <ul class="GCH__list">
+            @{
+                List<HP_furniture.Models.SanPham> data = (List<HP_furniture.Models.SanPham>)ViewBag.Product;
+                for (int i = 0; i < data.Count; i++)
+                {
+                    <li class="GCH__list--item">
+                        <a href="@Url.Action("Index", "ChiTietSanPham", new { Id = data[i].ID })" class="GCH__list--item--link">
+                            <img src="@data[i].HinhAnhSanPham" alt="">
+
+                            <div class="GCH__list--item--name">
+                                <h2 style=" display: inline-block; max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                    @data[i].TenSanPham
+                                </h2>
+                                <div class="GCH__bottom"></div>
+                            </div>
+                            <div class="product__price">
+                                @if (data[i].GiaSanPhamSale != null)
+                                {
+                                    <del style="color: black; font-size: 14px">@Html.FormatValue(data[i].GiaSanPham, "{0:#,###}")₫</del>
+                                    <span>@Html.FormatValue(data[i].GiaSanPhamSale, "{0:#,###}")₫</span>
+                                }
+                                else
+                                {
+                                    <span style="color: #BC5B64; font-size: 17px; font-weight: bold">@Html.FormatValue(data[i].GiaSanPham, "{0:#,###}")₫</span>
+                                }
+                            </div>
+                        </a>
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+</div>
+<div class="col-1" style="height: 315px;"></div>
+
+<div class="col-12" style="height: 40px;"></div>
+
+

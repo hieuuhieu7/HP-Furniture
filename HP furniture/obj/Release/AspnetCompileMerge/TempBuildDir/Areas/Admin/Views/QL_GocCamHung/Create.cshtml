@@ -1,0 +1,153 @@
+﻿@model HP_furniture.Models.GocCamHung
+
+@{
+    ViewBag.Title = "Thêm mới";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout1.cshtml";
+}
+
+<h4>THÊM MỚI GÓC CẢM HỨNG</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.TenCamHung1, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <label class="control-label col-md-2">Tên cảm hứng 1</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TenCamHung1, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TenCamHung1, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="control-label col-md-2">
+            Hình ảnh 1
+        </label>
+        <div class="col-md-10">
+            <input type="text" name="HinhAnhCamHung1" class="form-control" />
+            @Html.ValidationMessageFor(model => model.HinhAnhCamHung1, "", new { @class = "text-danger" })
+            <div style="margin-left: 90%; margin-top: 1%">
+                <button type="button" onclick="OpenCkfinder('HinhAnhCamHung1')" class="btn btn-bitbucket">Chọn ảnh</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.MoTaCamHung1, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <label class="control-label col-md-2">Mô tả 1</label>
+        <div class="col-md-10">
+            <textarea class="form-control ckeditor" name="MoTaCamHung1" id="inputMoTaCamHung1"></textarea>
+            @Html.ValidationMessageFor(model => model.MoTaCamHung1, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.TenCamHung2, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <label class="control-label col-md-2">Tên cảm hứng 2</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TenCamHung2, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TenCamHung2, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">
+            Hình ảnh 2
+        </label>
+        <div class="col-md-10">
+            <input type="text" name="HinhAnhCamHung2" class="form-control" />
+            @Html.ValidationMessageFor(model => model.HinhAnhCamHung2, "", new { @class = "text-danger" })
+            <div style="margin-left: 90%; margin-top: 1%">
+                <button type="button" onclick="OpenCkfinder('HinhAnhCamHung2')" class="btn btn-bitbucket">Chọn ảnh</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.MoTaCamHung2, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <label class="control-label col-md-2">Mô tả 2</label>
+        <div class="col-md-10">
+            <textarea class="form-control ckeditor" name="MoTaCamHung2" id="inputMoTaCamHung2"></textarea>
+            @Html.ValidationMessageFor(model => model.MoTaCamHung2, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.TenCamHung3, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <label class="control-label col-md-2">Tên cảm hứng 3</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TenCamHung3, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TenCamHung3, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">
+            Hình ảnh 3
+        </label>
+        <div class="col-md-10">
+            <input type="text" name="HinhAnhCamHung3" class="form-control" />
+            @Html.ValidationMessageFor(model => model.HinhAnhCamHung3, "", new { @class = "text-danger" })
+            <div style="margin-left: 90%; margin-top: 1%">
+                <button type="button" onclick="OpenCkfinder('HinhAnhCamHung3')" class="btn btn-bitbucket">Chọn ảnh</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Mô tả 3</label>
+        <div class="col-md-10">
+            <textarea class="form-control ckeditor" name="MoTaCamHung3" id="inputMoTaCamHung3"></textarea>
+            @Html.ValidationMessageFor(model => model.MoTaCamHung3, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">
+            Hình ảnh 4
+        </label>
+        <div class="col-md-10">
+            <input type="text" name="HinhAnhEnd" class="form-control" />
+            @Html.ValidationMessageFor(model => model.HinhAnhEnd, "", new { @class = "text-danger" })
+            <div style="margin-left: 90%; margin-top: 1%">
+                <button type="button" onclick="OpenCkfinder('HinhAnhEnd')" class="btn btn-bitbucket">Chọn ảnh</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Thêm" class="btn btn-success" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Trở về danh sách", "Index")
+</div>
+
+@section HieuJS{
+    <script>
+        var textAreas = document.querySelectorAll('.ckeditor');
+        for (var i = 0; i < textAreas.length; ++i) {
+            CKEDITOR.replace(textAreas[i].id);
+        }
+
+        function OpenCkfinder(inputName) {
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (fileUrl) {
+                SetUrlHinhAnh(fileUrl, inputName);
+            };
+            finder.popup();
+        }
+        function SetUrlHinhAnh(fileUrl, inputName) {
+            $('input[name=' + inputName + ']').val(fileUrl);
+        }
+    </script>
+}

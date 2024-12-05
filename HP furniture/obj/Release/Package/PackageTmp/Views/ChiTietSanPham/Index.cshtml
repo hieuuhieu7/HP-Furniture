@@ -1,0 +1,331 @@
+﻿@{
+    ViewBag.Title = "HP furniture - Chi tiết sản phẩm";
+    Layout = "~/Views/share/HPfurnitureLayout.cshtml";
+}
+@model HP_furniture.Models.SanPham
+
+<style>
+    .zoom-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8); /* Màu nền của lớp đè phủ */
+        z-index: 9999; /* Đặt z-index để lớp đè phủ hiển thị phía trên tất cả các phần tử khác */
+        text-align: center;
+    }
+
+    .close__overlay{
+        position: absolute;
+        z-index: 100000;
+        top: 10%;
+        right: 10%;
+    }
+
+    .close__overlay--icon {
+        color: whitesmoke;
+        font-size: 30px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .close__overlay--icon:hover{
+        color: grey;
+    }
+
+    .zoomed-img {
+        max-width: 80%; /* Giảm kích thước tối đa của ảnh phóng to */
+        max-height: 80%; /* Giảm kích thước tối đa của ảnh phóng to */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 5px;
+    }
+</style>
+
+<!-- Details Sofa -->
+<div class="col-1" style="height: 5%;"></div>
+
+<div class="col-6 warp__tablet__mobile" style="height: 5%;">
+    <div class="details__box">
+        <div class="col-12" style="height: 50px;">
+            <div class="details__text">
+                <a href="#" class="details__text-link">Trang chủ /</a>
+                <a href="#" class="details__text-link">Sản phẩm /</a>
+                <a href="#" class="details__text-link">@Model.LoaiSanPham.TenLoaiSanPham </a>
+            </div>
+        </div>
+        <div class="details__big-img">
+            @if (Model.Sale != null)
+            {
+                <div class="details__sale">@Model.Sale%</div>
+            }
+            else
+            {
+
+            }
+            @*<img src="@Model.HinhAnhSanPham" alt="">*@
+            <img src="@Model.HinhAnhSanPham" alt="" onclick="toggleZoom()">
+        </div>
+
+        <div id="zoomOverlay" class="zoom-overlay" onclick="closeZoom()">
+            <img id="zoomedImg" src="" alt="" class="zoomed-img">
+            <div class="close__overlay">
+                <i class="fa-regular fa-circle-xmark close__overlay--icon"></i>
+            </div>
+        </div>
+
+        <div class="details__small">
+            <div class="details__smaill-img">
+                <img src="@Model.HinhAnhSanPham" alt="" onclick="showImg(this.src)">
+            </div>
+            <div class="details__smaill-img">
+                <img src="@Model.HinhAnhSanPham2" alt="" onclick="showImg(this.src)">
+            </div>
+            <div class="details__smaill-img">
+                <img src="@Model.HinhAnhSanPham3" alt="" onclick="showImg(this.src)">
+            </div>
+            <div class="details__smaill-img">
+                <img src="@Model.HinhAnhSanPham4" alt="" onclick="showImg(this.src)">
+            </div>
+            <div class="details__smaill-img">
+                <img src="@Model.HinhAnhSanPham5" alt="" onclick="showImg(this.src)">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-4 warp__tablet__mobile" style="height: 5%;">
+    <div class="details__bag">
+        <h2>@Model.TenSanPham</h2>
+        <div class="details__love">
+            <span>Yêu thích: </span>
+            @*<i class="fa-solid fa-heart heart__icon"></i>*@
+            <a href="/YeuThich/ThemYeuThich/@Model.ID" class="product__icon--link">
+                <i class="fa-solid fa-heart heart__icon"></i>
+            </a>
+        </div>
+        <div class="details__price-bag">
+            Giá:
+            @if (Model.GiaSanPhamSale != null)
+            {
+                <span class="details__price details__price-old">
+                    <del>@string.Format("{0: #,####}₫", Model.GiaSanPham)</del>
+                </span>
+                <span class="details__price-sale">@string.Format("{0: #,####}₫", Model.GiaSanPhamSale)</span>
+            }
+            else
+            {
+                <span style="color: rgba(5, 127, 5, 0.834); font-weight: bold; font-size: 18px">@Html.FormatValue(Model.GiaSanPham, "{0: #,####}")₫</span>
+            }
+        </div>
+        <!--<div class="details__make">
+            <span class="details__make-collect"><p>Collection:</p> Dubai</span>
+            <br>
+            <span class="details__make-material"><p>Vật liệu:</p> Khung gỗ Ash - nệm bọc vải</span>
+            <br>
+            <span class="details__make-size"><p>Kích thước:</p> D2300 - R800 - C760mm</span>
+        </div>
+        <ul class="details__infor-list">
+            <li class="details__infor-item">Mã: 3*110305</li>
+            <li class="details__infor-item">Category: @Model.LoaiSanPham.TenLoaiSanPham</li>
+            <li class="details__infor-item">Tag: Gỗ</li>-->
+            <!-- <li class="details__infor-item">Không có sẵn</li> -->
+        <!--</ul>-->
+        <div class="details__group">
+            <div style="display: flex; align-items: center">
+                @*<a href="#" class="details__btn-buy">MUA NGAY</a>*@
+                <a href="/GioHang/ThemGioHang/@Model.ID" class="details__btn-cart">THÊM VÀO GIỎ</a>
+            </div>
+        </div>
+        <div class="details__des">
+            <div class="details__des-text">
+                <p>
+                    <h3>- Mô tả: </h3>
+                    <i class="fa-solid fa-thumbs-up icon__des"></i>
+                    @{
+                        bool hasDescription = !string.IsNullOrEmpty(Model.MoTaSanPham);
+                        string moTaWithoutHtml = hasDescription ?
+                            System.Text.RegularExpressions.Regex.Replace(Model.MoTaSanPham, "<.*?>", string.Empty) :
+                            "Không có mô tả sản phẩm";
+                        // Giải mã HTML entities
+                        moTaWithoutHtml = HttpUtility.HtmlDecode(moTaWithoutHtml);
+                    }
+
+                    @if (hasDescription)
+                    {
+                        <span style="color: #333; font-size: 18px">@moTaWithoutHtml</span>
+                    }
+                    else
+                    {
+                        <span style="color: #333; font-size: 18px">@moTaWithoutHtml</span>
+                    }
+                </p>
+            </div>
+            <div class="details__guarantee">
+                <h3 style="margin: 0px">- Bảo hành: </h3>
+                <div class="details__guarantee-text">
+                    <p>
+                        <i class="fa-solid fa-check icon__check"></i> Các sản phẩm nội thất tại HP furniture đa số đều được sản xuất tại nhà máy của công ty cổ phần xây dựng kiến trúc AA với đội ngũ nhân viên và công nhân ưu tú cùng cơ sở vật chất hiện đại.
+                        HP furniture đã kiểm tra kỹ lưỡng từ nguồn nguyên liệu cho đến sản phẩm hoàn thiện cuối cùng.
+                    </p>
+                    <p>
+                        <i class="fa-solid fa-check icon__check"></i> HP furniture bảo hành một năm cho các trường hợp có lỗi về kỹ thuật trong quá trình sản xuất hay lắp đặt.
+                    </p>
+                    <p>
+                        <i class="fa-solid fa-check icon__check"></i> Quý khách không nên tự sửa chữa mà hãy báo ngay cho HP furniture qua: 38781108. Sau thời gian hết hạn bảo hành,
+                        nếu quý khách có bất kỳ yêu cầu hay thắc mắc thì vui lòng liên hệ với HP furniture để được hướng dẫn và giải quyết các vấn đề gặp phải.
+                    </p>
+                    <p>
+                        <h3>- Tuy nhiên HP furniture không bảo hành cho các trường hợp sau: </h3>
+                        <i class="fa-solid fa-check icon__check"></i> Khách hàng tự ý sửa chữa khi sản phẩm bị trục trặc mà không báo cho HP furniture.
+                    </p>
+                    <p>
+                        <i class="fa-solid fa-check icon__check"></i> Sản phẩm được sử dụng không đúng quy cách của sổ bảo hành (được trao gửi khi quý khách mua sản phẩm) gây nên trầy xước, móp, dơ bẩn hay mất màu.
+                    </p>
+                    <p>
+                        <i class="fa-solid fa-check icon__check"></i> Sản phẩm bị biến dạng do môi trường bên ngoài bất bình thường (quá ẩm, quá khô, mối hay do tác động từ các thiết bị điện nước, các hóa chất hay dung môi khách hàng sử dụng không phù hợp).
+                    </p>
+                    <p>
+                        <i class="fa-solid fa-check icon__check"></i> Sản phẩm hết hạn bảo hành.
+                        <br>
+                        <i class="fa-solid fa-check icon__check"></i> Sản phẩm không có phiếu bảo hành của Nhà Xinh.
+                        <br>
+                        <i class="fa-solid fa-check icon__check"></i> Xem nội dung sổ bảo hành
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-1" style="height: 5%;"></div>
+<div class="col-12" style="height: 40px;"></div>
+<!-- End Details Sofa -->
+<div class="col-12" style="height: 50px;"></div>
+
+<div class="col-12" style="height: 50px; display: flex; align-items: center; justify-content: center;">
+    <div>
+        <h2>SẢN PHẨM MỚI</h2>
+    </div>
+</div>
+<div class="col-1" style="height: 315px;"></div>
+<div class="col-10" style="height: 315px; border: 1.5px solid var(--rgb-primarry); padding: 10px;">
+    <div class="GCH__add">
+        <ul class="GCH__list">
+            @{
+                List<HP_furniture.Models.SanPham> data = (List<HP_furniture.Models.SanPham>)ViewBag.Product;
+                for (int i = 0; i < data.Count; i++)
+                {
+                    <li class="GCH__list--item">
+                        <a href="@Url.Action("Index", "ChiTietSanPham", new { Id = data[i].ID })" class="GCH__list--item--link">
+                            <img src="@data[i].HinhAnhSanPham" alt="">
+
+                            <div class="GCH__list--item--name">
+                                <h2 style=" display: inline-block; max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                    @data[i].TenSanPham
+                                </h2>
+                                <div class="GCH__bottom"></div>
+                            </div>
+                            <div class="product__price">
+                                @if (data[i].GiaSanPhamSale != null)
+                                {
+                                    <del style="color: black; font-size: 14px">@Html.FormatValue(data[i].GiaSanPham, "{0:#,###}")₫</del>
+                                    <span>@Html.FormatValue(data[i].GiaSanPhamSale, "{0:#,###}")₫</span>
+                                }
+                                else
+                                {
+                                    <span style="color: #BC5B64; font-size: 17px; font-weight: bold">@Html.FormatValue(data[i].GiaSanPham, "{0:#,###}")₫</span>
+                                }
+                            </div>
+                        </a>
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+</div>
+<div class="col-1" style="height: 315px;"></div>
+
+<div class="col-12" style="height: 40px;"></div>
+
+<div class="col-6" style="height: 5%;">
+    <div class="col-12" style="height: 600px;">
+        <div class="address__img">
+            <div class="pos">
+                <img class="sl__img--big" src="~/Assets/assets/img/camhung4.jpg" alt="">
+                <div class="address__img--title">
+                    <h2 class="sl__h2">SOFA</h2>
+                    <a class="address__img--link" href="~/SanPhamSofa/Index">Xem thêm</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-3" style="height: 5%;">
+    <div class="col-12" style="height: 600px;">
+        <div class="address__img">
+            <div class="pos">
+                <img class="sl__img--big" src="~/Assets/assets/img/camhung3.jpg" alt="">
+                <div class="address__img--title">
+                    <h2 class="sl__h2">BÀN ĂN</h2>
+                    <a class="address__img--link" href="~/SanPhamBan/Index">Xem thêm</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-3" style="height: 5%;">
+    <div class="col-12" style="height: 300px;">
+        <div class="address__img">
+            <div class="pos">
+                <img class="sl__img--small" src="~/Assets/assets/img/camhung5.jpg" alt="">
+                <div class="address__img--title">
+                    <h2>GIƯỜNG NGỦ</h2>
+                    <a class="address__img--link" href="~/SanPhamGiuongNgu/Index">Xem thêm</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12" style="height: 300px;">
+        <div class="address__img">
+            <div class="pos">
+                <img class="sl__img--small" src="~/Assets/assets/img/camhung2.jpg" alt="">
+                <div class="address__img--title">
+                    <h2 class="sl__h2">THIẾT KẾ NỘI THẤT</h2>
+                    <a class="address__img--link" href="~/ThietKeNoiThat/Index">Xem thêm</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleZoom() {
+        var zoomOverlay = document.getElementById("zoomOverlay");
+        var zoomedImg = document.getElementById("zoomedImg");
+        var originalImg = document.querySelector(".details__big-img img");
+
+        // Nếu lớp đè phủ đang ẩn thì hiển thị ảnh phóng to
+        if (zoomOverlay.style.display === "none") {
+            zoomedImg.src = originalImg.src;
+            zoomOverlay.style.display = "block";
+
+            // Thêm sự kiện click vào lớp đè phủ
+            zoomOverlay.addEventListener("click", closeZoom);
+        } else {
+            zoomOverlay.style.display = "none";
+
+            // Xóa sự kiện click trên lớp đè phủ
+            zoomOverlay.removeEventListener("click", closeZoom);
+        }
+    }
+
+    function closeZoom(event) {
+        var zoomOverlay = document.getElementById("zoomOverlay");
+        zoomOverlay.style.display = "none";
+        event.preventDefault();
+        event.stopPropagation();
+    }
+</script>

@@ -1,0 +1,141 @@
+﻿@model HP_furniture.Models.SanPham
+
+@{
+    ViewBag.Title = "Xóa";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout1.cshtml";
+}
+
+<h4>XÓA SẢN PHẨM</h4>
+
+<h5>Bạn có chắc chắn muốn xóa không?</h5>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @*@Html.DisplayNameFor(model => model.TenSanPham)*@
+            ID
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.TenSanPham)*@
+            Tên sản phẩm
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenSanPham)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.GiaSanPham)*@
+            Giá sản phẩm
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiaSanPham)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Sale)*@
+            Sale
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sale)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.GiaSanPhamSale)*@
+            Giá sản phẩm Sale
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiaSanPhamSale)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.SoLuongTonKho)*@
+            Số lượng tồn kho
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuongTonKho)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.HinhAnhSanPham)*@
+            Hình ảnh sản phẩm 1
+        </dt>
+
+        <dd>
+            <img src="@Model.HinhAnhSanPham" width="200" />
+        </dd>
+
+        <dt style="margin-top: 1%">
+            @*@Html.DisplayNameFor(model => model.HinhAnhSanPham2)*@
+            Hình ảnh sản phẩm 2
+        </dt>
+
+        <dd style="margin-top: 1%">
+            <img src="@Model.HinhAnhSanPham2" width="200" />
+        </dd>
+
+        <dt style="margin-top: 1%">
+            @*@Html.DisplayNameFor(model => model.HinhAnhSanPham2)*@
+            Hình ảnh sản phẩm 3
+        </dt>
+
+        <dd style="margin-top: 1%">
+            <img src="@Model.HinhAnhSanPham3" width="200" />
+        </dd>
+
+        <dt style="margin-top: 1%">
+            @*@Html.DisplayNameFor(model => model.HinhAnhSanPham2)*@
+            Hình ảnh sản phẩm 4
+        </dt>
+
+        <dd style="margin-top: 1%">
+            <img src="@Model.HinhAnhSanPham4" width="200" />
+        </dd>
+
+        <dt style="margin-top: 1%">
+            @*@Html.DisplayNameFor(model => model.HinhAnhSanPham2)*@
+            Hình ảnh sản phẩm 5
+        </dt>
+
+        <dd style="margin-top: 1%">
+            <img src="@Model.HinhAnhSanPham5" width="200" />
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.LoaiSanPham.TenLoaiSanPham)*@
+            Tên loại sản phẩm
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoaiSanPham.TenLoaiSanPham)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.MoTaSanPham)*@
+            Mô tả sản phẩm
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.MoTaSanPham)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger" /> |
+            @Html.ActionLink("Trở về danh sách", "Index")
+        </div>
+    }
+</div>

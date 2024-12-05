@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "HP furniture - Tất cả sản phẩm";
+    Layout = "~/Views/share/HPfurnitureLayout.cshtml";
+}
+
+<!-- Imgae Sofa -->
+<div class="col-12" style="height: 486px;">
+    <div class="image__sofa">
+        <div class="img__overlay">
+            <h2 class="img__overley-text">SẢN PHẨM</h2>
+        </div>
+        <img src="https://nhaxinh.com/wp-content/uploads/2024/01/nen-thom-qua-tang-tet-2.jpg" alt="" class="image__sofa-link">
+    </div>
+</div>
+
+<!-- Search add -->
+<div class="col-12 hide__on--tablet__mobile" style="height: 50px;">
+    <div class="search__add">
+        <form action="@Url.Action("Index", "TimKiem")" method="get">
+            <!-- Điều chỉnh action và method -->
+            <input type="text" name="key" class="search__add--input" placeholder="Nhập...">
+            <input type="submit" value="TÌM KIẾM" class="search__add--btn">
+        </form>
+    </div>
+</div>
+
+<!-- Sản phẩm Sofa -->
+<div class="col-1" style="height: 5%"></div>
+<div class="col-10" style="height: 5%;">
+    @{
+        List<HP_furniture.Models.SanPham> data = (List<HP_furniture.Models.SanPham>)ViewBag.Product;
+        foreach (var item in Model)
+        {
+            <div class="col-3 product__tablet product__mobile" style="height: 335px;">
+                <div class="product">
+                    <div class="img__container">
+                        @if (item.Sale != null)
+                        {
+                            <div class="sale">@item.Sale%</div>
+                        }
+                        <div class="product__img">
+                            <img class="product__img-link-original" src="@item.HinhAnhSanPham" alt="img_1">
+                            <img class="product__img-link-hover" src="@item.HinhAnhSanPham2" alt="img_1_hover">
+                        </div>
+                    </div>
+                    <div class="product__title">
+                        <span class="product__title-name" style=" display: inline-block; max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                            @item.TenSanPham
+                        </span>
+                        <a href="/YeuThich/ThemYeuThich/@item.ID" class="product__icon--link">
+                            <i class="fa-regular fa-heart product__icon"></i>
+                        </a>
+                    </div>
+                    <div class="product__price">
+                        @if (item.GiaSanPhamSale != null)
+                        {
+                            <span class="price price__old">
+                                <del>@Html.FormatValue(item.GiaSanPham, "{0: #,####}₫")</del>
+                            </span>
+                            <span class="price__sale">@Html.FormatValue(item.GiaSanPhamSale, "{0: #,####}₫")</span>
+                        }
+                        else
+                        {
+                            <span class="price price__old">@Html.FormatValue(item.GiaSanPham, "{0: #,####}₫")</span>
+                        }
+
+                    </div>
+                    <div class="product__btn">
+                        <div class="product__btn-cart">
+                            <a href="/GioHang/ThemGioHang/@item.ID" class="product__btn-cart_link">
+                                THÊM VÀO GIỎ
+                            </a>
+                        </div>
+                        <div class="product__btn-details">
+                            <a href="@Url.Action("Index", "ChiTietSanPham", new { Id = item.ID })" class="product__btn-details_link">
+                                XEM THÊM
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+<div class="col-1" style="height: 5%"></div>
+
+@* Phân trang *@
+@model PagedList.IPagedList<HP_furniture.Models.SanPham>
+@using PagedList.Mvc;
+<div class="col-12" style="height: 80px; display: flex; align-items: center; justify-content:center">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions
+    {
+        UlElementClasses = new[] { "pagination", "page-next" }, // Thêm các class CSS của bạn vào đây
+        LiElementClasses = new[] { "page-item" }, // Lớp CSS cho mỗi phần tử li
+        LinkToPreviousPageFormat = "<li class='page-item'><a class='page-link' href='?page={0}'><</a></li>", // Định dạng cho nút prev
+        LinkToNextPageFormat = "<li class='page-item'><a class='page-link' href='?page={0}'>></a></li>" // Định dạng cho nút next
+    })
+</div>
+
+<div class="col-12" style="height: 20px"></div>
+

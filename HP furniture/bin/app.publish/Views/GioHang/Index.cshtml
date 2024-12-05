@@ -1,0 +1,239 @@
+﻿
+@{
+    ViewBag.Title = "HP furniture - Giỏ hàng";
+    Layout = "~/Views/share/HPfurnitureLayout.cshtml";
+    ViewBag.act = 3;
+}
+
+<style>
+    .box {
+        display: flex;
+        align-items: center;
+        padding-bottom: 2%;
+        border-bottom: 1px solid var(--rgb-primarry);
+    }
+
+    .home__link {
+        padding-right: 5px;
+    }
+
+    .cart__link {
+        padding-left: 5px;
+    }
+
+    .home__link, .cart__link {
+        color: var(--grey-primary);
+        font-size: 15px;
+        transition: 0.3s;
+    }
+
+        .home__link:hover, .cart__link:hover {
+            color: black;
+        }
+
+    .cart__box {
+        border-bottom: 1px solid var(--rgb-primarry);
+    }
+
+    .btn__border {
+    }
+
+    .cart__title {
+        width: 100%;
+    }
+
+    .cart__number {
+        padding-right: 2%;
+    }
+
+    .design {
+        outline: none;
+        border: none;
+        border: 2px solid black;
+        height: 25px;
+        font-weight: bold;
+        cursor: pointer;
+        line-height: 1.5;
+        transition: 0.3s;
+        font-size: 13px;
+    }
+
+    .design:hover{
+        background-color: black;
+        color: whitesmoke;
+    }
+</style>
+
+<!-- Giỏ hàng -->
+<div class="col-12" style="height: 20px;"></div>
+<div class="col-1" style="height: 5%;"></div>
+<div class="col-6 block__mobile" style="height: 5%;">
+    <div class="box">
+        <a class="home__link" href="~/TrangChu/Index">
+            <i class="fa-solid fa-house home__link_icon"></i>
+            Trang chủ
+        </a>
+        <span style="color: var(--rgb-primarry)"> / </span>
+        <a class="cart__link" href="~/GioHang/Index" style="color: var(--be-primary)">
+            <i class="fa-solid fa-cart-shopping cart__link_icon"></i>
+            Giỏ hàng
+        </a>
+    </div>
+    @using HtmlAgilityPack
+    @{
+        if (Session["Cart"] != null)
+        {
+            List<HP_furniture.Models.CartModel> lstCart = (List<HP_furniture.Models.CartModel>)Session["Cart"];
+            for (int i = 0; i < lstCart.Count; i++)
+            {
+                <div class="cart__box">
+                        <div class="cart__img">
+                            <img class="cart__img--cart" src="@lstCart[i].ProductDetail.HinhAnhSanPham" alt="@lstCart[i].ProductDetail.TenSanPham">
+                        </div>
+                    <div class="cart__title">
+                        <div class="cart__title-flex">
+                            <h3>@lstCart[i].ProductDetail.TenSanPham</h3>
+                            <a href="@Url.Action("RemoveFromCart", "GioHang", new { productId = lstCart[i].ProductDetail.ID })">
+                                <i class="fa-solid fa-xmark cart__title-flex-icon"></i>
+                            </a>
+                        </div>
+                        <p>
+                            @{
+                                // Kiểm tra xem chuỗi có null không trước khi xử lý
+                                if (!string.IsNullOrEmpty(lstCart[i].ProductDetail.MoTaSanPham))
+                                {
+                                    // Sử dụng HTML Agility Pack để loại bỏ thẻ HTML và giải mã HTML entities
+                                    HtmlDocument doc = new HtmlDocument();
+                                    doc.LoadHtml(lstCart[i].ProductDetail.MoTaSanPham);
+
+                                    // Lấy văn bản trong thẻ HTML
+                                    string cleanedDescription = doc.DocumentNode.InnerText;
+
+                                    @Html.Raw(cleanedDescription.Replace("<br>", " ").Replace("<br />", " "))
+                                }
+                            }
+                        </p>
+                        <div style="display: flex; align-items: center; justify-content: space-between">
+                            <span class="cart__price">
+                                @if (lstCart[i].ProductDetail.GiaSanPhamSale != null)
+                                {
+                                    <del style="color: black">@Html.FormatValue(lstCart[i].ProductDetail.GiaSanPham, "{0:#,###}")₫</del>
+                                    <span>@Html.FormatValue(lstCart[i].ProductDetail.GiaSanPhamSale, "{0:#,###}")₫</span>
+                                }
+                                else
+                                {
+                                    <span>@Html.FormatValue(lstCart[i].ProductDetail.GiaSanPham, "{0:#,###}")₫</span>
+                                }
+                            </span>
+                            <span style="">
+                                Tổng:
+                                <span style="font-size: 21px; font-weight: bold; color: black">
+                                    @Html.FormatValue(lstCart[i].Amount, "{0:#,###}")₫
+                                </span>
+                            </span>
+                        </div>
+                        <div class="cart__bag">
+                            <div class="cart__heart">
+                                <a href="#">
+                                    <i class="fa-regular fa-heart"></i>
+                                    Thêm vào Wishlist
+                                </a>
+                            </div>
+                            <div class="cart__number">
+                                <span style="margin-right: 5px">Số lượng </span>
+                                @using (Html.BeginForm("UpdateCart", "GioHang", FormMethod.Post))
+                                {
+                                    @Html.Hidden("productId", lstCart[i].ProductID)
+                                    <input type="number" name="quantity" style="width: 80px; height: 30px; border: 1px solid #BC5B64; border-radius: 5px; font-size: 15px;text-align: center;" min="1" value="@lstCart[i].Quantity">
+                                    <button type="submit" class="btn btn-primary btn-sm design"><i class="fa-solid fa-check"></i></button>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    }
+    @*<div class="btn__border">
+        <button type="submit" class="btn__cart-update">CẬP NHẬT GIỎ HÀNG</button>
+    </div>*@
+</div>
+<div class="col-4 block__mobile" style="height: 5%;">
+    <div class="build">
+        <h2>Tóm tắt đơn hàng</h2>
+        <div class="build__price">
+            <span>Thành tiền</span>
+            <span class="build__price-money">
+                @{
+                    if (Session["Cart"] != null)
+                    {
+                        List<HP_furniture.Models.CartModel> lstCart = (List<HP_furniture.Models.CartModel>)Session["Cart"];
+
+                        // Tính tổng giá trị đơn hàng
+                        decimal orderTotal = lstCart.Sum(item => (decimal)item.Amount);
+
+                        // Hiển thị tổng giá trị đơn hàng
+                        @*@Html.FormatValue(orderTotal, "{0:#,###}")*@
+                        <span>@Html.FormatValue(orderTotal, "{0:#,###}")&#8363;</span>
+                    }
+                }
+            </span>
+        </div>
+        <div class="build__ship">
+            <span>Vận chuyển</span>
+            <div class="build__ship-later">
+                <span>Liên hệ phí vận chuyển sau</span>
+                <br>
+                <span>Shipping options will be updated during checkout</span>
+            </div>
+        </div>
+        <div class="build__discount">
+            <input type="text" placeholder="Mã giảm giá">
+            <button type="submit">SỬ DỤNG</button>
+        </div>
+        <div class="build__all-price">
+            <span>Tổng cộng</span>
+            <span class="build__all-price-money">
+                @{
+                    if (Session["Cart"] != null)
+                    {
+                        List<HP_furniture.Models.CartModel> lstCart = (List<HP_furniture.Models.CartModel>)Session["Cart"];
+
+                        // Tính tổng giá trị đơn hàng
+                        decimal orderTotal = lstCart.Sum(item => (decimal)item.Amount);
+
+                        // Hiển thị tổng giá trị đơn hàng
+                        <span>@Html.FormatValue(orderTotal, "{0:#,###}")&#8363;</span>
+                    }
+                }
+            </span>
+        </div>
+        <div class="build__infor-ship">
+            <h3>Thông tin giao hàng</h3>
+            <span>
+                Đối với những sản phẩm có sẵn tại khu vực,
+                HP furniture sẽ giao hàng trong vòng 2-7 ngày.
+                Đối với những sản phẩm không có sẵn,
+                thời gian giao hàng sẽ được nhân viên HP furniture thông báo đến quý khách.
+            </span>
+        </div>
+        <div class="build__time">
+            <span>- Từ 2-6: 8:30 - 17:30</span>
+            <br>
+            <span>- Thứ 7, CN: 9:30 - 16:30</span>
+        </div>
+        <a href="#" class="build__link">Cửa hàng gần bạn</a>
+        <div class="btn__build">
+            <a href="~/TrangChu/Index" class="btn__build-buy">
+                <i class="fa-solid fa-arrow-left-long"></i>
+                Tiếp tục mua hàng
+            </a>
+            <form action="@Url.Action("DatHang", "GioHang")" method="post">
+                <button type="submit" class="btn__build-order">Đặt hàng</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="col-1" style="height: 50%;"></div>
+<div class="col-12"></div>
+

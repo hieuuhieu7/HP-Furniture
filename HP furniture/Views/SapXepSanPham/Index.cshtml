@@ -1,0 +1,148 @@
+﻿@using PagedList.Mvc
+@using PagedList
+@{
+    ViewBag.Title = "Sắp xếp";
+    Layout = "~/Views/share/HPfurnitureLayout.cshtml";
+}
+
+<!-- Imgae Sofa -->
+<div class="col-12" style="height: 486px;">
+    <div class="image__sofa">
+        <div class="img__overlay">
+            @if (ViewBag.LoaiSanPham == 8)
+            {
+                <h2 class="img__overley-text">SOFA</h2>
+            }
+            else if (ViewBag.LoaiSanPham == 9)
+            {
+                <h2 class="img__overley-text">BÀN</h2>
+            }
+            else if (ViewBag.LoaiSanPham == 10)
+            {
+                <h2 class="img__overley-text">GHẾ</h2>
+            }
+            else if (ViewBag.LoaiSanPham == 12)
+            {
+                <h2 class="img__overley-text">GIƯỜNG NGỦ</h2>
+            }
+            else if (ViewBag.LoaiSanPham == 13)
+            {
+                <h2 class="img__overley-text">TỦ VÀ KỆ</h2>
+            }
+            else if (ViewBag.LoaiSanPham == 7)
+            {
+                <h2 class="img__overley-text">GIẢM GIÁ ĐẶC BIỆT</h2>
+            }
+        </div>
+        @if (ViewBag.LoaiSanPham == 8)
+        {
+            <img src="~/Assets/assets/img/sofa2.jpg" alt="" class="image__sofa-link">
+        }
+        else if (ViewBag.LoaiSanPham == 9)
+        {
+            <img src="~/Assets/assets/img/yt2.jpg" alt="" class="image__sofa-link">
+        }
+        else if (ViewBag.LoaiSanPham == 10)
+        {
+            <img src="~/Assets/assets/img/ch3.jpg" alt="" class="image__sofa-link">
+        }
+        else if (ViewBag.LoaiSanPham == 12)
+        {
+            <img src="~/Assets/assets/img/slider2.jpg" alt="" class="image__sofa-link">
+        }
+        else if (ViewBag.LoaiSanPham == 13)
+        {
+            <img src="~/Assets/assets/img/tuvake.jpg" alt="" class="image__sofa-link">
+        }
+        else if (ViewBag.LoaiSanPham == 7)
+        {
+            <img src="~/Assets/assets/img/yt3.jpg" alt="" class="image__sofa-link">
+        }
+    </div>
+</div>
+
+<!-- Lọc sản phẩm -->
+<div class="col-12" style="height: 5%;">
+    <div class="apply">
+        @using (Html.BeginForm("Index", "SapXepSanPham", FormMethod.Get))
+        {
+            <div class="apply__list">
+                <div class="apply__list-item">
+                    <div class="apply__bag">
+                        <span href="#" class="apply__list-item-link">
+                            Giá
+                            <i class="fa-solid fa-angle-down apply__list-item-icon"></i>
+                        </span>
+                    </div>
+                    <div class="select">
+                        <select name="gia" id="gia" class="apply__select">
+                            <option value="3" class="apply__options">Giá từ: Thấp đến cao</option>
+                            <option value="4" class="apply__options">Giá từ: Cao đến thấp</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="apply__list-item">
+                    <button type="submit" class="apply__btn">ÁP DỤNG</button>
+                </div>
+            </div>
+            <input type="hidden" name="loaiSanPham" value="@ViewBag.LoaiSanPham" />
+        }
+    </div>
+</div>
+
+<!-- Sản phẩm Sofa -->
+<div class="col-1"></div>
+<div class="col-10" style="height: 50%;">
+    @{
+        List<HP_furniture.Models.SanPham> data = (List<HP_furniture.Models.SanPham>)ViewBag.Product;
+        foreach (var sanPham in ViewBag.ProductList)
+        {
+            <div class="col-3 product__tablet product__mobile" style="height: 335px;">
+                <div class="product">
+                    <div class="img__container">
+                        <div class="sale">@sanPham.Sale%</div>
+                        <div class="product__img">
+                            <img class="product__img-link-original" src="@sanPham.HinhAnhSanPham" alt="img_1">
+                            <img class="product__img-link-hover" src="@sanPham.HinhAnhSanPham2" alt="img_1_hover">
+                        </div>
+                    </div>
+                    <div class="product__title">
+                        <span class="product__title-name" style=" display: inline-block; max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">@sanPham.TenSanPham</span>
+                        <a href="/YeuThich/ThemYeuThich/@sanPham.ID" class="product__icon--link">
+                            <i class="fa-regular fa-heart product__icon"></i>
+                        </a>
+                    </div>
+                    <div class="product__price">
+                        <span class="price price__old">@Html.FormatValue(sanPham.GiaSanPham, "{0: #,####}")₫</span>
+                        <span class="price__sale">@Html.FormatValue(sanPham.GiaSanPhamSale, "{0: #,####}")₫</span>
+                    </div>
+                    <div class="product__btn">
+                        <div class="product__btn-cart">
+                            <a href="/GioHang/ThemGioHang/@sanPham.ID" class="product__btn-cart_link">
+                                THÊM VÀO GIỎ
+                            </a>
+                        </div>
+                        <div class="product__btn-details">
+                            <a href="@Url.Action("Index", "ChiTietSanPham", new { Id = sanPham.ID })" class="product__btn-details_link">
+                                XEM THÊM
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+<div class="col-1"></div>
+
+<!-- Phân trang -->
+<div class="col-12" style="height: 80px; display: flex; align-items: center; justify-content:center">
+    @*@Html.PagedListPager((IPagedList)ViewBag.PagedList, page => Url.Action("Index", new { page }), new PagedListRenderOptions
+    {
+        UlElementClasses = new[] { "pagination", "page-next" }, // Thêm các class CSS của bạn vào đây
+        LiElementClasses = new[] { "page-item" }, // Lớp CSS cho mỗi phần tử li
+        LinkToPreviousPageFormat = "<li class='page-item'><a class='page-link' href='?page={0}'><</a></li>", // Định dạng cho nút prev
+        LinkToNextPageFormat = "<li class='page-item'><a class='page-link' href='?page={0}'>></a></li>" // Định dạng cho nút next
+    })*@
+</div>
+

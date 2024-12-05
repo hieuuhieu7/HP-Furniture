@@ -1,0 +1,38 @@
+﻿@model HP_furniture.Models.LoaiPhong
+
+@{
+    ViewBag.Title = "Sửa";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout1.cshtml";
+}
+
+<h4>SỬA CHI TIẾT PHÒNG</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.TenLoaiSanPham, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label class="control-label col-md-2">Tên loại sản phẩm</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TenLoaiPhong, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TenLoaiPhong, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Lưu" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Trở về danh sách", "Index")
+</div>

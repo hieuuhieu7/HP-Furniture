@@ -1,0 +1,60 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HP furniture - Đăng nhập</title>
+    <link rel="stylesheet" href="~/Assets/assets/css/main.css">
+    <link rel="stylesheet" href="~/Assets/assets/css/base.css">
+    <link rel="stylesheet" href="~/Assets/assets/css/style.css">
+    <link href="~/Assets/assets/css/responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="bg__form">
+        <form action="" method="post">
+            <div class="balo__form">
+                <div style="display: flex; align-items: center; justify-content: space-between">
+                    <h2 class="title__form">ĐĂNG NHẬP</h2>
+                    <a href="~/TrangChu/Index" class="title__back">Trở về</a>
+                </div>
+                <div class="form__group">
+                    <p style="color: red">
+                        @TempData["error"]
+                    </p>
+                </div>
+                <div class="form__group">
+                    <input class="form__control" type="text" placeholder="Tài khoản" name="username" autofocus>
+                    <!-- <i class="fa-solid fa-user icon__user"></i> -->
+                </div>
+
+                <div class="form__group">
+                    <input class="form__control" type="password" placeholder="Mật khẩu" name="password">
+                    <!-- <i class="fa-solid fa-lock icon__password"></i> -->
+                </div>
+                <div class="remember__fogot">
+                    <label for="">
+                        <input type="checkbox" class="check">
+                        Lưu thông tin đăng nhập
+                    </label>
+                    <a href="#">Quên mật khẩu</a>
+                </div>
+                <button class="btn__form" style="cursor: pointer" type="submit">
+                    <span>ĐĂNG NHẬP</span>
+                </button>
+
+                <div class="text">
+                    <span class="text__form">Bạn đã có tài khoản?</span>
+                    <a href="~/DangKy/Create" class="text__form-link">Đăng ký</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+

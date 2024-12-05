@@ -1,0 +1,121 @@
+﻿@model HP_furniture.Models.SanPhamMoi
+
+@{
+    ViewBag.Title = "Thêm mới";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout1.cshtml";
+}
+
+<h4>THÊM MỚI SẢN PHẨM (mới)</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.TenSanPhamMoi, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <label class="control-label col-md-2">Tên sản phẩm mới</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TenSanPhamMoi, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TenSanPhamMoi, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.GiaSanPhamMoi, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <label class="control-label col-md-2">Giá sản phẩm mới</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.GiaSanPhamMoi, new { htmlAttributes = new { @class = "form-control", Type = "number" } })
+            @Html.ValidationMessageFor(model => model.GiaSanPhamMoi, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.SoLuongTonKho, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <label class="control-label col-md-2">Số lượng tồn kho</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SoLuongTonKho, new { htmlAttributes = new { @class = "form-control", Type = "number" } })
+            @Html.ValidationMessageFor(model => model.SoLuongTonKho, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">
+            Hình ảnh 1
+        </label>
+        <div class="col-md-10">
+            <input type="text" name="HinhAnh1" class="form-control" />
+            @Html.ValidationMessageFor(model => model.HinhAnh1, "", new { @class = "text-danger" })
+            <div style="margin-left: 90%; margin-top: 1%">
+                @*<button type="button" onclick="OpenCkfinder()" class="btn btn-info">Chọn ảnh 1</button>*@
+                <button type="button" onclick="OpenCkfinder('HinhAnh1')" class="btn btn-info">Chọn ảnh 1</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">
+            Hình ảnh 2
+        </label>
+        <div class="col-md-10">
+            <input type="text" name="HinhAnh2" class="form-control" />
+            @Html.ValidationMessageFor(model => model.HinhAnh2, "", new { @class = "text-danger" })
+            <div style="margin-left: 90%; margin-top: 1%">
+                @*<button type="button" onclick="OpenCkfinder()" class="btn btn-info">Chọn ảnh 1</button>*@
+                <button type="button" onclick="OpenCkfinder('HinhAnh2')" class="btn btn-info">Chọn ảnh 2</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.MoTaSanPhamMoi, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <label class="control-label col-md-2">Mô tả sản phẩm mới</label>
+        <div class="col-md-10">
+            @*@Html.EditorFor(model => model.MoTaSanPhamMoi, new { htmlAttributes = new { @class = "form-control" } })*@
+            <textarea class="form-control" name="MoTaSanPhamMoi" id="inputMoTa">
+
+            </textarea>
+            @Html.ValidationMessageFor(model => model.MoTaSanPhamMoi, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Thêm" class="btn btn-success" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Trở về danh sách", "Index")
+</div>
+
+@section HieuJS{
+    <script>
+        CKEDITOR.replace('inputMoTa')
+
+        //function OpenCkfinder() {
+        //    var finder = new CKFinder();
+        //    finder.selectActionFunction = SetUrlHinhAnh;
+        //    finder.popup();
+        //}
+        //function SetUrlHinhAnh(fileUrl) {
+        //    $('input[name=HinhAnhSanPham]').val(fileUrl);
+        //    $('input[name=HinhAnhSanPham2]').val(fileUrl);
+        //}
+
+        function OpenCkfinder(inputName) {
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (fileUrl) {
+                SetUrlHinhAnh(fileUrl, inputName);
+            };
+            finder.popup();
+        }
+        function SetUrlHinhAnh(fileUrl, inputName) {
+            $('input[name=' + inputName + ']').val(fileUrl);
+        }
+    </script>
+}
